@@ -215,7 +215,7 @@ public class Essfadi_Hakkour {
                                     break;
                                 case 2:
                                     if (show != null) {
-                                        myProfile.add_favorite(show);
+                                        myProfile.getFavorites().add(show);
                                         System.out.println(show.getTitle() + " is added to favorite!");
                                     } else {
                                         System.out.println("\nThere are no shows to add as favoite, exit this menu to add new one!\n");

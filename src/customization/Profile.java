@@ -18,7 +18,7 @@ public class Profile {
 
     private boolean subtitles;
 
-    private Show favorites; // List or Array or Enum
+    private FavoritesCollection favorites; // List or Array or Enum
 
     private Show blocked; // List or Array or Enum
 
@@ -35,17 +35,13 @@ public class Profile {
         this.playback = playback;
         this.subtitles = subtitles;
         this.subtitle_lang = subtitle_lang;
+        this.favorites = new FavoritesCollection();
     }
     
     
     public void modify_maturity(int new_choice) {
         setLevel_restriction(new MaturityLevel(new_choice));
         System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString()); 
-    }
-
-    public void add_favorite(Show show) {
-        // Since We Can Not Use Lists Or Arrays, They Will be Only One Show;
-        setFavorites(show);
     }
 
     public String getName() {
@@ -104,11 +100,11 @@ public class Profile {
         this.subtitles = subtitles;
     }
 
-    public Show getFavorites() {
+    public FavoritesCollection getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(Show favorites) {
+    public void setFavorites(FavoritesCollection favorites) {
         this.favorites = favorites;
     }
 
