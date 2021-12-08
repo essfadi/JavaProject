@@ -6,6 +6,7 @@ import authentication.Account;
 import authentication.finance.Plans;
 import customization.Language;
 import customization.MaturityLevel;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +15,11 @@ import platform.component.Country;
 import platform.component.Movies;
 import platform.component.Seasons;
 import platform.component.Series;
+import platform.component.ShowCollection;
 
 public class Netflix {
 
-    private Show shows; // Array or List
+    private ShowCollection shows; // Array or List
 
     private Account customers; // Array or List
 
@@ -31,8 +33,9 @@ public class Netflix {
     public Netflix() {
     }
 
-    Netflix(Show shows, Map plans_by_country, Map maturity_by_region) {
-        this.shows = shows;
+    Netflix(ArrayList<Show> showList, Map plans_by_country, Map maturity_by_region) {
+        shows=new ShowCollection();
+        this.shows.addShows(showList); 
         this.plans_by_country = plans_by_country;
 
     }
@@ -105,13 +108,14 @@ public class Netflix {
 
     public void search() {
         // We don't have any prior data for shows and we are not allowed to use List or Array
+        
     }
 
     public void browse() {
         // We don't have any prior data for shows and we are not allowed to use List or Array
     }
 
-    public Show addShow() throws DateException, AgeException{
+    public ShowCollection addShow() throws DateException, AgeException{
         System.out.println("======================================");
         Scanner scanner = new Scanner(System.in);
         String title;
@@ -262,13 +266,14 @@ public class Netflix {
         if (choice_show == 1) {
             System.out.println("Please enter the duration of the movie in seconds: ");
             duration = scanner.nextInt();
-            shows = new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration);
+            
+            shows.addShow(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
         } else {
             System.out.println("Please enter the number of seasons:");
             seasons_num = scanner.nextInt();
             System.out.println("Please enter the number of episodes:");
             episode_num = scanner.nextInt();
-            shows = new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num);
+            shows.addShow(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
             season = new Seasons(seasons_num, episode_num);
         }
         return (shows);
