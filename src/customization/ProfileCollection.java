@@ -107,11 +107,11 @@ public class ProfileCollection {
                     if (placeHolder.getFavorites() == null) {
                         System.out.println("You have no show in Favorites List");
                     } else {
-                        ListIterator<Show> iter = placeHolder.getFavorites().listIterator();
+                        ListIterator<Show> iter = placeHolder.getFavorites().getFavorites().listIterator();
                         while (iter.hasNext()) {
                             Show s = iter.next();
                             if (title.equalsIgnoreCase(s.getTitle())) {
-                                placeHolder.getFavorites().remove(s);
+                                placeHolder.getFavorites().getFavorites().remove(s);
                                 System.out.println(placeHolder.getFavorites());
                             }
                         }
@@ -124,11 +124,11 @@ public class ProfileCollection {
                     if (placeHolder.getBlocked() == null) {
                         System.out.println("Your Blocked List is Empty!");
                     } else {
-                        ListIterator<Show> iter = placeHolder.getBlocked().listIterator();
+                        ListIterator<Show> iter = placeHolder.getBlocked().getBlocked().listIterator();
                         while (iter.hasNext()) {
                             Show b = iter.next();
                             if (title.equals(b.getTitle())) {
-                                placeHolder.getBlocked().remove(b);
+                                placeHolder.getBlocked().getBlocked().remove(b);
                             }
                         }
                         System.out.println("The show" + title + "you are looking for does not exist in Blocked List");

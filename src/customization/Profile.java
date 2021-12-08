@@ -20,12 +20,12 @@ public class Profile {
 
     private FavoritesCollection favorites; // List or Array or Enum
 
-    private Show blocked; // List or Array or Enum
+    private BlockedCollection blocked; // List or Array or Enum
 
     private Language subtitle_lang; // List or Array or Enum
 
-    public Profile(String name, MaturityLevel level_restriction, String email, 
-            boolean toNotify, String language, Playback playback, 
+    public Profile(String name, MaturityLevel level_restriction, String email,
+            boolean toNotify, String language, Playback playback,
             boolean subtitles, Language subtitle_lang) {
         this.name = name;
         this.level_restriction = level_restriction;
@@ -36,12 +36,12 @@ public class Profile {
         this.subtitles = subtitles;
         this.subtitle_lang = subtitle_lang;
         this.favorites = new FavoritesCollection();
+        this.blocked = new BlockedCollection();
     }
-    
-    
+
     public void modify_maturity(int new_choice) {
         setLevel_restriction(new MaturityLevel(new_choice));
-        System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString()); 
+        System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString());
     }
 
     public String getName() {
@@ -108,11 +108,11 @@ public class Profile {
         this.favorites = favorites;
     }
 
-    public Show getBlocked() {
+    public BlockedCollection getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(Show blocked) {
+    public void setBlocked(BlockedCollection blocked) {
         this.blocked = blocked;
     }
 
@@ -123,15 +123,14 @@ public class Profile {
     public void setSubtitle_lang(Language subtitle_lang) {
         this.subtitle_lang = subtitle_lang;
     }
-    
+
     @Override
     public String toString() {
-        return ("\nYour profile is name: " + name + level_restriction.toString() +
-                "\nProfile's Language: " + language
+        return ("\nYour profile is name: " + name + level_restriction.toString()
+                + "\nProfile's Language: " + language
                 + "\nPofile's email: " + email + "\nNotifications Activation: " + toNotify
                 + "\nSubtitle Activation: " + subtitles + ", in " + subtitle_lang.name()
                 + playback.toString());
     }
-    
-}
 
+}
