@@ -33,8 +33,8 @@ public class FavoritesCollection {
     // Begins: For You Hiba
     @Override
     public String toString() {
-        return "FavoritesCollection{" + "favorites=" + favorites + '}';
-    }
+        return "The list of your Favorite Shows is: \n FavoriteCollection{" + "favorites=" + favorites + '}';
+    } //done
 
     // End
     public void add(Show show) {
