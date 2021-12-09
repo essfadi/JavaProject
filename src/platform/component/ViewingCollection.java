@@ -49,7 +49,7 @@ public class ViewingCollection {
         }
     }
     public void sort() {
-        Collections.sort(viewings, new sortByDate());
+        Collections.sort(viewings);
     }
     @Override
     public String toString() {
