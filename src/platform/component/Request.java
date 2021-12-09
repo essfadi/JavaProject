@@ -1,8 +1,8 @@
 package platform.component;
 
-import java.util.GregorianCalendar;
 import authentication.Account;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,17 +13,16 @@ import java.text.SimpleDateFormat;
  *
  * @author user
  */
-public class Request {
+public class Request implements Comparable<Request>{
 
     private String titleSuggested;
     private Account requester;
-    private String formatted;
-    private GregorianCalendar request_made = new GregorianCalendar();
+    private GregorianCalendar request_made;
 
     public Request(Account owner, String title) {
         this.titleSuggested = title;
         this.requester = owner;
-        //sets the current date of the request and store it for later use
+        this.request_made = new GregorianCalendar();
     }
 
     public Account getRequester() {
@@ -42,11 +41,14 @@ public class Request {
     public GregorianCalendar getRequestDate() {
         return request_made;
     }
-
+    @Override
+    public int compareTo(Request req) {
+        return this.getRequestDate().compareTo(req.getRequestDate());
+    }
     @Override
     public String toString() {
         SimpleDateFormat fm = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        formatted = fm.format(request_made.getTime());
+        String formatted = fm.format(request_made.getTime());
         return "Requester: " + requester.getEmail() + "\nRequestedMovie:" + titleSuggested + "\nDate of request: " + formatted;
     }
 }
