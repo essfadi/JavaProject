@@ -26,15 +26,22 @@ public class ProfileCollection {
     }
 
     public void addProfile(Profile profile) {
-        profiles.add(numberOfProfiles++, profile);
+        while(numberOfProfiles<=5){
+            profiles.add(numberOfProfiles++, profile);
+        }
+        System.out.println("You reached the profile limit!");
+        
     }
 
     public void removeProfile(Profile profile) {
-        if (!profiles.contains(profile)) {
-            System.out.println("The profie is not found, Deletion Fails!");
-        } else {
-            profiles.remove(profile);
+        while (profiles==null) {
+            if (!profiles.contains(profile)) {
+                System.out.println("The profie is not found, Deletion Fails!");
+            } else {
+                profiles.remove(profile);
+            }
         }
+        System.out.println("This account doesn't have a profile!");
     }
 
     public Profile searchProfile(String name) {
