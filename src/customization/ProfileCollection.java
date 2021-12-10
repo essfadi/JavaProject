@@ -170,7 +170,12 @@ public class ProfileCollection {
 
     @Override
     public String toString() {
-        return "ProfileCollection{" + "profiles=" + profiles + ", numberOfProfiles=" + numberOfProfiles + '}';
+        String str = "";
+        ListIterator<Profile> iter = profiles.listIterator();
+        while (iter.hasNext()) {
+            Profile p = iter.next();
+            str += p.toString() + "\n";
+        }
+        return str;
     }
-
 }
