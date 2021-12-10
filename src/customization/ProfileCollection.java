@@ -41,7 +41,7 @@ public class ProfileCollection {
         Iterator<Profile> iterator = profiles.iterator();
         while (iterator.hasNext()) {
             Profile profile = iterator.next();
-            if (profile.getName().equals(name)) {
+            if (profile.getName().equalsIgnoreCase(name)) {
                 return profile;
             }
         }
