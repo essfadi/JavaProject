@@ -59,9 +59,11 @@ public class AccountCollection {
             if (acc.getPassword().equals(password)) {
                 return acc;
             } else {
+                System.out.println("Your Password is wrong! please, try again.");
                 return null;
             }
         }
+        System.out.println("The Email is wrong! please, try again.");
         return null;
     }
 
