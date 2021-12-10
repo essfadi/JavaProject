@@ -8,6 +8,7 @@ package authentication;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 /**
@@ -24,14 +25,18 @@ public class AccountCollection {
     }
 
     public void add(Account acc) {
-        accounts.add(acc);
+        if (search(acc.getEmail()) == null) {
+            accounts.add(acc);
+        } else {
+            System.out.println("You already have an account!");
+        }
     }
 
     public Account search(String email) {
         Iterator<Account> iterator = accounts.iterator();
         while (iterator.hasNext()) {
             Account account = iterator.next();
-            if (account.getEmail().equals(email)) {
+            if (account.getEmail().equalsIgnoreCase(email)) {
                 return account;
             }
         }
@@ -39,11 +44,27 @@ public class AccountCollection {
     }
 
     public void remove(Account acc) {
-        if (accounts.contains(acc)) {
-            accounts.remove(acc);
-        } else {
-            System.out.println("The account is not found, Deletion failed!");
+        while (accounts != null) {
+            if (accounts.contains(acc)) {
+                accounts.remove(acc);
+            } else {
+                System.out.println("The account is not found, Deletion failed!");
+            }
         }
+    }
+
+    public Account checkAcc(String email, String password) {
+        Account acc = search(email);
+        if (acc != null) {
+            if (acc.getPassword().equals(password)) {
+                return acc;
+            } else {
+                System.out.println("Your Password is wrong! please, try again.");
+                return null;
+            }
+        }
+        System.out.println("The Email is wrong! please, try again.");
+        return null;
     }
 
     public void modify(String email) {
@@ -91,7 +112,13 @@ public class AccountCollection {
 
     @Override
     public String toString() {
-        return "AccountCollection{" + "accounts=" + accounts + ", numberOfAccounts=" + numberOfAccounts + '}';
+        String str = "";
+        ListIterator<Account> iter = accounts.listIterator();
+        while (iter.hasNext()) {
+            Account acc = iter.next();
+            str += acc.toString() + "\n";
+        }
+        return str;
     }
 
 }
