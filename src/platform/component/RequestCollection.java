@@ -8,6 +8,7 @@ package platform.component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  *
@@ -17,7 +18,7 @@ public class RequestCollection {
     private ArrayList<Request> requests;
     
     public RequestCollection() {
-        requests = new ArrayList();
+        requests = new ArrayList<>();
     }
     
     public void add(Request req) {
@@ -32,7 +33,7 @@ public class RequestCollection {
         Iterator<Request> iterator = requests.iterator();
         while (iterator.hasNext()) {
             Request req = iterator.next();
-            if (req.getTitle().equals(suggested)) {
+            if (req.getTitle().equalsIgnoreCase(suggested)) {
                 return req;
             }
         }
@@ -50,8 +51,14 @@ public class RequestCollection {
     }
 
     @Override
-    public String toString() {
-        return "RequestCollection{" + "requests=" + requests + '}';
+        public String toString() {
+        String str = "";
+        ListIterator<Request> iter = requests.listIterator();
+        while (iter.hasNext()) {
+            Request r = iter.next();
+            str += r.toString() + "\n";
+        }
+        return str;
     }
     
 }
