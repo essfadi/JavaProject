@@ -8,6 +8,7 @@ package platform.component;
 import customization.MaturityLevel;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Scanner;
 import main.Genres;
 import main.Quality;
@@ -22,7 +23,7 @@ public class ShowCollection{
     private int numberOfShows = 0;
 
     public ShowCollection() {
-        shows = new ArrayList();
+        shows = new ArrayList<>();
     }
 
     public void addShow(Show show) {
@@ -120,6 +121,12 @@ public class ShowCollection{
 
     @Override
     public String toString() {
-        return "The list of your shows is: \n\t ShowCollection{" + "shows=" + shows + ", numberOfShows=" + numberOfShows + '}';
+        String str = "";
+        ListIterator<Show> iter = shows.listIterator();
+        while (iter.hasNext()) {
+            Show s = iter.next();
+            str += s.toString() + "\n";
+        }
+        return str;
     }
 }
