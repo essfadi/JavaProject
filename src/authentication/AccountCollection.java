@@ -24,14 +24,17 @@ public class AccountCollection {
     }
 
     public void add(Account acc) {
-        accounts.add(acc);
+        if(search(acc.getEmail())==null)
+            accounts.add(acc);
+        else 
+            System.out.println("You already have an account!");
     }
 
     public Account search(String email) {
         Iterator<Account> iterator = accounts.iterator();
         while (iterator.hasNext()) {
             Account account = iterator.next();
-            if (account.getEmail().equals(email)) {
+            if (account.getEmail().equalsIgnoreCase(email)) {
                 return account;
             }
         }
@@ -44,6 +47,17 @@ public class AccountCollection {
         } else {
             System.out.println("The account is not found, Deletion failed!");
         }
+    }
+    
+    public Account checkAcc(String email, String password){
+        Account acc=search(email);
+        if(acc!=null){
+            if(acc.getPassword().equals(password))
+                return acc;
+            else
+                return null;   
+        }
+        return  null;
     }
 
     public void modify(String email) {
