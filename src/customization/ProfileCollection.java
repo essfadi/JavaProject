@@ -34,7 +34,7 @@ public class ProfileCollection {
     }
 
     public void removeProfile(Profile profile) {
-        while (profiles==null) {
+        while (profiles!=null) {
             if (!profiles.contains(profile)) {
                 System.out.println("The profie is not found, Deletion Fails!");
             } else {
