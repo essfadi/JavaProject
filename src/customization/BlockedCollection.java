@@ -3,65 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package customization;
+package platform.component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import platform.component.Show;
+import java.util.ListIterator;
 
 /**
  *
  * @author oessf
  */
-public class BlockedCollection {
-
-    private ArrayList<Show> blocked;
-
-    public BlockedCollection() {
-        blocked = new ArrayList();
+public class RequestCollection {
+    private ArrayList<Request> requests;
+    
+    public RequestCollection() {
+        requests = new ArrayList<>();
+    }
+    
+    public void add(Request req) {
+        requests.add(req);
+    }
+    
+    public void sort() {
+        Collections.sort(requests);
     }
 
-    public ArrayList<Show> getBlocked() {
-        return blocked;
-    }
-
-    public void setBlocked(ArrayList<Show> blocked) {
-        this.blocked = blocked;
-    }
-
-    public void add(Show show) {
-        blocked.add(show);
-    }
-
-    public Show search(String title) {
-        Iterator<Show> iterator = blocked.iterator();
+    public Request search(String suggested) {
+        Iterator<Request> iterator = requests.iterator();
         while (iterator.hasNext()) {
-            Show show = iterator.next();
-            if (show.getTitle().equals(title)) {
-                return show;
+            Request req = iterator.next();
+            if (req.getTitle().equals(suggested)) {
+                return req;
             }
         }
         return null;
     }
-
-    public void remove(String title) {
-        Show show = this.search(title);
-        if (show != null) {
-            blocked.remove(show);
-        } else {
-            System.out.println("The Show's title you entered is not contained in your list of blocked shows for this profile!");
+    
+    public void delete(String suggested) {
+        Iterator<Request> iterator = requests.iterator();
+        while (iterator.hasNext()) {
+            Request req = iterator.next();
+            if (req.getTitle().equals(suggested)) {
+                requests.remove(req);
+            }
         }
     }
 
-    public void sort() {
-        Collections.sort(blocked, new sortByTitle());
-    }
-
-    // For Our Beloved Teammate!
     @Override
-    public String toString() {
-        return "BlockedCollection{" + "blocked=" + blocked + '}';
+        public String toString() {
+        String str = "";
+        ListIterator<Request> iter = requests.listIterator();
+        while (iter.hasNext()) {
+            Request r = iter.next();
+            str += r.toString() + "\n";
+        }
+        return str;
     }
     
 }
