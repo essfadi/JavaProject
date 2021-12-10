@@ -8,7 +8,10 @@ package customization;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.ListIterator;
+import platform.component.Rating;
 import platform.component.Show;
+import platform.component.Viewing;
 
 /**
  *
@@ -32,9 +35,15 @@ public class FavoritesCollection {
 
     // Begins: For You Hiba
     @Override
-    public String toString() {
-        return "The list of your Favorite Shows is: \n FavoriteCollection{" + "favorites=" + favorites + '}';
-    } //done
+        public String toString() {
+        String str = "";
+        ListIterator<Show> iter = favorites.listIterator();
+        while (iter.hasNext()) {
+            Show s = iter.next();
+            str += s.toString() + "\n";
+        }
+        return str;
+    }//Done
 
     // End
     public void add(Show show) {
@@ -61,10 +70,14 @@ public class FavoritesCollection {
         }
     }
 
-    public void modify(String title) {
+    public void modify(String title, int choice) {
         Show show = this.search(title);
         if (show != null) {
             // The logic of Modification can be Ratings: Polymorphism
+            Viewing viewing=new Viewing(show);
+            viewing.rate(choice);
+            if(viewing.getRate()==Rating.THUMBS_DOWN)
+                favorites.remove(show);        
         } else {
             System.out.println("The Show you entered is not contained in your list of profiles for this account!");
         }
