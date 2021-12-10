@@ -54,7 +54,7 @@ public class FavoritesCollection {
         Iterator<Show> iterator = favorites.iterator();
         while (iterator.hasNext()) {
             Show show = iterator.next();
-            if (show.getTitle().equals(title)) {
+            if (show.getTitle().equalsIgnoreCase(title)) {
                 return show;
             }
         }
