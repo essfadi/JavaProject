@@ -8,60 +8,57 @@ package customization;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.ListIterator;
 import platform.component.Show;
 
 /**
  *
- * @author oessf
+ * @author user
  */
 public class BlockedCollection {
-
-    private ArrayList<Show> blocked;
-
-    public BlockedCollection() {
-        blocked = new ArrayList();
+    ArrayList<Show> blocked; 
+    
+    BlockedCollection(){
+        this.blocked=new ArrayList<>(); 
     }
 
     public ArrayList<Show> getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(ArrayList<Show> blocked) {
-        this.blocked = blocked;
+    public void setBlocked(ArrayList<Show> Blocked) {
+        this.blocked = Blocked;
     }
-
-    public void add(Show show) {
-        blocked.add(show);
-    }
-
-    public Show search(String title) {
-        Iterator<Show> iterator = blocked.iterator();
-        while (iterator.hasNext()) {
-            Show show = iterator.next();
-            if (show.getTitle().equals(title)) {
+    public Show search(String title){
+        Iterator<Show> iter=blocked.iterator();
+        while(iter.hasNext()){
+            Show show=iter.next();
+            if(title.equalsIgnoreCase(show.getTitle()));
                 return show;
-            }
-        }
-        return null;
+        }   
+        return null; 
     }
-
     public void remove(String title) {
         Show show = this.search(title);
         if (show != null) {
             blocked.remove(show);
         } else {
-            System.out.println("The Show's title you entered is not contained in your list of blocked shows for this profile!");
+            System.out.println("The show is not found, Deletion Fails!");
         }
     }
-
-    public void sort() {
-        Collections.sort(blocked, new sortByTitle());
-    }
-
-    // For Our Beloved Teammate!
+       
     @Override
     public String toString() {
-        return "BlockedCollection{" + "blocked=" + blocked + '}';
+        String str = "";
+        ListIterator<Show> iter = blocked.listIterator();
+        while (iter.hasNext()) {
+            Show s = iter.next();
+            str += s.toString() + "\n";
+        }
+        return str;
+    }
+        public void sort() {
+        Collections.sort(blocked, new sortByTitle());
     }
     
 }
