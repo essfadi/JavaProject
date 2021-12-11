@@ -5,6 +5,7 @@
  */
 package platform.component;
 
+import customization.Language;
 import customization.MaturityLevel;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,43 +18,81 @@ import main.Quality;
  *
  * @author user
  */
-public class ShowCollection{
+public class ShowCollection {
 
     private ArrayList<Show> shows;
     private int numberOfShows = 0;
+    private Show show;
+    //private Genres genre;
+    private Scanner scanner = new Scanner(System.in);
 
     public ShowCollection() {
         shows = new ArrayList<>();
     }
 
     public void addShow(Show show) {
-        shows.add(numberOfShows++, show);
+        if(!shows.contains(show))
+            shows.add(numberOfShows++, show);
+        else 
+            System.out.println("This show already exists!");
     }
-    public void addShows(ArrayList<Show> shows){
+
+    public void addShows(ArrayList<Show> shows) {
         this.shows.addAll(shows);
     }
 
     public void removeShow(Show show) {
         shows.remove(show);
     }
-
-    public Show searchShow(Show searched) {
+    public Show search(Show searched) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
-            Show show = iterator.next();
-            if (show.getTitle().equalsIgnoreCase(searched.getTitle())) {
-                return show;
+            Show s = iterator.next();
+            if (s.getTitle().equalsIgnoreCase(searched.getTitle())) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public Show searchByTitle(String title) {
+        Iterator<Show> iterator = shows.iterator();
+        while (iterator.hasNext()) {
+            Show s = iterator.next();
+            if (s.getTitle().equalsIgnoreCase(title)) {
+                return s;
             }
         }
         return null;
     }
     
+    public Show searchByGenre(String genre) {
+        Iterator<Show> iterator = shows.iterator();
+        while (iterator.hasNext()) {
+            Show s = iterator.next();
+            if (s.getGenres().equals(Genres.valueOf(genre.toUpperCase()))) {
+                return s;
+            }
+        }
+        return null;
+    }
+    public Show searchByLang(String lang) {
+        Iterator<Show> iterator = shows.iterator();
+        while (iterator.hasNext()) {
+            Show s = iterator.next();
+            if (s.getLang().equals(Language.valueOf(lang.toUpperCase()))) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     public void modifyShow(Show show) {
         Show placeHolder;
         Scanner scanner = new Scanner(System.in);
         int choice_change;
         if (shows.contains(show)) {
-            placeHolder = this.searchShow(show);
+            placeHolder = this.search(show);
             System.out.println("1/ title\n2/ release_date\n\t3/quality\n4/genres\n5/language\n6/names\n7/synopsis\n8/level\n");
             System.out.print("Choose The Element You want to change: ");
             choice_change = scanner.nextInt();
@@ -61,38 +100,38 @@ public class ShowCollection{
                 case 1:
                     System.out.print("Please enter the searched title:");
                     String title = scanner.nextLine();
-                    placeHolder.setTitle(title); 
+                    placeHolder.setTitle(title);
                     break;
                 case 2:
                     break;
                 case 3:
                     System.out.print("Please enter the searched quality:");
-                    String quality= scanner.nextLine();
+                    String quality = scanner.nextLine();
                     placeHolder.setQuality(Quality.valueOf(quality));
                     break;
                 case 4:
                     System.out.print("Please enter the searched Genre:");
-                    String genre= scanner.nextLine();
+                    String genre = scanner.nextLine();
                     placeHolder.setGenres(Genres.valueOf(genre));
                     break;
                 case 5:
                     System.out.print("Please enter the new language :");
-                    String language= scanner.nextLine();
+                    String language = scanner.nextLine();
                     placeHolder.setGenres(Genres.valueOf(language));
                     break;
                 case 6:
                     System.out.print("Please enter the new names :");
-                    String names= scanner.nextLine();
+                    String names = scanner.nextLine();
                     placeHolder.setNames(names);
                     break;
                 case 7:
                     System.out.print("Please enter the new synopsis :");
-                    String synopsis= scanner.nextLine();
+                    String synopsis = scanner.nextLine();
                     placeHolder.setSynopsis(synopsis);
                     break;
                 case 8:
                     System.out.print("Please enter the new min age:");
-                    int age= scanner.nextInt();
+                    int age = scanner.nextInt();
                     placeHolder.setLevels(new MaturityLevel(age));
                     break;
                 default:
@@ -128,5 +167,9 @@ public class ShowCollection{
             str += s.toString() + "\n";
         }
         return str;
+    }
+
+    public Iterator<Show> iterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
