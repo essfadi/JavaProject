@@ -24,7 +24,7 @@ public class ShowCollection {
     private int numberOfShows = 0;
     private Show show;
     //private Genres genre;
-    private Scanner scanner = new Scanner(System.in);
+    
 
     public ShowCollection() {
         shows = new ArrayList<>();
