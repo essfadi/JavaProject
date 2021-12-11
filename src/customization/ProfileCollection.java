@@ -26,22 +26,29 @@ public class ProfileCollection {
     }
 
     public void addProfile(Profile profile) {
-        profiles.add(numberOfProfiles++, profile);
+        while(numberOfProfiles<=5){
+            profiles.add(numberOfProfiles++, profile);
+        }
+        System.out.println("You reached the profile limit!");
+        
     }
 
     public void removeProfile(Profile profile) {
-        if (!profiles.contains(profile)) {
-            System.out.println("The profie is not found, Deletion Fails!");
-        } else {
-            profiles.remove(profile);
+        while (profiles!=null) {
+            if (!profiles.contains(profile)) {
+                System.out.println("The profie is not found, Deletion Fails!");
+            } else {
+                profiles.remove(profile);
+            }
         }
+        System.out.println("This account doesn't have a profile!");
     }
 
     public Profile searchProfile(String name) {
         Iterator<Profile> iterator = profiles.iterator();
         while (iterator.hasNext()) {
             Profile profile = iterator.next();
-            if (profile.getName().equals(name)) {
+            if (profile.getName().equalsIgnoreCase(name)) {
                 return profile;
             }
         }
@@ -170,7 +177,12 @@ public class ProfileCollection {
 
     @Override
     public String toString() {
-        return "ProfileCollection{" + "profiles=" + profiles + ", numberOfProfiles=" + numberOfProfiles + '}';
+        String str = "";
+        ListIterator<Profile> iter = profiles.listIterator();
+        while (iter.hasNext()) {
+            Profile p = iter.next();
+            str += p.toString() + "\n";
+        }
+        return str;
     }
-
 }
