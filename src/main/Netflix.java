@@ -3,27 +3,32 @@ package main;
 import platform.component.Request;
 import platform.component.Show;
 import authentication.Account;
+import authentication.AccountCollection;
 import authentication.finance.Plans;
 import customization.Language;
 import customization.MaturityLevel;
-import java.util.ArrayList;
+import customization.Profile;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import platform.component.Country;
 import platform.component.Movies;
+import platform.component.RequestCollection;
 import platform.component.Seasons;
 import platform.component.Series;
 import platform.component.ShowCollection;
 
 public class Netflix {
 
-    private ShowCollection shows; // Array or List
+    Scanner scanner = new Scanner(System.in);
 
-    private Account customers; // Array or List
+    private static  ShowCollection shows; // Array or List
 
-    private Request requests; // Array or List
+    private AccountCollection accList;
+
+    private RequestCollection requests; // Array or List
 
     private Map<Plans, Double> plans_by_country = new HashMap<>();
 
@@ -33,9 +38,11 @@ public class Netflix {
     public Netflix() {
     }
 
-    Netflix(ArrayList<Show> showList, Map plans_by_country, Map maturity_by_region) {
-        shows=new ShowCollection();
-        this.shows.addShows(showList); 
+    Netflix(ShowCollection showList, Map plans_by_country, Map maturity_by_region) {
+        shows = new ShowCollection();
+        accList = new AccountCollection();
+        requests = new RequestCollection();
+        shows.addShows(showList);
         this.plans_by_country = plans_by_country;
 
     }
@@ -102,20 +109,54 @@ public class Netflix {
         System.out.print("Enter a password: ");
         password = scanner.next();
         System.out.println("======================================================");
-
-        return (new Account(email, password));
-    }
-
-    public void search() {
-        // We don't have any prior data for shows and we are not allowed to use List or Array
+        Account acc = new Account(email, password);
+        return(accList.add(acc));
         
     }
 
-    public void browse() {
-        // We don't have any prior data for shows and we are not allowed to use List or Array
+    public void search(int choice, String data) {
+        // We ask the user then implement one of the 3 types of search()
+        switch (choice) {
+            case 1:
+                System.out.println(shows.searchByTitle(data).toString());
+                break;
+            case 2:
+                System.out.println(shows.searchByGenre(data).toString());
+                break;
+            case 3:
+                shows.searchByLang(shows.searchByLang(data).toString());
+                break;
+        }
     }
 
-    public ShowCollection addShow() throws DateException, AgeException{
+    public void browse(Profile myProfile) {
+        // To display all shows available
+        if (myProfile != null) {
+            Iterator<Show> iter = shows.iterator();
+            while (iter.hasNext()) {
+                Show show = iter.next();
+                if (show.getLevels().getMin_age() <= myProfile.getLevel_restriction().getMin_age()) {
+                    shows.toString();
+                }
+            }
+            System.out.println("there are no shows to display!");
+        }
+        System.out.println("You don't have a profile!");
+    }
+
+    public void request(Account fake, String title) {
+        if (fake == null) {
+            System.out.print("Sorry you need to authenticate to make a request!");
+        } else {
+            Request request = new Request(fake, title);
+            System.out.println("Your request has been sent successfully!\n Click '1' to see your request info.");
+            int choice_request = scanner.nextInt();
+            if(choice_request==1)
+                System.out.println(request.toString());
+        }
+    }
+
+    public static ShowCollection addShow() throws DateException, AgeException {
         System.out.println("======================================");
         Scanner scanner = new Scanner(System.in);
         String title;
@@ -144,8 +185,7 @@ public class Netflix {
         if ((release_year > 0 && release_year <= GregorianCalendar.getInstance().get(GregorianCalendar.YEAR))
                 && (release_month > 0 && release_month < 13) && (release_day > 0 && release_day < 32)) {
             gcal = new GregorianCalendar(release_year, release_month, release_day);
-        }
-        else {
+        } else {
             throw new DateException("\tYou Have Entered a None-Logical Value for 'The Date Of Release'");
         }
         System.out.println("\n1. UHD\n2. ATOMOS\n3. HD");
@@ -253,12 +293,10 @@ public class Netflix {
         age = scanner.nextInt();
         if (age > 0) {
             levels = new MaturityLevel(age);
-        }
-        else {
+        } else {
             throw new AgeException("\tThe Age You Entered Is Not Valid");
         }
         System.out.println("======================================================");
-
         System.out.print("********Show Menu*********\n1/Movie\n2/Serie\nPlease Enter your Choice:");
         do {
             choice_show = scanner.nextInt();
@@ -266,14 +304,14 @@ public class Netflix {
         if (choice_show == 1) {
             System.out.println("Please enter the duration of the movie in seconds: ");
             duration = scanner.nextInt();
-            
-            shows.addShow(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
+
+            shows.add(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
         } else {
             System.out.println("Please enter the number of seasons:");
             seasons_num = scanner.nextInt();
             System.out.println("Please enter the number of episodes:");
             episode_num = scanner.nextInt();
-            shows.addShow(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
+            shows.add(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
             season = new Seasons(seasons_num, episode_num);
         }
         return (shows);
