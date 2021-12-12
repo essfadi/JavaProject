@@ -22,7 +22,7 @@ import platform.component.ShowCollection;
 
 public class Netflix {
 
-    public static  ShowCollection shows; // Array or List
+    public static ShowCollection shows;
 
     private AccountCollection accList;
 
@@ -108,8 +108,8 @@ public class Netflix {
         password = scanner.next();
         System.out.println("======================================================");
         Account acc = new Account(email, password);
-        return(accList.add(acc));
-        
+        return (accList.add(acc));
+
     }
 
     public void search(int choice, String data) {
@@ -150,12 +150,13 @@ public class Netflix {
             Request request = new Request(fake, title);
             System.out.println("Your request has been sent successfully!\n Click '1' to see your request info.");
             int choice_request = scanner.nextInt();
-            if(choice_request==1)
+            if (choice_request == 1) {
                 System.out.println(request.toString());
+            }
         }
     }
 
-    public static ShowCollection addShow() throws DateException, AgeException {
+    public ShowCollection addShow() throws DateException, AgeException {
         System.out.println("======================================");
         Scanner scanner = new Scanner(System.in);
         String title;
@@ -290,11 +291,7 @@ public class Netflix {
         synopsis = scanner.nextLine();
         System.out.print("Enter the minimum age allowed to watch: "); // Should be a switch (not sure)
         age = scanner.nextInt();
-        if (age > 0) {
-            levels = new MaturityLevel(age);
-        } else {
-            throw new AgeException("\tThe Age You Entered Is Not Valid");
-        }
+        levels=setMaturityLevel(age);
         System.out.println("======================================================");
         System.out.print("********Show Menu*********\n1/Movie\n2/Serie\nPlease Enter your Choice:");
         do {
@@ -316,4 +313,21 @@ public class Netflix {
         return (shows);
     }
 
+    public MaturityLevel setMaturityLevel(int age) throws AgeException {
+        if (age > 0) {
+            if (age < 7) {
+                return (MaturityLevel.ALL);
+            } else if (age < 13) {
+                return (MaturityLevel.KIDS);
+            } else if (age < 16) {
+                return (MaturityLevel.TEENS);
+            } else if (age < 18) {
+                return (MaturityLevel.ADULT);
+            } else {
+                return (MaturityLevel.ADULTS);
+            }
+        } else {
+            throw new AgeException("\tThe Age You Entered Is Not Valid");
+        }
+    }
 }
