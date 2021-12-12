@@ -24,53 +24,87 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSeparator1" alignment="1" min="-2" pref="1000" max="-2" attributes="0"/>
+          <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
           <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" max="32767" attributes="0"/>
+                                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel5" max="32767" attributes="0"/>
+                                      <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel6" max="32767" attributes="0"/>
+                                      <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel7" max="32767" attributes="0"/>
+                                      <EmptySpace min="68" pref="68" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel8" max="32767" attributes="0"/>
+                                      <EmptySpace min="75" pref="75" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel9" max="32767" attributes="0"/>
+                                      <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel12" max="32767" attributes="0"/>
+                                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel2" max="32767" attributes="0"/>
+                                      <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel3" max="32767" attributes="0"/>
+                                      <EmptySpace min="85" pref="85" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="romanticCB" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="romanticCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="scientificCB" min="-2" pref="98" max="-2" attributes="0"/>
+                              <Component id="scientificCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="sportsCB" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="sportsCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="tvshowsCB" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="tvshowsCB" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="370" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="actionCB" min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="actionCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="animeCB" min="-2" pref="64" max="-2" attributes="0"/>
+                              <Component id="animeCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="familyCB" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="familyCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="comodiesCB" min="-2" pref="112" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="classicCB" min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="comediesCB" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="dramasCB" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="horrorCB" min="-2" pref="61" max="-2" attributes="0"/>
+                              <Component id="classicCB" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="dramasCB" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="horrorCB" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="maturityCombo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="totalWatchTxt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="avgRatingTxt" alignment="0" max="32767" attributes="0"/>
@@ -79,28 +113,29 @@
                                   <Component id="namesTxt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="languageCombo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="qualityCombo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="dateTxt" alignment="0" pref="200" max="32767" attributes="0"/>
+                                  <Component id="dateTxt" alignment="0" max="32767" attributes="0"/>
                                   <Component id="titleTxt" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="432" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="deleteBtn" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                              <Component id="editBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="editBtn" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="addBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="addBtn" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="290" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -112,8 +147,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="73" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -171,18 +206,18 @@
                   </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="actionCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="animeCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="familyCB" alignment="3" max="32767" attributes="0"/>
-                  <Component id="comodiesCB" alignment="3" max="32767" attributes="0"/>
+                  <Component id="comediesCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="classicCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="dramasCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="horrorCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="romanticCB" alignment="3" max="32767" attributes="0"/>
                   <Component id="scientificCB" alignment="3" max="32767" attributes="0"/>
@@ -193,9 +228,9 @@
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="editBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deleteBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addBtn" alignment="3" max="32767" attributes="0"/>
+                  <Component id="editBtn" alignment="3" max="32767" attributes="0"/>
+                  <Component id="deleteBtn" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -436,6 +471,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="actionCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Action"/>
       </Properties>
       <Events>
@@ -444,6 +482,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="animeCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Anime"/>
       </Properties>
       <Events>
@@ -452,37 +493,55 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="familyCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Family"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="familyCBActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="comodiesCB">
+    <Component class="javax.swing.JCheckBox" name="comediesCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Comedies"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comodiesCBActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comediesCBActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="classicCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Classic"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="dramasCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Dramas"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="horrorCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Horror"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="romanticCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Romantic"/>
       </Properties>
       <Events>
@@ -491,6 +550,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="scientificCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Scientific"/>
       </Properties>
       <Events>
@@ -499,6 +561,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="sportsCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Sports"/>
       </Properties>
       <Events>
@@ -507,6 +572,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="tvshowsCB">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="24" green="1d" red="b8" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="TVShows"/>
       </Properties>
       <Events>
@@ -521,8 +589,6 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;MaturityLevel&gt;"/>
-        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="dateTxt">
@@ -540,20 +606,24 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="showList">
           <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="24" green="1d" red="b8" type="rgb"/>
             </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="14" style="3"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f1" green="f5" red="f5" type="rgb"/>
+            </Property>
+            <Property name="selectionMode" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="showListValueChanged"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Show&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -22,7 +22,7 @@ import platform.component.ShowCollection;
 
 public class Netflix {
 
-    private static  ShowCollection shows; // Array or List
+    public static  ShowCollection shows; // Array or List
 
     private AccountCollection accList;
 

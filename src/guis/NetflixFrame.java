@@ -5,16 +5,23 @@
  */
 package guis;
 
+import java.awt.FlowLayout;
+import javax.swing.UIManager;
+import platform.component.ShowCollection;
+
 /**
  *
  * @author oessf
  */
 public class NetflixFrame extends javax.swing.JFrame {
-
+    static ShowCollection shows;
     /**
      * Creates new form NetflixFrame
      */
     public NetflixFrame() {
+        setTitle("Netflix Application");
+        setLayout(new FlowLayout());
+        shows = new ShowCollection();
         initComponents();
     }
 
@@ -27,23 +34,25 @@ public class NetflixFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tab1 = new javax.swing.JTabbedPane();
         cRUDNetflixPanel1 = new guis.CRUDNetflixPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.addTab("tab1", cRUDNetflixPanel1);
+        tab1.addTab("Add and View Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png")), cRUDNetflixPanel1); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tab1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+            .addComponent(tab1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
+
+        tab1.getAccessibleContext().setAccessibleName("Add and View Show");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -58,12 +67,7 @@ public class NetflixFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName() );
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NetflixFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -85,6 +89,6 @@ public class NetflixFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private guis.CRUDNetflixPanel cRUDNetflixPanel1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane tab1;
     // End of variables declaration//GEN-END:variables
 }

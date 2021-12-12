@@ -7,19 +7,29 @@ package guis;
 
 import customization.MaturityLevel;
 import customization.ShowLanguage;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import main.Genres;
 import main.Quality;
+import platform.component.Show;
+import static guis.NetflixFrame.shows;
 
 /**
  *
  * @author oessf
  */
 public class CRUDNetflixPanel extends javax.swing.JPanel {
-
+    static DefaultListModel<Show> model;
     /**
      * Creates new form CRUDNetflixPanel
      */
     public CRUDNetflixPanel() {
+        model = new DefaultListModel<>();
         initComponents();
+        showList.setModel(model);
     }
 
     /**
@@ -59,7 +69,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         actionCB = new javax.swing.JCheckBox();
         animeCB = new javax.swing.JCheckBox();
         familyCB = new javax.swing.JCheckBox();
-        comodiesCB = new javax.swing.JCheckBox();
+        comediesCB = new javax.swing.JCheckBox();
         classicCB = new javax.swing.JCheckBox();
         dramasCB = new javax.swing.JCheckBox();
         horrorCB = new javax.swing.JCheckBox();
@@ -67,10 +77,10 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         scientificCB = new javax.swing.JCheckBox();
         sportsCB = new javax.swing.JCheckBox();
         tvshowsCB = new javax.swing.JCheckBox();
-        javax.swing.JComboBox<MaturityLevel> maturityCombo = new javax.swing.JComboBox<>();
+        maturityCombo = new javax.swing.JComboBox<>();
         dateTxt = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        showList = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(34, 31, 31));
         setPreferredSize(new java.awt.Dimension(1000, 1000));
@@ -157,6 +167,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(229, 9, 20));
         jLabel12.setText("Genres:");
 
+        actionCB.setForeground(new java.awt.Color(184, 29, 36));
         actionCB.setText("Action");
         actionCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +175,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
+        animeCB.setForeground(new java.awt.Color(184, 29, 36));
         animeCB.setText("Anime");
         animeCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +183,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
+        familyCB.setForeground(new java.awt.Color(184, 29, 36));
         familyCB.setText("Family");
         familyCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,19 +191,24 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
-        comodiesCB.setText("Comedies");
-        comodiesCB.addActionListener(new java.awt.event.ActionListener() {
+        comediesCB.setForeground(new java.awt.Color(184, 29, 36));
+        comediesCB.setText("Comedies");
+        comediesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comodiesCBActionPerformed(evt);
+                comediesCBActionPerformed(evt);
             }
         });
 
+        classicCB.setForeground(new java.awt.Color(184, 29, 36));
         classicCB.setText("Classic");
 
+        dramasCB.setForeground(new java.awt.Color(184, 29, 36));
         dramasCB.setText("Dramas");
 
+        horrorCB.setForeground(new java.awt.Color(184, 29, 36));
         horrorCB.setText("Horror");
 
+        romanticCB.setForeground(new java.awt.Color(184, 29, 36));
         romanticCB.setText("Romantic");
         romanticCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +216,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
+        scientificCB.setForeground(new java.awt.Color(184, 29, 36));
         scientificCB.setText("Scientific");
         scientificCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +224,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
+        sportsCB.setForeground(new java.awt.Color(184, 29, 36));
         sportsCB.setText("Sports");
         sportsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,6 +232,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
 
+        tvshowsCB.setForeground(new java.awt.Color(184, 29, 36));
         tvshowsCB.setText("TVShows");
         tvshowsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,61 +245,88 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         dateTxt.setColumns(8);
         dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        showList.setBackground(new java.awt.Color(184, 29, 36));
+        showList.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        showList.setForeground(new java.awt.Color(245, 245, 241));
+        showList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        showList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                showListValueChanged(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(showList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(21, 21, 21))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(62, 62, 62))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(44, 44, 44))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(68, 68, 68))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(75, 75, 75))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(52, 52, 52))
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(8, 8, 8))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(24, 24, 24))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(85, 85, 85)))
+                                .addGap(3, 3, 3)))
+                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(romanticCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(romanticCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(scientificCB, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(scientificCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sportsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sportsCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tvshowsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tvshowsCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(370, 370, 370))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(actionCB, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(actionCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(animeCB, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(animeCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(familyCB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(familyCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comodiesCB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comediesCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(classicCB, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(classicCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dramasCB, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dramasCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(horrorCB, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(horrorCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(221, 221, 221))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(maturityCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(totalWatchTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(avgRatingTxt, javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,30 +335,31 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                                     .addComponent(namesTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(languageCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(qualityCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dateTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(dateTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(titleTxt, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(129, 129, 129)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(60, 60, 60)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(182, 182, 182)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(184, 184, 184))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(deleteBtn)
+                                .addGap(83, 83, 83)
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(106, 106, 106)
-                                .addComponent(editBtn)
+                                .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(96, 96, 96)
-                                .addComponent(addBtn)
+                                .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(290, 290, 290))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -361,7 +410,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                     .addComponent(actionCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(animeCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(familyCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comodiesCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comediesCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(classicCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dramasCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(horrorCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -376,15 +425,104 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBtn)
-                    .addComponent(editBtn)
-                    .addComponent(deleteBtn))
+                    .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+        
+        String titleStr = titleTxt.getText();
+        GregorianCalendar gre = new GregorianCalendar();
+        gre.setTime((Date) dateTxt.getValue());
+        Quality quality = (Quality) qualityCombo.getSelectedItem();
+        ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
+        String[] names = namesTxt.getText().split(",");
+        String viewsStr = viewsTxt.getText();
+        int views;
+        try {
+            views = Integer.parseInt(viewsStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter an integer for the number of views!", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
+        String synopsis = synopsisTxt.getText();
+        String avgRatingStr = avgRatingTxt.getText();
+        double avgRating;
+        try {
+            avgRating = Double.parseDouble(avgRatingStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a double for the average rating!", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
+        String totalWatchStr = totalWatchTxt.getText();
+        int totalWatch;
+        try {
+            totalWatch = Integer.parseInt(totalWatchStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a integer for the total watch!", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
+        MaturityLevel level = (MaturityLevel) maturityCombo.getSelectedItem();
+        ArrayList<MaturityLevel> levels = new ArrayList();
+        if (level == MaturityLevel.KIDS) {
+            levels.add(MaturityLevel.KIDS);
+        } else if (level.equals(MaturityLevel.TEENS)) {
+            levels.add(MaturityLevel.KIDS);
+            levels.add(MaturityLevel.TEENS);
+        } else if (level.equals(MaturityLevel.ADULT)) {
+            levels.add(MaturityLevel.KIDS);
+            levels.add(MaturityLevel.TEENS);
+            levels.add(MaturityLevel.ADULT);
+        } else if (level.equals(MaturityLevel.ADULTS)) {
+            levels.add(MaturityLevel.KIDS);
+            levels.add(MaturityLevel.TEENS);
+            levels.add(MaturityLevel.ADULT);
+            levels.add(MaturityLevel.ADULTS);
+        } else {
+            levels.add(MaturityLevel.KIDS);
+            levels.add(MaturityLevel.TEENS);
+            levels.add(MaturityLevel.ADULT);
+            levels.add(MaturityLevel.ADULTS);
+        }
+        ArrayList<Genres> genres = new ArrayList();
+        // Genres Checkboxes
+        if (actionCB.isSelected()) {
+            genres.add(Genres.ACTION);
+        }
+        if (animeCB.isSelected()) {
+            genres.add(Genres.ANIME);
+        }
+        if (familyCB.isSelected()) {
+            genres.add(Genres.FAMILY);
+        }
+        if (comediesCB.isSelected()) {
+            genres.add(Genres.COMEDIES);
+        }
+        if (classicCB.isSelected()) {
+            genres.add(Genres.CLASSIC);
+        }
+        if (dramasCB.isSelected()) {
+            genres.add(Genres.DRAMAS);
+        }
+        if (horrorCB.isSelected()) {
+            genres.add(Genres.HORROR);
+        }
+        if (romanticCB.isSelected()) {
+            genres.add(Genres.ROMANTIC);
+        }
+        if (scientificCB.isSelected()) {
+            genres.add(Genres.SCIENCEFICTION);
+        }
+        if (sportsCB.isSelected()) {
+            genres.add(Genres.SPORTS);
+        }
+        if (tvshowsCB.isSelected()) {
+            genres.add(Genres.TVSHOWS);
+        }
+        Show show = new Show(titleStr, gre, quality, genres, language, names, synopsis, levels);
+        shows.addShow(show);
+        System.out.println(shows.toString());
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -403,9 +541,9 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_familyCBActionPerformed
 
-    private void comodiesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comodiesCBActionPerformed
+    private void comediesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comediesCBActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comodiesCBActionPerformed
+    }//GEN-LAST:event_comediesCBActionPerformed
 
     private void romanticCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_romanticCBActionPerformed
         // TODO add your handling code here:
@@ -423,6 +561,62 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tvshowsCBActionPerformed
 
+    private void showListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_showListValueChanged
+        // TODO add your handling code here:
+        if (evt.getValueIsAdjusting()) return;
+        Show show = showList.getSelectedValue();
+        if (show == null) return;
+        
+        titleTxt.setText(show.getTitle());
+        dateTxt.setText(show.getRelease_date().toString());
+        qualityCombo.setSelectedItem(show.getQuality());
+        languageCombo.setSelectedItem(show.getLang());
+        namesTxt.setText(String.join(", ",show.getNames()));
+        viewsTxt.setText(String.valueOf(show.getNum_views()));
+        synopsisTxt.setText(show.getSynopsis());
+        avgRatingTxt.setText(String.valueOf(show.getAverage_rating()));
+        totalWatchTxt.setText(String.valueOf(show.getTotal_watch()));
+        maturityCombo.setSelectedItem(show.getLevels());
+        // Genres Checkboxes
+        for(Genres genre : show.getGenres()) {
+            switch (genre.name()) {
+                case "ACTION":
+                    actionCB.setSelected(true);
+                    break;
+                case "ANIME":
+                    animeCB.setSelected(true);
+                    break;
+                case "FAMILY":
+                    familyCB.setSelected(true);
+                    break;
+                case "CLASSIC":
+                    classicCB.setSelected(true);
+                    break;
+                case "COMEDIES":
+                    comediesCB.setSelected(true);
+                    break;
+                case "DRAMAS":
+                    dramasCB.setSelected(true);
+                    break;
+                case "HORROR":
+                    horrorCB.setSelected(true);
+                    break;
+                case "ROMANTIC":
+                    romanticCB.setSelected(true);
+                    break;
+                case "SCIENCEFICTION":
+                    scientificCB.setSelected(true);
+                    break;
+                case "SPORTS":
+                    sportsCB.setSelected(true);
+                    break;
+                case "TVSHOWS":
+                    tvshowsCB.setSelected(true);
+                    break;
+            }
+        }
+    }//GEN-LAST:event_showListValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox actionCB;
@@ -430,7 +624,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox animeCB;
     private javax.swing.JTextField avgRatingTxt;
     private javax.swing.JCheckBox classicCB;
-    private javax.swing.JCheckBox comodiesCB;
+    private javax.swing.JCheckBox comediesCB;
     private javax.swing.JFormattedTextField dateTxt;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JCheckBox dramasCB;
@@ -449,15 +643,16 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox<ShowLanguage> languageCombo;
+    private javax.swing.JComboBox<MaturityLevel> maturityCombo;
     private javax.swing.JTextField namesTxt;
     private javax.swing.JComboBox<Quality> qualityCombo;
     private javax.swing.JCheckBox romanticCB;
     private javax.swing.JCheckBox scientificCB;
+    private javax.swing.JList<Show> showList;
     private javax.swing.JCheckBox sportsCB;
     private javax.swing.JTextField synopsisTxt;
     private javax.swing.JTextField titleTxt;
