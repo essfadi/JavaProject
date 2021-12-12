@@ -24,11 +24,13 @@ public class AccountCollection {
         accounts = new ArrayList();
     }
 
-    public void add(Account acc) {
-        if (search(acc.getEmail()) == null) {
-            accounts.add(acc);
+    public Account add(Account acc) {
+        if(search(acc.getEmail()) == null) {
+            accounts.add(numberOfAccounts++, acc);
+            return acc;
         } else {
-            System.out.println("You already have an account!");
+            System.out.println("This email adress already have an account!");
+            return null;
         }
     }
 
@@ -52,8 +54,7 @@ public class AccountCollection {
             }
         }
     }
-
-    public Account checkAcc(String email, String password) {
+ public Account checkAcc(String email, String password) {
         Account acc = search(email);
         if (acc != null) {
             if (acc.getPassword().equals(password)) {
