@@ -1,5 +1,7 @@
 package customization;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import platform.component.Show;
 
 public class Profile {
@@ -22,11 +24,11 @@ public class Profile {
 
     private BlockedCollection blocked; // List or Array or Enum
 
-    private Language subtitle_lang; // List or Array or Enum
+    private ShowLanguage subtitle_lang; // List or Array or Enum
 
     public Profile(String name, MaturityLevel level_restriction, String email,
             boolean toNotify, String language, Playback playback,
-            boolean subtitles, Language subtitle_lang) {
+            boolean subtitles, ShowLanguage subtitle_lang) {
         this.name = name;
         this.level_restriction = level_restriction;
         this.email = email;
@@ -39,9 +41,20 @@ public class Profile {
         this.blocked = new BlockedCollection();
     }
 
-    public void modify_maturity(int new_choice) {
-        setLevel_restriction(new MaturityLevel(new_choice));
-        System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString());
+    public void modify_maturity() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1. All\n2. +7\n3. +13\n4. +16\n5. +18.");
+        int choice;
+        try {
+            // Choices out of range should be handled
+            choice = scanner.nextInt();
+            setLevel_restriction(MaturityLevel.values()[choice-1]);
+            System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString());
+        } catch(InputMismatchException err) {
+            System.err.println("Please, enter a number for your choice!");
+        } catch (ArrayIndexOutOfBoundsException  err) {
+            System.err.println("Please, enter a number within the choices!");
+        }
     }
 
     public String getName() {
@@ -116,11 +129,11 @@ public class Profile {
         this.blocked = blocked;
     }
 
-    public Language getSubtitle_lang() {
+    public ShowLanguage getSubtitle_lang() {
         return subtitle_lang;
     }
 
-    public void setSubtitle_lang(Language subtitle_lang) {
+    public void setSubtitle_lang(ShowLanguage subtitle_lang) {
         this.subtitle_lang = subtitle_lang;
     }
 

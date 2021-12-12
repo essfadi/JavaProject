@@ -14,7 +14,7 @@ import authentication.User;
 import customization.MaturityLevel;
 import customization.Playback;
 import customization.Profile;
-import customization.Language;
+import customization.ShowLanguage;
 import platform.component.Request;
 import main.Netflix;
 import platform.component.Show;
@@ -43,7 +43,7 @@ public class Essfadi_Hakkour {
         Profile myProfile = null;
         Subscription mySubscription;
         MaturityLevel levels;
-        Language language;
+        ShowLanguage language;
         Request showRequest;
         User myUser;
         Show show = null;
@@ -146,40 +146,40 @@ public class Essfadi_Hakkour {
                         }
                         switch (profile_choice) {
                             case 1:
-                                language = Language.ENGLISH;
+                                language = ShowLanguage.ENGLISH;
                                 break;
                             case 2:
-                                language = Language.FRENCH;
+                                language = ShowLanguage.FRENCH;
                                 break;
                             case 3:
-                                language = Language.GERMAN;
+                                language = ShowLanguage.GERMAN;
                                 break;
                             case 4:
-                                language = Language.ITALIEN;
+                                language = ShowLanguage.ITALIEN;
                                 break;
                             case 5:
-                                language = Language.SPANISH;
+                                language = ShowLanguage.SPANISH;
                                 break;
                             case 6:
-                                language = Language.POTUGUESE;
+                                language = ShowLanguage.POTUGUESE;
                                 break;
                             case 7:
-                                language = Language.ARABIC;
+                                language = ShowLanguage.ARABIC;
                                 break;
                             case 8:
-                                language = Language.KOREAN;
+                                language = ShowLanguage.KOREAN;
                                 break;
                             case 9:
-                                language = Language.TURKISH;
+                                language = ShowLanguage.TURKISH;
                                 break;
                             case 10:
-                                language = Language.HEBREW;
+                                language = ShowLanguage.HEBREW;
                                 break;
                             case 11:
-                                language = Language.CHINESE;
+                                language = ShowLanguage.CHINESE;
                                 break;
                             default:
-                                language = Language.ENGLISH;
+                                language = ShowLanguage.ENGLISH;
                                 break;
                         }
                         myProfile = new Profile(profile_name, levels, profile_email, notification, profile_lang, setting, subtitle, language);

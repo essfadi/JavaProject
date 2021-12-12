@@ -4,7 +4,7 @@ import platform.component.Request;
 import platform.component.Show;
 import authentication.Account;
 import authentication.finance.Plans;
-import customization.Language;
+import customization.ShowLanguage;
 import customization.MaturityLevel;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -122,7 +122,7 @@ public class Netflix {
         GregorianCalendar gcal;
         Quality quality;
         Genres genres = Genres.TVSHOWS;
-        Language language = Language.ENGLISH;
+        ShowLanguage language = ShowLanguage.ENGLISH;
         String names;
         String synopsis;
         int choice = 0;
@@ -211,37 +211,37 @@ public class Netflix {
         }
         switch (choice) {
             case 1:
-                language = Language.ENGLISH;
+                language = ShowLanguage.ENGLISH;
                 break;
             case 2:
-                language = Language.FRENCH;
+                language = ShowLanguage.FRENCH;
                 break;
             case 3:
-                language = Language.GERMAN;
+                language = ShowLanguage.GERMAN;
                 break;
             case 4:
-                language = Language.ITALIEN;
+                language = ShowLanguage.ITALIEN;
                 break;
             case 5:
-                language = Language.SPANISH;
+                language = ShowLanguage.SPANISH;
                 break;
             case 6:
-                language = Language.POTUGUESE;
+                language = ShowLanguage.POTUGUESE;
                 break;
             case 7:
-                language = Language.ARABIC;
+                language = ShowLanguage.ARABIC;
                 break;
             case 8:
-                language = Language.KOREAN;
+                language = ShowLanguage.KOREAN;
                 break;
             case 9:
-                language = Language.TURKISH;
+                language = ShowLanguage.TURKISH;
                 break;
             case 10:
-                language = Language.HEBREW;
+                language = ShowLanguage.HEBREW;
                 break;
             case 11:
-                language = Language.CHINESE;
+                language = ShowLanguage.CHINESE;
                 break;
         }
         scanner.nextLine();

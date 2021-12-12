@@ -3,7 +3,7 @@ package platform.component;
 
 import customization.MaturityLevel;
 import main.Genres;
-import customization.Language;
+import customization.ShowLanguage;
 import main.Quality;
 import java.util.GregorianCalendar; // To change
 
@@ -17,7 +17,7 @@ public class Show {
 
     private Genres genres; // Enum
 
-    private Language lang; // Enum
+    private ShowLanguage lang; // Enum
 
     private String names; // Array of names
 
@@ -32,7 +32,7 @@ public class Show {
     private static int total_watch; // should be static too (not sure)
 
     public Show(String title, GregorianCalendar release_date, Quality quality, Genres genres,
-            Language lang, String names, String synopsis, MaturityLevel levels)  {
+            ShowLanguage lang, String names, String synopsis, MaturityLevel levels)  {
         this.title = title;
         this.release_date = release_date;
         this.quality = quality;
@@ -75,11 +75,11 @@ public class Show {
         this.genres = genres;
     }
 
-    public Language getLang() {
+    public ShowLanguage getLang() {
         return lang;
     }
 
-    public void setLang(Language lang) {
+    public void setLang(ShowLanguage lang) {
         this.lang = lang;
     }
 
