@@ -2,6 +2,7 @@ package customization;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import main.OutOfRangeException;
 import platform.component.Show;
 
 public class Profile {
@@ -41,20 +42,28 @@ public class Profile {
         this.blocked = new BlockedCollection();
     }
 
-    public void modify_maturity() {
+    public void modify_maturity() throws OutOfRangeException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("1. All\n2. +7\n3. +13\n4. +16\n5. +18.");
         int choice;
         try {
-            // Choices out of range should be handled
             choice = scanner.nextInt();
-            setLevel_restriction(MaturityLevel.values()[choice-1]);
-            System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString());
-        } catch(InputMismatchException err) {
+            if (choice > 0 && choice < 6) {
+                setLevel_restriction(MaturityLevel.values()[choice - 1]);
+                System.out.println("The Maturity level has been changed to: " + getLevel_restriction().toString());
+            } else {
+                throw new OutOfRangeException("Please Enter a choice within the range of choices!");
+            }
+        } catch (InputMismatchException err) {
             System.err.println("Please, enter a number for your choice!");
-        } catch (ArrayIndexOutOfBoundsException  err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             System.err.println("Please, enter a number within the choices!");
         }
+    }
+
+    public void add_favorite(Show show) {
+        //add to favorites if exists
+            favorites.add(show);
     }
 
     public String getName() {
