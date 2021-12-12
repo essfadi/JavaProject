@@ -22,8 +22,6 @@ import platform.component.ShowCollection;
 
 public class Netflix {
 
-    Scanner scanner = new Scanner(System.in);
-
     private static  ShowCollection shows; // Array or List
 
     private AccountCollection accList;
@@ -145,6 +143,7 @@ public class Netflix {
     }
 
     public void request(Account fake, String title) {
+        Scanner scanner = new Scanner(System.in);
         if (fake == null) {
             System.out.print("Sorry you need to authenticate to make a request!");
         } else {
