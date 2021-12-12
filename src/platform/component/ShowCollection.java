@@ -5,7 +5,7 @@
  */
 package platform.component;
 
-import customization.Language;
+import customization.ShowLanguage;
 import customization.MaturityLevel;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -80,7 +80,7 @@ public class ShowCollection {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
-            if (s.getLang().equals(Language.valueOf(lang.toUpperCase()))) {
+            if (s.getLang().equals(ShowLanguage.valueOf(lang.toUpperCase()))) {
                 return s;
             }
         }
@@ -131,8 +131,8 @@ public class ShowCollection {
                     break;
                 case 8:
                     System.out.print("Please enter the new min age:");
-                    int age = scanner.nextInt();
-                    placeHolder.setLevels(new MaturityLevel(age));
+                    /*int age = scanner.nextInt();
+                    placeHolder.setLevels(new MaturityLevel(age));*/
                     break;
                 default:
                     System.out.println("The Choice You Entered Is Not Valid!");
