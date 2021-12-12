@@ -9,7 +9,7 @@ package customization;
  *
  * @author oessf
  */
-public enum Language {
+public enum ShowLanguage {
     ENGLISH, FRENCH, GERMAN, ITALIEN, SPANISH, POTUGUESE,
     ARABIC, KOREAN, TURKISH, HEBREW, CHINESE;
 }
