@@ -1,9 +1,9 @@
 package platform.component;
 
-
 import customization.MaturityLevel;
 import main.Genres;
 import customization.ShowLanguage;
+import java.util.ArrayList;
 import main.Quality;
 import java.util.GregorianCalendar; // To change
 
@@ -15,11 +15,11 @@ public class Show {
 
     private Quality quality; // Enum
 
-    private Genres genres; // Enum
+    private ArrayList<Genres> genres; // Enum
 
     private ShowLanguage lang; // Enum
 
-    private String names; // Array of names
+    private String[] names; // Array of names
 
     private static int num_views; //Should be static 
 
@@ -27,20 +27,20 @@ public class Show {
 
     private static double average_rating; // Should be calculated or entered by the producer
 
-    private MaturityLevel levels; // Enum 
+    private ArrayList<MaturityLevel> levels; // Enum 
 
     private static int total_watch; // should be static too (not sure)
 
-    public Show(String title, GregorianCalendar release_date, Quality quality, Genres genres,
-            ShowLanguage lang, String names, String synopsis, MaturityLevel levels)  {
+    public Show(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
+            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels) {
         this.title = title;
         this.release_date = release_date;
         this.quality = quality;
-        this.genres = genres;
+        this.genres = new ArrayList();
         this.lang = lang;
         this.names = names;
         this.synopsis = synopsis;
-        this.levels = levels;
+        this.levels = new ArrayList();
     }
 
     public String getTitle() {
@@ -67,28 +67,12 @@ public class Show {
         this.quality = quality;
     }
 
-    public Genres getGenres() {
-        return genres;
-    }
-
-    public void setGenres(Genres genres) {
-        this.genres = genres;
-    }
-
     public ShowLanguage getLang() {
         return lang;
     }
 
     public void setLang(ShowLanguage lang) {
         this.lang = lang;
-    }
-
-    public String getNames() {
-        return names;
-    }
-
-    public void setNames(String names) {
-        this.names = names;
     }
 
     public int getNum_views() {
@@ -115,14 +99,6 @@ public class Show {
         this.average_rating = average_rating;
     }
 
-    public MaturityLevel getLevels() {
-        return levels;
-    }
-
-    public void setLevels(MaturityLevel levels) {
-        this.levels = levels;
-    }
-
     public int getTotal_watch() {
         return total_watch;
     }
@@ -131,14 +107,38 @@ public class Show {
         this.total_watch = total_watch;
     }
 
+    public ArrayList<Genres> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genres> genres) {
+        this.genres = genres;
+    }
+
+    public String[] getNames() {
+        return names;
+    }
+
+    public void setNames(String[] names) {
+        this.names = names;
+    }
+
+    public ArrayList<MaturityLevel> getLevels() {
+        return levels;
+    }
+
+    public void setLevels(ArrayList<MaturityLevel> levels) {
+        this.levels = levels;
+    }
+
     @Override
     public String toString() {
-        return ("\n\tTitle: " + title + "\n\tRelease_date: " 
-        + release_date.getTime() + "\n\tQuality: " + quality + "\n\tGenre: " 
-        + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + names 
-        + "\n\tNumber Of Views: " + num_views + "\n\tSynopsis: " + synopsis 
-        + "\n\tAverage Rating:" + average_rating + levels.toString() 
-        + "\n\tTotal Watch: " + total_watch + '.');
+        return ("\n\tTitle: " + title + "\n\tRelease_date: "
+                + release_date.getTime() + "\n\tQuality: " + quality + "\n\tGenre: "
+                + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + names
+                + "\n\tNumber Of Views: " + num_views + "\n\tSynopsis: " + synopsis
+                + "\n\tAverage Rating:" + average_rating + levels.toString()
+                + "\n\tTotal Watch: " + total_watch + '.');
     }
-    
+
 }
