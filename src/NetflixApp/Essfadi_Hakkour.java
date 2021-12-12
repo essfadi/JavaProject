@@ -1,4 +1,4 @@
-package NetflixApp;
+package netflixApp;
 
 
 /*
@@ -14,6 +14,7 @@ import authentication.User;
 import customization.MaturityLevel;
 import customization.Playback;
 import customization.Profile;
+import customization.ProfileCollection;
 import customization.ShowLanguage;
 import platform.component.Request;
 import main.Netflix;
@@ -22,7 +23,9 @@ import platform.component.Viewing;
 import java.util.Scanner;
 import main.AgeException;
 import main.DateException;
+import main.OutOfRangeException;
 import platform.component.Country;
+import platform.component.ShowCollection;
 
 /**
  *
@@ -36,13 +39,15 @@ public class Essfadi_Hakkour {
     public static void main(String[] args) {
         // TODO code application logic here
         Netflix netflix = new Netflix();
-        Account fakeAccount = null;
+        Account fakeAccount=null;
         Plan myPlan = null;
         PaymentMethod method;
         Playback setting;
         Profile myProfile = null;
+        ProfileCollection profiles = new ProfileCollection();
+        ShowCollection showList=null;
         Subscription mySubscription;
-        MaturityLevel levels;
+        MaturityLevel levels=null;
         ShowLanguage language;
         Request showRequest;
         User myUser;
@@ -100,7 +105,11 @@ public class Essfadi_Hakkour {
                         profile_email = scanner.next();
                         System.out.print("Enter the minimum age that will use this profile: ");
                         profile_age = scanner.nextInt();
-                        levels = new MaturityLevel(profile_age);
+                        try {
+                            levels = netflix.setMaturityLevel(profile_age);
+                        } catch (AgeException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                         // The Start for: Playback Settings (1)
                         System.out.println("\n1. AUTO \n2. LOW \n3. MEDIUM \n4. HIGH");
                         System.out.print("Choose your Data Usage setting: ");
@@ -183,18 +192,17 @@ public class Essfadi_Hakkour {
                                 break;
                         }
                         myProfile = new Profile(profile_name, levels, profile_email, notification, profile_lang, setting, subtitle, language);
+                        profiles.addProfile(myProfile);
                         System.out.print("Enter your phone number: ");
                         phone_number = scanner.next();
                         myUser = new User(phone_number, myProfile, method);
                         System.out.println("\t\t======================================================");
                         System.out.println("\t\tYou Have Been Registered Successfully!!!");
                         System.out.println("\t\t======================================================");
-                        // THE END
-                    } else {
-                        System.out.println("\n\tYou alreadu have an Account !!!");
                     }
-                    // Settings for profile
+                    // THE END
 
+                    // Settings for profile
                     break;
                 // Add Your case 2
                 case 2:
@@ -209,14 +217,25 @@ public class Essfadi_Hakkour {
                             } while (choice_menu < 0 || choice_menu > 3);
                             switch (authenticated_choice) {
                                 case 1:
-                                    System.out.print("Enter the new minimal age you want for this profile: ");
-                                    profile_age = scanner.nextInt();
-                                    myProfile.modify_maturity(profile_age);
+                                    try {
+                                        myProfile.modify_maturity();
+                                    } catch (OutOfRangeException err) {
+                                        System.out.println(err.getMessage());
+                                    }
                                     break;
                                 case 2:
-                                    if (show != null) {
-                                        myProfile.getFavorites().add(show);
-                                        System.out.println(show.getTitle() + " is added to favorite!");
+                                    if (showList != null) {
+
+                                        System.out.println("enter the title of your show:");
+                                        scanner.next();
+                                        String title = scanner.nextLine();
+                                        Show s = showList.searchByTitle(title);
+                                       if (s != null) {
+                                            myProfile.add_favorite(s);
+                                            System.out.println(s.getTitle() + " is added to favorite!");
+                                        } else {
+                                            System.out.println("The movie doesn't exist!");
+                                        }
                                     } else {
                                         System.out.println("\nThere are no shows to add as favoite, exit this menu to add new one!\n");
                                     }
@@ -251,36 +270,23 @@ public class Essfadi_Hakkour {
                     }
                     break;
                 case 3:
-                    //Request Show 
-                    if (fakeAccount == null) {
-                        System.out.println("Sorry you need to authenticate to make a request!");
-                    } else {
-                        scanner.nextLine();
-                        System.out.print("Please enter your Show request: ");
-                        request = scanner.nextLine();
-                        showRequest = new Request(fakeAccount, request);
-                        System.out.println("Your request has been sent successfully!\n Click '1' to see your request info.");
-                        choice_request = scanner.nextInt();
-                        if (choice_request == 1) {
-                            System.out.println(showRequest.toString());
-                        } else {
-                            break;
-                        }
-                    }
+                    //Request Show
+                    System.out.println("Please enter your show request:");
+                    request = scanner.nextLine();
+                    netflix.request(fakeAccount, request);
                     break;
                 case 4:
                     // Add a new show
                     do {
                         try {
-                            show = netflix.addShow();
+                            showList = new ShowCollection();
+                            showList = netflix.addShow();
                             System.out.println("======================================================");
-                            System.out.println(show.toString());
+                            System.out.println(showList.toString());
                             System.out.println("======================================================");
-                        }
-                        catch (AgeException err1) {
+                        } catch (AgeException err1) {
                             System.err.println(err1.getMessage());
-                        }
-                        catch (DateException err2) {
+                        } catch (DateException err2) {
                             System.err.println(err2.getMessage());
                         } finally {
                             System.out.print("If you want to try again or add another show, enter 'YES': ");
