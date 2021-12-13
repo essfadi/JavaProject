@@ -24,21 +24,24 @@ public class ShowCollection {
     private int numberOfShows = 0;
     private Show show;
     //private Genres genre;
-    
 
     public ShowCollection() {
         shows = new ArrayList<>();
     }
 
-    public void addShow(Show show) {
+    public void add(Show show) {
         if(!shows.contains(show))
             shows.add(numberOfShows++, show);
         else 
             System.out.println("This show already exists!");
     }
 
-    public void addShows(ArrayList<Show> shows) {
-        this.shows.addAll(shows);
+    public void addShows(ShowCollection shows) {
+        Iterator<Show> iter=shows.iterator(); 
+        Show s=iter.next(); 
+        while(iter.hasNext()){
+            this.shows.add(s);
+        }
     }
 
     public void removeShow(Show show) {
@@ -54,8 +57,7 @@ public class ShowCollection {
         }
         return null;
     }
-
-    public Show searchByTitle(String title) {
+    public Show searchByTitle(String title){
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
@@ -128,11 +130,11 @@ public class ShowCollection {
                     System.out.print("Please enter the new synopsis :");
                     String synopsis = scanner.nextLine();
                     placeHolder.setSynopsis(synopsis);
-                    break;
+                    break;  
                 case 8:
-                    System.out.print("Please enter the new min age:");
-                    /*int age = scanner.nextInt();
-                    placeHolder.setLevels(new MaturityLevel(age));*/
+                    System.out.println("Please enter new Mturity level:\n\t1.ALL\n\t2.Kids\n\t3.Teens\n\t4.Adult\n\t5.Adults");
+                    int choice=scanner.nextInt();
+                    placeHolder.setLevels(MaturityLevel.values()[choice-1]);
                     break;
                 default:
                     System.out.println("The Choice You Entered Is Not Valid!");
