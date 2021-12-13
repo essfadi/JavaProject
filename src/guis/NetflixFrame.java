@@ -34,25 +34,27 @@ public class NetflixFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tab1 = new javax.swing.JTabbedPane();
+        searchTab = new javax.swing.JTabbedPane();
         cRUDNetflixPanel1 = new guis.CRUDNetflixPanel();
+        showSearchPanel1 = new guis.ShowSearchPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tab1.addTab("Add and View Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png")), cRUDNetflixPanel1); // NOI18N
+        searchTab.addTab("Add and View Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png")), cRUDNetflixPanel1); // NOI18N
+        searchTab.addTab("Search For Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Clipboard.png")), showSearchPanel1); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab1)
+            .addComponent(searchTab)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(searchTab, javax.swing.GroupLayout.PREFERRED_SIZE, 640, Short.MAX_VALUE)
         );
 
-        tab1.getAccessibleContext().setAccessibleName("Add and View Show");
+        searchTab.getAccessibleContext().setAccessibleName("Add and View Show");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -89,6 +91,7 @@ public class NetflixFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private guis.CRUDNetflixPanel cRUDNetflixPanel1;
-    private javax.swing.JTabbedPane tab1;
+    private javax.swing.JTabbedPane searchTab;
+    private guis.ShowSearchPanel showSearchPanel1;
     // End of variables declaration//GEN-END:variables
 }

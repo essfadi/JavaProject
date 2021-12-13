@@ -81,6 +81,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         dateTxt = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         showList = new javax.swing.JList<>();
+        clearBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(34, 31, 31));
         setPreferredSize(new java.awt.Dimension(1000, 1000));
@@ -106,6 +107,11 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         editBtn.setForeground(new java.awt.Color(245, 245, 241));
         editBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Modify.png"))); // NOI18N
         editBtn.setText("Edit");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         deleteBtn.setBackground(new java.awt.Color(229, 9, 20));
         deleteBtn.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -243,7 +249,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         maturityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(MaturityLevel.values()));
 
         dateTxt.setColumns(8);
-        dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        dateTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyy"))));
 
         showList.setBackground(new java.awt.Color(184, 29, 36));
         showList.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -255,6 +261,16 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(showList);
+
+        clearBtn.setBackground(new java.awt.Color(229, 9, 20));
+        clearBtn.setForeground(new java.awt.Color(245, 245, 241));
+        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Refresh.png"))); // NOI18N
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -341,19 +357,19 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(184, 184, 184))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(106, 106, 106)
-                                .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(96, 96, 96)
-                                .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(290, 290, 290))))))
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(184, 184, 184))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(clearBtn)
+                        .addGap(77, 77, 77)
+                        .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(106, 106, 106)
+                        .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(96, 96, 96)
+                        .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(290, 290, 290))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,7 +443,8 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clearBtn))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -436,25 +453,44 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         String titleStr = titleTxt.getText();
+        if (titleStr.isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a title!", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
         GregorianCalendar gre = new GregorianCalendar();
-        gre.setTime((Date) dateTxt.getValue());
+        try {
+            gre.setTime((Date) dateTxt.getValue());
+        } catch(NullPointerException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a value for date in this form: dd/MM/yyy", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
         Quality quality = (Quality) qualityCombo.getSelectedItem();
         ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
-        String[] names = namesTxt.getText().split(",");
+        String[] names;
+        if (namesTxt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter some names of actors!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            names = namesTxt.getText().split(",");
+        }
         String viewsStr = viewsTxt.getText();
         int views;
         try {
             views = Integer.parseInt(viewsStr);
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter an integer for the number of views!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         String synopsis = synopsisTxt.getText();
+        if (synopsis.isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter an synopsis for your show!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String avgRatingStr = avgRatingTxt.getText();
         double avgRating;
         try {
             avgRating = Double.parseDouble(avgRatingStr);
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a double for the average rating!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         String totalWatchStr = totalWatchTxt.getText();
         int totalWatch;
@@ -462,28 +498,35 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             totalWatch = Integer.parseInt(totalWatchStr);
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a integer for the total watch!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         MaturityLevel level = (MaturityLevel) maturityCombo.getSelectedItem();
         ArrayList<MaturityLevel> levels = new ArrayList();
-        if (level == MaturityLevel.KIDS) {
-            levels.add(MaturityLevel.KIDS);
-        } else if (level.equals(MaturityLevel.TEENS)) {
-            levels.add(MaturityLevel.KIDS);
-            levels.add(MaturityLevel.TEENS);
-        } else if (level.equals(MaturityLevel.ADULT)) {
-            levels.add(MaturityLevel.KIDS);
-            levels.add(MaturityLevel.TEENS);
-            levels.add(MaturityLevel.ADULT);
-        } else if (level.equals(MaturityLevel.ADULTS)) {
-            levels.add(MaturityLevel.KIDS);
-            levels.add(MaturityLevel.TEENS);
-            levels.add(MaturityLevel.ADULT);
-            levels.add(MaturityLevel.ADULTS);
-        } else {
-            levels.add(MaturityLevel.KIDS);
-            levels.add(MaturityLevel.TEENS);
-            levels.add(MaturityLevel.ADULT);
-            levels.add(MaturityLevel.ADULTS);
+        switch (level) {
+            case KIDS:
+                levels.add(MaturityLevel.KIDS);
+                break;
+            case TEENS:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                break;
+            case ADULT:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                break;
+            case ADULTS:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ADULTS);
+                break;
+            default:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ADULTS);
+                break;
         }
         ArrayList<Genres> genres = new ArrayList();
         // Genres Checkboxes
@@ -520,13 +563,43 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         if (tvshowsCB.isSelected()) {
             genres.add(Genres.TVSHOWS);
         }
-        Show show = new Show(titleStr, gre, quality, genres, language, names, synopsis, levels);
+        Show show = new Show(titleStr, gre, quality, genres, language, names, synopsis, levels, views, avgRating, totalWatch);
         shows.addShow(show);
-        System.out.println(shows.toString());
+        
+        model.addElement(show);
+        showList.setSelectedValue(show, true);
+        JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "A new show has been added successfully", "Adding Show", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_addBtnActionPerformed
-
+    private void resetInput() {
+        titleTxt.setText("");
+        dateTxt.setText("");
+        qualityCombo.setSelectedItem(Quality.HD);
+        languageCombo.setSelectedItem(ShowLanguage.ENGLISH);
+        namesTxt.setText("");
+        viewsTxt.setText("");
+        synopsisTxt.setText("");
+        avgRatingTxt.setText("");
+        totalWatchTxt.setText("");
+        maturityCombo.setSelectedItem(MaturityLevel.ALL);
+        actionCB.setSelected(false);
+        animeCB.setSelected(false);
+        classicCB.setSelected(false);
+        familyCB.setSelected(false);
+        comediesCB.setSelected(false);
+        dramasCB.setSelected(false);
+        horrorCB.setSelected(false);
+        romanticCB.setSelected(false);
+        scientificCB.setSelected(false);
+        sportsCB.setSelected(false);
+        tvshowsCB.setSelected(false);
+    }
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+        Show show = showList.getSelectedValue();
+        shows.removeShow(show);
+        model.removeElement(show);
+        resetInput();
+        JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "The show has been deleted successfully", "Deleting Show", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void actionCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionCBActionPerformed
@@ -567,8 +640,10 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         Show show = showList.getSelectedValue();
         if (show == null) return;
         
+        resetInput();
+        
         titleTxt.setText(show.getTitle());
-        dateTxt.setText(show.getRelease_date().toString());
+        dateTxt.setText(show.getRelease_date().getTime().toString());
         qualityCombo.setSelectedItem(show.getQuality());
         languageCombo.setSelectedItem(show.getLang());
         namesTxt.setText(String.join(", ",show.getNames()));
@@ -617,6 +692,140 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_showListValueChanged
 
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+        Show show = showList.getSelectedValue();
+        String titleStr = titleTxt.getText();
+        if (titleStr.isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a title!", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
+        GregorianCalendar gre = new GregorianCalendar();
+        try {
+            gre.setTime((Date) dateTxt.getValue());
+        } catch(NullPointerException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a value for date in this form: dd/MM/yyy", "Add Show", JOptionPane.ERROR_MESSAGE);
+        }
+        Quality quality = (Quality) qualityCombo.getSelectedItem();
+        ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
+        String[] names;
+        if (namesTxt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter some names of actors!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            names = namesTxt.getText().split(",");
+        }
+        String viewsStr = viewsTxt.getText();
+        int views;
+        try {
+            views = Integer.parseInt(viewsStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter an integer for the number of views!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String synopsis = synopsisTxt.getText();
+        if (synopsis.isEmpty()) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter an synopsis for your show!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String avgRatingStr = avgRatingTxt.getText();
+        double avgRating;
+        try {
+            avgRating = Double.parseDouble(avgRatingStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a double for the average rating!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String totalWatchStr = totalWatchTxt.getText();
+        int totalWatch;
+        try {
+            totalWatch = Integer.parseInt(totalWatchStr);
+        } catch (NumberFormatException err) {
+            JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please, Enter a integer for the total watch!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        MaturityLevel level = (MaturityLevel) maturityCombo.getSelectedItem();
+        ArrayList<MaturityLevel> levels = new ArrayList();
+        switch (level) {
+            case KIDS:
+                levels.add(MaturityLevel.KIDS);
+                break;
+            case TEENS:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                break;
+            case ADULT:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                break;
+            case ADULTS:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ADULTS);
+                break;
+            default:
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ADULTS);
+                break;
+        }
+        ArrayList<Genres> genres = new ArrayList();
+        // Genres Checkboxes
+        if (actionCB.isSelected()) {
+            genres.add(Genres.ACTION);
+        }
+        if (animeCB.isSelected()) {
+            genres.add(Genres.ANIME);
+        }
+        if (familyCB.isSelected()) {
+            genres.add(Genres.FAMILY);
+        }
+        if (comediesCB.isSelected()) {
+            genres.add(Genres.COMEDIES);
+        }
+        if (classicCB.isSelected()) {
+            genres.add(Genres.CLASSIC);
+        }
+        if (dramasCB.isSelected()) {
+            genres.add(Genres.DRAMAS);
+        }
+        if (horrorCB.isSelected()) {
+            genres.add(Genres.HORROR);
+        }
+        if (romanticCB.isSelected()) {
+            genres.add(Genres.ROMANTIC);
+        }
+        if (scientificCB.isSelected()) {
+            genres.add(Genres.SCIENCEFICTION);
+        }
+        if (sportsCB.isSelected()) {
+            genres.add(Genres.SPORTS);
+        }
+        if (tvshowsCB.isSelected()) {
+            genres.add(Genres.TVSHOWS);
+        }
+        show.setTitle(titleStr);
+        show.setRelease_date(gre);
+        show.setQuality(quality);
+        show.setLang(language);
+        show.setNames(names);
+        show.setNum_views(views);
+        show.setSynopsis(synopsis);
+        show.setAverage_rating(avgRating);
+        show.setTotal_watch(totalWatch);
+        show.setLevels(levels);
+        show.setGenres(genres);
+        showList.updateUI();
+        JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "The editing has been made successfully!", "Editing Show", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+        resetInput();
+    }//GEN-LAST:event_clearBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox actionCB;
@@ -624,6 +833,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox animeCB;
     private javax.swing.JTextField avgRatingTxt;
     private javax.swing.JCheckBox classicCB;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JCheckBox comediesCB;
     private javax.swing.JFormattedTextField dateTxt;
     private javax.swing.JButton deleteBtn;
