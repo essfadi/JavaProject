@@ -6,6 +6,9 @@
 package guis;
 
 import java.awt.FlowLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import platform.component.ShowCollection;
 
@@ -23,6 +26,7 @@ public class NetflixFrame extends javax.swing.JFrame {
         setLayout(new FlowLayout());
         shows = new ShowCollection();
         initComponents();
+        
     }
 
     /**
@@ -37,11 +41,54 @@ public class NetflixFrame extends javax.swing.JFrame {
         searchTab = new javax.swing.JTabbedPane();
         cRUDNetflixPanel1 = new guis.CRUDNetflixPanel();
         showSearchPanel1 = new guis.ShowSearchPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        saveMenu = new javax.swing.JMenuItem();
+        exitMenu = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        aboutMenu = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         searchTab.addTab("Add and View Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Search.png")), cRUDNetflixPanel1); // NOI18N
         searchTab.addTab("Search For Show", new javax.swing.ImageIcon(getClass().getResource("/icons/Clipboard.png")), showSearchPanel1); // NOI18N
+
+        jMenu1.setText("File");
+
+        saveMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Save.png"))); // NOI18N
+        saveMenu.setText("Save");
+        saveMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(saveMenu);
+
+        exitMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Exit.png"))); // NOI18N
+        exitMenu.setText("Exit");
+        exitMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenu);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Help");
+
+        aboutMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/About.png"))); // NOI18N
+        aboutMenu.setText("About");
+        aboutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(aboutMenu);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,13 +98,32 @@ public class NetflixFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(searchTab, javax.swing.GroupLayout.PREFERRED_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(searchTab, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
         );
 
         searchTab.getAccessibleContext().setAccessibleName("Add and View Show");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuActionPerformed
+        try {
+            // TODO add your handling code here:
+            shows.save();
+        } catch (IOException ex) {
+            Logger.getLogger(NetflixFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveMenuActionPerformed
+
+    private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitMenuActionPerformed
+
+    private void aboutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuActionPerformed
+        // TODO add your handling code here:
+        new AboutFrame().setVisible(true);
+    }//GEN-LAST:event_aboutMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,7 +156,13 @@ public class NetflixFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem aboutMenu;
     private guis.CRUDNetflixPanel cRUDNetflixPanel1;
+    private javax.swing.JMenuItem exitMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem saveMenu;
     private javax.swing.JTabbedPane searchTab;
     private guis.ShowSearchPanel showSearchPanel1;
     // End of variables declaration//GEN-END:variables
