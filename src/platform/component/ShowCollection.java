@@ -43,6 +43,7 @@ public class ShowCollection {
 
     public void removeShow(Show show) {
         shows.remove(show);
+        numberOfShows--;
     }
 
     public Show search(Show searched) {
