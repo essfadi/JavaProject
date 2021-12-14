@@ -4,6 +4,7 @@ import customization.MaturityLevel;
 import main.Genres;
 import customization.ShowLanguage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import main.Quality;
 import java.util.GregorianCalendar; // To change
 
@@ -21,27 +22,32 @@ public class Show {
 
     private String[] names; // Array of names
 
-    private static int num_views; //Should be static 
+    private int num_views; //Should be static 
 
     private String synopsis; // Summary of the film
 
-    private static double average_rating; // Should be calculated or entered by the producer
+    private double average_rating; // Should be calculated or entered by the producer
 
     private ArrayList<MaturityLevel> levels; // Enum 
 
-    private static int total_watch; // should be static too (not sure)
+    private int total_watch; // should be static too (not sure)
 
+    
     public Show(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
-            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels) {
+            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int num_views, double average_rating, int total_watch) {
         this.title = title;
         this.release_date = release_date;
         this.quality = quality;
-        this.genres = new ArrayList();
+        this.genres = genres;
         this.lang = lang;
         this.names = names;
         this.synopsis = synopsis;
-        this.levels = new ArrayList();
+        this.levels = levels;
+        this.num_views = num_views;
+        this.average_rating = average_rating;
+        this.total_watch = total_watch;
     }
+    
 
     public String getTitle() {
         return title;
@@ -130,14 +136,14 @@ public class Show {
     public void setLevels(ArrayList<MaturityLevel> levels) {
         this.levels = levels;
     }
-
+    
     @Override
     public String toString() {
         return ("\n\tTitle: " + title + "\n\tRelease_date: "
-                + release_date.getTime() + "\n\tQuality: " + quality + "\n\tGenre: "
-                + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + names
+                + release_date.getTime() + "\n\tQuality: " + quality.name() + "\n\tGenre: "
+                + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + Arrays.toString(names)
                 + "\n\tNumber Of Views: " + num_views + "\n\tSynopsis: " + synopsis
-                + "\n\tAverage Rating:" + average_rating + levels.toString()
+                + "\n\tAverage Rating:" + average_rating + "\n\tMaturity Levels: " +levels
                 + "\n\tTotal Watch: " + total_watch + '.');
     }
 
