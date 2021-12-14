@@ -7,12 +7,20 @@ package platform.component;
 
 import customization.ShowLanguage;
 import customization.MaturityLevel;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
 import main.Genres;
 import main.Quality;
+import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,8 +45,8 @@ public class ShowCollection {
         }
     }
 
-    public void addShows(ArrayList<Show> shows) {
-        this.shows.addAll(shows);
+    public void addShows(ShowCollection shows) {
+        this.shows.addAll(shows.shows);
     }
 
     public void removeShow(Show show) {
@@ -155,6 +163,23 @@ public class ShowCollection {
             }
         }
         return results;
+    }
+    
+    public void save() throws IOException{
+        File file = new File("..\\..\\data\\netflix.ser");
+        FileOutputStream fout = new FileOutputStream(file);
+        ObjectOutputStream out = new ObjectOutputStream(fout);
+        out.writeObject(this.shows);
+        fout.close();
+        out.close();
+    }
+    public void load() throws IOException, ClassNotFoundException{
+        File file = new File("..\\..\\data\\netflix.ser");
+        FileInputStream fin = new FileInputStream(file);
+        ObjectInputStream in = new ObjectInputStream(fin);
+        this.shows = (ArrayList<Show>) in.readObject();
+        fin.close();
+        in.close();
     }
 
     public ArrayList<Show> getShows() {
