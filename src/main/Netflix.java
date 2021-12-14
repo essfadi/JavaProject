@@ -303,13 +303,13 @@ public class Netflix {
             System.out.println("Please enter the duration of the movie in seconds: ");
             duration = scanner.nextInt();
 
-            shows.addShow(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
+            shows.add(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
         } else {
             System.out.println("Please enter the number of seasons:");
             seasons_num = scanner.nextInt();
             System.out.println("Please enter the number of episodes:");
             episode_num = scanner.nextInt();
-            shows.addShow(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
+            shows.add(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
             season = new Seasons(seasons_num, episode_num);
         }
         return (shows);

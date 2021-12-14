@@ -3,7 +3,6 @@ package authentication.finance;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-import authentication.finance.Plan;
 
 public class Subscription {
 

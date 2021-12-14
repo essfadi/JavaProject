@@ -12,4 +12,9 @@ package main;
 public enum Genres {
     ACTION, ANIME, FAMILY, CLASSIC, COMEDIES, DRAMAS, HORROR, ROMANTIC, 
     SCIENCEFICTION, SPORTS, TVSHOWS;
+
+    @Override
+    public String toString() {
+        return this.name();
+    }
 }

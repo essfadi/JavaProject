@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package platform.component;
-import customization.SortByTitle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -50,15 +49,10 @@ public class ViewingCollection {
         }
     }
     public void sort() {
-        Collections.sort(viewings, new SortByDate());
+        Collections.sort(viewings);
     }
     @Override
     public String toString() {
-        Iterator<Viewing> iter=viewings.iterator();
-        while(iter.hasNext()){
-            Viewing v= iter.next();
-            return v.toString()+'\n';
-        }
         return "";
     }
 }

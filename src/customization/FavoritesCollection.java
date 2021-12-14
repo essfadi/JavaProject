@@ -84,6 +84,6 @@ public class FavoritesCollection {
     }
 
     public void sort() {
-        Collections.sort(favorites, new SortByTitle());
+        Collections.sort(favorites, new sortByTitle());
     }
 }

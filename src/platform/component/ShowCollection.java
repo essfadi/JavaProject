@@ -30,23 +30,22 @@ public class ShowCollection {
     }
 
     public void addShow(Show show) {
-        if(!shows.contains(show))
+        if (!shows.contains(show)) {
             shows.add(numberOfShows++, show);
-        else 
+        } else {
             System.out.println("This show already exists!");
+        }
     }
 
-    public void addShows(ShowCollection shows) {
-        Iterator<Show> iter=shows.iterator(); 
-        Show s=iter.next(); 
-        while(iter.hasNext()){
-            this.shows.add(s);
-        }
+    public void addShows(ArrayList<Show> shows) {
+        this.shows.addAll(shows);
     }
 
     public void removeShow(Show show) {
         shows.remove(show);
+        numberOfShows--;
     }
+
     public Show search(Show searched) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
@@ -57,16 +56,18 @@ public class ShowCollection {
         }
         return null;
     }
-    public Show searchByTitle(String title){
+
+    public Show searchByTitle(String title) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
-            if (s.getTitle().equalsIgnoreCase(title))
+            if (s.getTitle().equalsIgnoreCase(title)) {
                 return s;
+            }
         }
         return null;
     }
-    
+
     public Show searchByGenre(String genre) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
@@ -77,6 +78,7 @@ public class ShowCollection {
         }
         return null;
     }
+
     public Show searchByLang(String lang) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
@@ -89,7 +91,7 @@ public class ShowCollection {
     }
 
     public void modifyShow(Show show) {
-        Show placeHolder;
+        /*Show placeHolder;
         Scanner scanner = new Scanner(System.in);
         int choice_change;
         if (shows.contains(show)) {
@@ -129,18 +131,30 @@ public class ShowCollection {
                     System.out.print("Please enter the new synopsis :");
                     String synopsis = scanner.nextLine();
                     placeHolder.setSynopsis(synopsis);
-                    break;  
+                    break;
                 case 8:
-                    System.out.println("Please enter new Mturity level:\n\t1.ALL\n\t2.Kids\n\t3.Teens\n\t4.Adult\n\t5.Adults");
-                    int choice=scanner.nextInt();
-                    placeHolder.setLevels(MaturityLevel.values()[choice-1]);
+                    System.out.print("Please enter the new min age:");
+                    int age = scanner.nextInt();
+                    placeHolder.setLevels(new MaturityLevel(age));
                     break;
                 default:
                     System.out.println("The Choice You Entered Is Not Valid!");
             }
         } else {
             System.out.println("The Show you entered is not contained in your list of shows for this account!");
+        }*/
+    }
+
+    public ArrayList<Show> findShowWithGenre(Genres genre) {
+        ArrayList<Show> results = new ArrayList();
+        ListIterator<Show> iter = shows.listIterator();
+        while (iter.hasNext()) {
+            Show st = iter.next();
+            if (st.getGenres().contains(genre)) {
+                results.add(st);
+            }
         }
+        return results;
     }
 
     public ArrayList<Show> getShows() {
