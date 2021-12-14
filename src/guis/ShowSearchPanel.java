@@ -162,6 +162,7 @@ public class ShowSearchPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(ShowSearchPanel.this, "There is no result for this genre!", "Search Show", JOptionPane.ERROR_MESSAGE);
             return ;
         }
+        // Instead of else, implement an exception
     }//GEN-LAST:event_searchBtnActionPerformed
 
 
