@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ListIterator;
+import main.OutOfRangeException;
 import platform.component.*;
 
 /**
@@ -26,15 +27,15 @@ public class ProfileCollection {
     }
 
     public void addProfile(Profile profile) {
-        while(numberOfProfiles<=5){
+        while (numberOfProfiles <= 5) {
             profiles.add(numberOfProfiles++, profile);
         }
         System.out.println("You reached the profile limit!");
-        
+
     }
 
     public void removeProfile(Profile profile) {
-        while (profiles!=null) {
+        while (profiles != null) {
             if (!profiles.contains(profile)) {
                 System.out.println("The profie is not found, Deletion Fails!");
             } else {
@@ -73,10 +74,11 @@ public class ProfileCollection {
                     placeHolder.setName(newname);
                     break;
                 case 2:
-                    System.out.println("Please enter the minimal age for this profile:");
-                    int age = scanner.nextInt();
-                    MaturityLevel level = new MaturityLevel(age);
-                    placeHolder.setLevel_restriction(level);
+                    try {
+                        placeHolder.modify_maturity();
+                    } catch (OutOfRangeException err) {
+                        System.out.println(err.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.print("Please enter the new email: ");
