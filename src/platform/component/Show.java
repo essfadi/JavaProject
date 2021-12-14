@@ -3,10 +3,9 @@ package platform.component;
 import customization.MaturityLevel;
 import main.Genres;
 import customization.ShowLanguage;
-import java.util.ArrayList;
-import java.util.Arrays;
 import main.Quality;
 import java.util.GregorianCalendar; // To change
+import main.AgeException;
 
 public class Show {
 
@@ -16,25 +15,24 @@ public class Show {
 
     private Quality quality; // Enum
 
-    private ArrayList<Genres> genres; // Enum
+    private Genres genres; // Enum
 
     private ShowLanguage lang; // Enum
 
-    private String[] names; // Array of names
+    private String names; // Array of names
 
-    private int num_views; //Should be static 
+    private static int num_views; //Should be static 
 
     private String synopsis; // Summary of the film
 
-    private double average_rating; // Should be calculated or entered by the producer
+    private static double average_rating; // Should be calculated or entered by the producer
 
-    private ArrayList<MaturityLevel> levels; // Enum 
+    private MaturityLevel levels; // Enum 
 
-    private int total_watch; // should be static too (not sure)
+    private static int total_watch; // should be static too (not sure)
 
-    
-    public Show(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
-            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int num_views, double average_rating, int total_watch) {
+    public Show(String title, GregorianCalendar release_date, Quality quality, Genres genres,
+            ShowLanguage lang, String names, String synopsis, MaturityLevel levels) {
         this.title = title;
         this.release_date = release_date;
         this.quality = quality;
@@ -43,11 +41,7 @@ public class Show {
         this.names = names;
         this.synopsis = synopsis;
         this.levels = levels;
-        this.num_views = num_views;
-        this.average_rating = average_rating;
-        this.total_watch = total_watch;
     }
-    
 
     public String getTitle() {
         return title;
@@ -73,12 +67,28 @@ public class Show {
         this.quality = quality;
     }
 
+    public Genres getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Genres genres) {
+        this.genres = genres;
+    }
+
     public ShowLanguage getLang() {
         return lang;
     }
 
     public void setLang(ShowLanguage lang) {
         this.lang = lang;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public int getNum_views() {
@@ -105,6 +115,14 @@ public class Show {
         this.average_rating = average_rating;
     }
 
+    public MaturityLevel getLevels() {
+        return levels;
+    }
+
+    public void setLevels(MaturityLevel levels) {
+        this.levels = levels;
+    }
+
     public int getTotal_watch() {
         return total_watch;
     }
@@ -113,37 +131,13 @@ public class Show {
         this.total_watch = total_watch;
     }
 
-    public ArrayList<Genres> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<Genres> genres) {
-        this.genres = genres;
-    }
-
-    public String[] getNames() {
-        return names;
-    }
-
-    public void setNames(String[] names) {
-        this.names = names;
-    }
-
-    public ArrayList<MaturityLevel> getLevels() {
-        return levels;
-    }
-
-    public void setLevels(ArrayList<MaturityLevel> levels) {
-        this.levels = levels;
-    }
-    
     @Override
     public String toString() {
         return ("\n\tTitle: " + title + "\n\tRelease_date: "
-                + release_date.getTime() + "\n\tQuality: " + quality.name() + "\n\tGenre: "
-                + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + Arrays.toString(names)
+                + release_date.getTime() + "\n\tQuality: " + quality + "\n\tGenre: "
+                + genres + "\n\tLanguage:" + lang + "\n\tNames of Actors: " + names
                 + "\n\tNumber Of Views: " + num_views + "\n\tSynopsis: " + synopsis
-                + "\n\tAverage Rating:" + average_rating + "\n\tMaturity Levels: " +levels
+                + "\n\tAverage Rating:" + average_rating + levels.toString()
                 + "\n\tTotal Watch: " + total_watch + '.');
     }
 

@@ -3,7 +3,7 @@ package platform.component;
 
 import java.util.GregorianCalendar; 
 
-public class Viewing implements Comparable<Viewing>{
+public class Viewing {
 
     private GregorianCalendar date; 
 
@@ -51,8 +51,5 @@ public class Viewing implements Comparable<Viewing>{
     public String toString() {
         return "\n\tLast Time You Viewed " + show.getTitle() + " is " + date.getTime();
     }
-    @Override
-    public int compareTo(Viewing view) {
-        return this.getDate().compareTo(view.getDate());
-    }
+    
 }

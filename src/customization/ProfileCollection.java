@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ListIterator;
+import main.OutOfRangeException;
 import platform.component.*;
 
 /**
@@ -34,7 +35,7 @@ public class ProfileCollection {
     }
 
     public void removeProfile(Profile profile) {
-        while (profiles!=null) {
+        while (profiles==null) {
             if (!profiles.contains(profile)) {
                 System.out.println("The profie is not found, Deletion Fails!");
             } else {
@@ -55,7 +56,7 @@ public class ProfileCollection {
         return null;
     }
 
-    public void modifyProfile(String name) {
+    public void modifyProfile(String name) throws OutOfRangeException {
         Profile placeHolder = this.searchProfile(name);
         Scanner scanner = new Scanner(System.in);
         int choice_change;
@@ -68,15 +69,12 @@ public class ProfileCollection {
             choice_change = scanner.nextInt();
             switch (choice_change) {
                 case 1:
-                    System.out.print("Please eneter the new name:");
+                    System.out.print("Please enter the new name:");
                     String newname = scanner.nextLine();
                     placeHolder.setName(newname);
                     break;
                 case 2:
-                    System.out.println("Please enter the minimal age for this profile:");
-                    int age = scanner.nextInt();
-                    MaturityLevel level = new MaturityLevel(age);
-                    placeHolder.setLevel_restriction(level);
+                    placeHolder.modify_maturity();
                     break;
                 case 3:
                     System.out.print("Please enter the new email: ");
@@ -156,7 +154,7 @@ public class ProfileCollection {
     }
 
     public void sortProfiles() {
-        Collections.sort(profiles, new sortByName());
+        Collections.sort(profiles, new SortByName());
     }
 
     public ArrayList<Profile> getProfiles() {

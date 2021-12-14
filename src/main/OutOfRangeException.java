@@ -7,9 +7,10 @@ package main;
 
 /**
  *
- * @author oessf
+ * @author user
  */
-public enum Genres {
-    ACTION, ANIME, FAMILY, CLASSIC, COMEDIES, DRAMAS, HORROR, ROMANTIC, 
-    SCIENCEFICTION, SPORTS, TVSHOWS;
+public class OutOfRangeException extends Exception{
+    public OutOfRangeException(String message){
+        super(message);
+    }
 }

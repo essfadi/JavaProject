@@ -39,7 +39,7 @@ public class Essfadi_Hakkour {
     public static void main(String[] args) {
         // TODO code application logic here
         Netflix netflix = new Netflix();
-        Account fakeAccount=null;
+        Account fakeAccount = null;
         Plan myPlan = null;
         PaymentMethod method;
         Playback setting;
@@ -47,7 +47,7 @@ public class Essfadi_Hakkour {
         ProfileCollection profiles = new ProfileCollection();
         ShowCollection showList=null;
         Subscription mySubscription;
-        MaturityLevel levels=null;
+        MaturityLevel levels = null;
         ShowLanguage language;
         Request showRequest;
         User myUser;
@@ -225,12 +225,11 @@ public class Essfadi_Hakkour {
                                     break;
                                 case 2:
                                     if (showList != null) {
-
                                         System.out.println("enter the title of your show:");
                                         scanner.next();
                                         String title = scanner.nextLine();
                                         Show s = showList.searchByTitle(title);
-                                       if (s != null) {
+                                        if (s != null) {
                                             myProfile.add_favorite(s);
                                             System.out.println(s.getTitle() + " is added to favorite!");
                                         } else {
@@ -242,12 +241,16 @@ public class Essfadi_Hakkour {
                                     break;
                                 case 3:
                                     // Menu of Shows (we have only 1 shows)
-                                    if (show != null && show.getLevels().getMin_age() <= myProfile.getLevel_restriction().getMin_age()) {
-                                        // After choosing
-                                        System.out.print("There is only one show as Max!!!");
-                                        // Creating Viewing
-                                        viewing = new Viewing(show);
-                                        System.out.println(viewing.toString());
+                                    if (showList != null) {
+                                        System.out.println("");
+
+                                        if (show != null && show.getLevels().getMin_age() <= myProfile.getLevel_restriction().getMin_age()) {
+                                            // After choosing
+                                            System.out.print("There is only one show as Max!!!");
+                                            // Creating Viewing
+                                            viewing = new Viewing(show);
+                                            System.out.println(viewing.toString());
+                                        }
                                     } else {
                                         System.out.println("\nThere are no shows to view, exit this menu to add new one!\n");
                                     }

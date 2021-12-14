@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package customization;
+package platform.component;
 
 import java.util.Comparator;
 
 /**
  *
- * @author oessf
+ * @author user
  */
-public class SortByName implements Comparator<Profile>{
-    
+public class SortByDate implements Comparator<Viewing>{
     @Override
-    public int compare(Profile a, Profile b) {
-        return a.getName().compareTo(b.getName());
+    public int compare(Viewing a, Viewing b){
+        return a.getDate().compareTo(b.getDate());
     }
+    
 }
