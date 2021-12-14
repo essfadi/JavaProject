@@ -166,16 +166,14 @@ public class ShowCollection {
     }
     
     public void save() throws IOException{
-        File file = new File("..\\..\\data\\netflix.ser");
-        FileOutputStream fout = new FileOutputStream(file);
+        FileOutputStream fout = new FileOutputStream("data/netflix.ser");
         ObjectOutputStream out = new ObjectOutputStream(fout);
         out.writeObject(this.shows);
         fout.close();
         out.close();
     }
     public void load() throws IOException, ClassNotFoundException{
-        File file = new File("..\\..\\data\\netflix.ser");
-        FileInputStream fin = new FileInputStream(file);
+        FileInputStream fin = new FileInputStream("data/netflix.ser");
         ObjectInputStream in = new ObjectInputStream(fin);
         this.shows = (ArrayList<Show>) in.readObject();
         fin.close();

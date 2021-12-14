@@ -3,12 +3,13 @@ package platform.component;
 import customization.MaturityLevel;
 import main.Genres;
 import customization.ShowLanguage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import main.Quality;
 import java.util.GregorianCalendar; // To change
 
-public class Show {
+public class Show implements Serializable{
 
     private String title;
 
