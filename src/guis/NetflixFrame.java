@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import platform.component.ShowCollection;
 
@@ -25,8 +26,13 @@ public class NetflixFrame extends javax.swing.JFrame {
         setTitle("Netflix Application");
         setLayout(new FlowLayout());
         shows = new ShowCollection();
+        try {
+            shows.load();
+        } catch (ClassNotFoundException | IOException err) {
+            JOptionPane.showMessageDialog(NetflixFrame.this, "Class Not Found in the file!", "Loading Shows", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         initComponents();
-        
     }
 
     /**
