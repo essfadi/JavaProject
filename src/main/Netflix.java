@@ -48,7 +48,7 @@ public class Netflix {
         this.plans_by_country = plans_by_country;
 
     }
-    
+
     public final void setMaturityByRegion(Country country) {
 
         switch (country) {
@@ -99,7 +99,7 @@ public class Netflix {
         }
     }
 
-    public void register() {
+    public Account register() {
         System.out.println("======================================================");
         Scanner scanner = new Scanner(System.in);
         //Should be developped later for checking the format!
@@ -112,7 +112,7 @@ public class Netflix {
         password = scanner.next();
         System.out.println("======================================================");
         Account acc = new Account(email, password);
-        accList.add(acc);
+        return (accList.add(acc));
     }
 
     public void search(int choice, String data) {
@@ -301,7 +301,7 @@ public class Netflix {
         synopsis = scanner.nextLine();
         System.out.print("Enter the minimum age allowed to watch: "); // Should be a switch (not sure)
         age = scanner.nextInt();
-        levels.add(setMaturityLevel(age));
+        setMaturityLevel(age, levels);
         System.out.print("Enter the total watch: ");
         total_watch = scanner.nextInt();
         System.out.print("Enter the number of views:");
@@ -328,44 +328,32 @@ public class Netflix {
         }
         return (shows);
     }
-    
-    public static MaturityLevel setMaturityLevel(int age) throws AgeException {
+
+    public static ArrayList<MaturityLevel> setMaturityLevel(int age, ArrayList<MaturityLevel> levels) throws AgeException {
         if (age > 0) {
             if (age < 7) {
-                return (MaturityLevel.ALL);
+                levels.add(MaturityLevel.ALL);
             } else if (age < 13) {
-                return (MaturityLevel.KIDS);
+                levels.add(MaturityLevel.ALL);
+                levels.add(MaturityLevel.KIDS);
             } else if (age < 16) {
-                return (MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ALL);
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
             } else if (age < 18) {
-                return (MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ALL);
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.TEENS);
+                levels.add(MaturityLevel.ADULT);
             } else {
-                return (MaturityLevel.ADULTS);
+                levels.add(MaturityLevel.ALL);
+                levels.add(MaturityLevel.KIDS);
+                levels.add(MaturityLevel.ADULT);
+                levels.add(MaturityLevel.ADULTS);
             }
+            return levels;
         } else {
             throw new AgeException("\tThe Age You Entered Is Not Valid");
         }
     }
-
-    public AccountCollection getAccList() {
-        return accList;
-    }
-
-    public void setAccList(AccountCollection accList) {
-        this.accList = accList;
-    }
-
-    public RequestCollection getRequests() {
-        return requests;
-    }
-
-    public void setRequests(RequestCollection requests) {
-        this.requests = requests;
-    }
-
-    @Override
-    public String toString() {
-        return "Netflix{" + "accList=" + accList.toString() + ", requests=" + requests.toString() + ", plans_by_country=" + plans_by_country.toString() + ", maturityByCountry=" + maturityByCountry + '}';
-    }
-    
 }
