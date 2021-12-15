@@ -8,6 +8,7 @@ package netflixApp;
  */
 import authentication.finance.Subscription;
 import authentication.Account;
+import authentication.AccountCollection;
 import authentication.finance.PaymentMethod;
 import authentication.finance.Plan;
 import authentication.User;
@@ -39,15 +40,16 @@ public class Essfadi_Hakkour {
     public static void main(String[] args) {
         // TODO code application logic here
         Netflix netflix = new Netflix();
-        Account fakeAccount=null;
+        Account fakeAccount = null;
+        AccountCollection accList = new AccountCollection();
         Plan myPlan = null;
         PaymentMethod method;
         Playback setting;
         Profile myProfile = null;
         ProfileCollection profiles = new ProfileCollection();
-        ShowCollection showList=null;
+        ShowCollection showList = null;
         Subscription mySubscription;
-        MaturityLevel levels=null;
+        MaturityLevel levels = null;
         ShowLanguage language;
         Request showRequest;
         User myUser;
@@ -68,8 +70,8 @@ public class Essfadi_Hakkour {
 
             switch (choice_menu) {
                 case 1:
-                    if (fakeAccount == null) {
-                        fakeAccount = netflix.register();
+                    fakeAccount = netflix.register();
+                    if (fakeAccount != null) {
                         // Start for: Plan 
                         System.out.println("1. Basic\n2. Standard\n3. Premuim\n");
                         do {
@@ -106,7 +108,7 @@ public class Essfadi_Hakkour {
                         System.out.print("Enter the minimum age that will use this profile: ");
                         profile_age = scanner.nextInt();
                         try {
-                            levels = netflix.setMaturityLevel(profile_age);
+                            levels = Netflix.setMaturityLevel(profile_age);
                         } catch (AgeException ex) {
                             System.out.println(ex.getMessage());
                         }
@@ -199,12 +201,16 @@ public class Essfadi_Hakkour {
                         System.out.println("\t\t======================================================");
                         System.out.println("\t\tYou Have Been Registered Successfully!!!");
                         System.out.println("\t\t======================================================");
+
+                    } else {
+                        System.out.println("This email adress already has an account!");
                     }
                     // THE END
 
                     // Settings for profile
                     break;
                 // Add Your case 2
+
                 case 2:
                     if (myProfile != null) {
                         do {
@@ -230,7 +236,7 @@ public class Essfadi_Hakkour {
                                         scanner.next();
                                         String title = scanner.nextLine();
                                         Show s = showList.searchByTitle(title);
-                                       if (s != null) {
+                                        if (s != null) {
                                             myProfile.add_favorite(s);
                                             System.out.println(s.getTitle() + " is added to favorite!");
                                         } else {
@@ -242,7 +248,7 @@ public class Essfadi_Hakkour {
                                     break;
                                 case 3:
                                     // Menu of Shows (we have only 1 shows)
-                                    if (show != null && show.getLevels().getMin_age() <= myProfile.getLevel_restriction().getMin_age()) {
+                                    if (showList != null && show.getLevels().contains(myProfile.getLevel_restriction())) {
                                         // After choosing
                                         System.out.print("There is only one show as Max!!!");
                                         // Creating Viewing
@@ -280,9 +286,11 @@ public class Essfadi_Hakkour {
                     do {
                         try {
                             showList = new ShowCollection();
-                            showList = netflix.addShow();
+                            showList = Netflix.addShow();
+                            System.out.println("Test1");
                             System.out.println("======================================================");
                             System.out.println(showList.toString());
+                            System.out.println("Test2");
                             System.out.println("======================================================");
                         } catch (AgeException err1) {
                             System.err.println(err1.getMessage());

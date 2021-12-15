@@ -8,6 +8,7 @@ import authentication.finance.Plans;
 import customization.ShowLanguage;
 import customization.MaturityLevel;
 import customization.Profile;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -135,7 +136,7 @@ public class Netflix {
             Iterator<Show> iter = shows.iterator();
             while (iter.hasNext()) {
                 Show show = iter.next();
-                if (show.getLevels().getMin_age() <= myProfile.getLevel_restriction().getMin_age()) {
+                if (show.getLevels().contains(myProfile.getLevel_restriction())) {
                     shows.toString();
                 }
             }
@@ -164,18 +165,21 @@ public class Netflix {
         String title;
         GregorianCalendar gcal;
         Quality quality;
-        Genres genres = Genres.TVSHOWS;
+        Genres genre = Genres.TVSHOWS;
+        ArrayList<Genres> genres = new ArrayList();
         ShowLanguage language = ShowLanguage.ENGLISH;
-        String names;
+        String[] names = new String[5];
         String synopsis;
         int choice = 0;
         int release_year;
         int release_month;
         int release_day;
-        int age;
+        int age, num_views, total_watch;
+        double average_rating;
         int choice_show, duration, seasons_num, episode_num;
         Seasons season;
-        MaturityLevel levels;
+        ArrayList<MaturityLevel> levels = new ArrayList<>();
+
         System.out.print("Enter the title of your show: ");
         title = scanner.nextLine();
         System.out.print("Enter the release year: ");
@@ -208,40 +212,41 @@ public class Netflix {
         while (choice < 1 || choice > 11) {
             System.out.print("Enter your choice of genres: ");
             choice = scanner.nextInt();
+            genres.add(Genres.valueOf(Genres.));
         }
         switch (choice) {
             case 1:
-                genres = Genres.ACTION;
+                genre = Genres.ACTION;
                 break;
             case 2:
-                genres = Genres.ANIME;
+                genre = Genres.ANIME;
                 break;
             case 3:
-                genres = Genres.FAMILY;
+                genre = Genres.FAMILY;
                 break;
             case 4:
-                genres = Genres.CLASSIC;
+                genre = Genres.CLASSIC;
                 break;
             case 5:
-                genres = Genres.COMEDIES;
+                genre = Genres.COMEDIES;
                 break;
             case 6:
-                genres = Genres.DRAMAS;
+                genre = Genres.DRAMAS;
                 break;
             case 7:
-                genres = Genres.HORROR;
+                genre = Genres.HORROR;
                 break;
             case 8:
-                genres = Genres.ROMANTIC;
+                genre = Genres.ROMANTIC;
                 break;
             case 9:
-                genres = Genres.SCIENCEFICTION;
+                genre = Genres.SCIENCEFICTION;
                 break;
             case 10:
-                genres = Genres.SPORTS;
+                genre = Genres.SPORTS;
                 break;
             case 11:
-                genres = Genres.TVSHOWS;
+                genre = Genres.TVSHOWS;
                 break;
         }
         System.out.println("\n1.ENGLISH\n2.FRENCH\n3.GERMAN\n4.ITALIEN\n5.SPANISH\n6.POTUGUESE"
@@ -288,12 +293,21 @@ public class Netflix {
         }
         scanner.nextLine();
         System.out.print("Enter the names of actors: ");
-        names = scanner.nextLine();
+        String name = scanner.nextLine();
+        for (int i = 0; i < names.length; i++) {
+            names[i] = name;
+        }
         System.out.print("Enter the synopsis of your show: ");
         synopsis = scanner.nextLine();
         System.out.print("Enter the minimum age allowed to watch: "); // Should be a switch (not sure)
         age = scanner.nextInt();
-        levels = setMaturityLevel(age);
+        levels.add(setMaturityLevel(age));
+        System.out.print("Enter the total watch: ");
+        total_watch = scanner.nextInt();
+        System.out.print("Enter the number of views:");
+        num_views = scanner.nextInt();
+        System.out.print("Enter the average rating:");
+        average_rating = Double.parseDouble(scanner.next());
         System.out.println("======================================================");
         System.out.print("********Show Menu*********\n1/Movie\n2/Serie\nPlease Enter your Choice:");
         do {
@@ -303,13 +317,13 @@ public class Netflix {
             System.out.println("Please enter the duration of the movie in seconds: ");
             duration = scanner.nextInt();
 
-            shows.add(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, duration));
+            shows.addShow(new Movies(title, gcal, quality, genres, language, names, synopsis, levels, num_views, average_rating, total_watch, duration));
         } else {
             System.out.println("Please enter the number of seasons:");
             seasons_num = scanner.nextInt();
             System.out.println("Please enter the number of episodes:");
             episode_num = scanner.nextInt();
-            shows.add(new Series(title, gcal, quality, genres, language, names, synopsis, levels, seasons_num));
+            shows.addShow(new Series(title, gcal, quality, genres, language, names, synopsis, levels, num_views, average_rating, total_watch, seasons_num));
             season = new Seasons(seasons_num, episode_num);
         }
         return (shows);
