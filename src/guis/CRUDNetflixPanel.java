@@ -455,12 +455,14 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         String titleStr = titleTxt.getText();
         if (titleStr.isEmpty()) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a title!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         GregorianCalendar gre = new GregorianCalendar();
         try {
             gre.setTime((Date) dateTxt.getValue());
         } catch(NullPointerException err) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a value for date in this form: dd/MM/yyy", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         Quality quality = (Quality) qualityCombo.getSelectedItem();
         ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
@@ -522,6 +524,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
                 levels.add(MaturityLevel.ADULTS);
                 break;
             default:
+                levels.add(MaturityLevel.ALL);
                 levels.add(MaturityLevel.KIDS);
                 levels.add(MaturityLevel.TEENS);
                 levels.add(MaturityLevel.ADULT);
@@ -698,12 +701,14 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         String titleStr = titleTxt.getText();
         if (titleStr.isEmpty()) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a title!", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         GregorianCalendar gre = new GregorianCalendar();
         try {
             gre.setTime((Date) dateTxt.getValue());
         } catch(NullPointerException err) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter a value for date in this form: dd/MM/yyy", "Add Show", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         Quality quality = (Quality) qualityCombo.getSelectedItem();
         ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();

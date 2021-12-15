@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import main.OutOfRangeException;
 import platform.component.Show;
+import platform.component.ViewingCollection;
 
 public class Profile {
 
@@ -26,6 +27,8 @@ public class Profile {
     private BlockedCollection blocked; // List or Array or Enum
 
     private ShowLanguage subtitle_lang; // List or Array or Enum
+    
+    private ViewingCollection viewing;
 
     public Profile(String name, MaturityLevel level_restriction, String email,
             boolean toNotify, String language, Playback playback,
@@ -40,6 +43,7 @@ public class Profile {
         this.subtitle_lang = subtitle_lang;
         this.favorites = new FavoritesCollection();
         this.blocked = new BlockedCollection();
+        this.viewing = new ViewingCollection();
     }
 
     public void modify_maturity() throws OutOfRangeException {
@@ -146,6 +150,14 @@ public class Profile {
         this.subtitle_lang = subtitle_lang;
     }
 
+    public ViewingCollection getViewing() {
+        return viewing;
+    }
+
+    public void setViewing(ViewingCollection viewing) {
+        this.viewing = viewing;
+    }
+    
     @Override
     public String toString() {
         return ("\nYour profile is name: " + name + level_restriction.toString()
