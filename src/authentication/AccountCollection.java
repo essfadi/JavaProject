@@ -92,7 +92,7 @@ public class AccountCollection {
     }
 
     public void sort() {
-        Collections.sort(accounts, new sortByEmail());
+        Collections.sort(accounts, new SortByEmail());
     }
 
     public ArrayList<Account> getAccounts() {

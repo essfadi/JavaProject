@@ -12,6 +12,7 @@ import authentication.AccountCollection;
 import authentication.finance.PaymentMethod;
 import authentication.finance.Plan;
 import authentication.User;
+import customization.BlockedCollection;
 import customization.MaturityLevel;
 import customization.Playback;
 import customization.Profile;
@@ -27,6 +28,7 @@ import main.DateException;
 import main.OutOfRangeException;
 import platform.component.Country;
 import platform.component.ShowCollection;
+import platform.component.ViewingCollection;
 
 /**
  *
@@ -54,7 +56,6 @@ public class Essfadi_Hakkour {
         Request showRequest;
         User myUser;
         Show show = null;
-        Viewing viewing = null;
         boolean notification, subtitle;
         int choice_menu, choice_card, choice_plan, choice_request, choice_subs, month_exp,
                 year_exp, playback_choice, option1, option2,
@@ -230,45 +231,80 @@ public class Essfadi_Hakkour {
                                     }
                                     break;
                                 case 2:
-                                    if (showList != null) {
-                                        scanner.nextLine();
-                                        System.out.println(showList.toString());
-                                        System.out.println("enter the title of your show:");
-                                        String title = scanner.nextLine();
-                                        System.out.println(title);
-                                        Show s = showList.searchByTitle(title);
-                                        if (s != null) {
-                                            myProfile.add_favorite(s);
-                                            System.out.println(s.getTitle() + " is added to favorite!");
-                                        } else {
-                                            System.out.println("The movie doesn't exist!");
-                                        }
-                                    } else {
-                                        System.out.println("\nThere are no shows to add as favoite, exit this menu to add new one!\n");
+                                    BlockedCollection notAllowed = myProfile.getBlocked();
+                                    ShowCollection allowed = notAllowed.generateAllowedShows(showList, myProfile);
+                                    System.out.println("Enter your choice: ");
+                                    int choice_show_menu = scanner.nextInt();
+                                    System.out.println(allowed);
+                                    switch (choice_show_menu) {
+                                        case 1:
+                                            if (showList != null) {
+                                                scanner.nextLine();
+                                                System.out.println(showList.toString());
+                                                System.out.println("enter the title of your show:");
+                                                String title = scanner.nextLine();
+                                                System.out.println(title);
+                                                Show s = showList.searchByTitle(title);
+                                                if (s != null) {
+                                                    myProfile.add_favorite(s);
+                                                    System.out.println(s.getTitle() + " is added to favorite!");
+                                                } else {
+                                                    System.out.println("The movie doesn't exist!");
+                                                }
+                                            } else {
+                                                System.out.println("\nThere are no shows to add as favoite, exit this menu to add new one!\n");
+                                            }
+                                            break;
+                                        case 2:
+                                            // edit
+                                            break;
+                                        case 3:
+                                            // Remove
+                                            break;
+                                        case 4:
+                                            // Viewing
+                                            System.out.println("Choose the show that you want to watch by title: ");
+                                            String title_viewing = scanner.nextLine();
+                                            Show show_viewing = allowed.searchByTitle(title_viewing);
+                                            if (show_viewing != null) {
+                                                showList.searchByTitle(title_viewing).view();
+                                                myProfile.getViewing().add(new Viewing(show_viewing));
+                                            } else {
+                                                System.out.println("There is no show with this title!");
+                                            }
+                                            title_viewing = null;
+                                            show_viewing = null;
+                                            break;
+                                        case 5:
+                                            if (!myProfile.getViewing().getViewings().isEmpty()) {
+                                                System.out.println(myProfile.getViewing().toString());
+                                                System.out.println("Choose the show that you want to watch by title: ");
+                                                String title_rate = scanner.nextLine();
+                                                Show show_rate = allowed.searchByTitle(title_rate);
+                                                if (show_rate != null) {
+                                                    System.out.println("If Thumbs up, Enter '1': ");
+                                                    choice_show = scanner.nextInt();
+                                                    for (Viewing view : myProfile.getViewing().getViewings()) {
+                                                        if (view.getShow().equals(show_rate)) {
+                                                            view.rate(choice_show);
+                                                        }
+                                                    }
+                                                    System.out.println(show_rate.getTitle() + " is rated");
+                                                } else {
+                                                    System.out.println("You did not view the show that you wanna rate!");
+                                                }
+                                            } else {
+                                                System.out.println("\nThere are no Viewings to rate, exit this menu to add new one!\n");
+                                            }
+                                            break;
                                     }
                                     break;
                                 case 3:
-                                    // Menu of Shows (we have only 1 shows)
-                                    if (showList != null && show.getLevels().contains(myProfile.getLevel_restriction())) {
-                                        // After choosing
-                                        System.out.print("There is only one show as Max!!!");
-                                        // Creating Viewing
-                                        viewing = new Viewing(show);
-                                        System.out.println(viewing.toString());
-                                    } else {
-                                        System.out.println("\nThere are no shows to view, exit this menu to add new one!\n");
-                                    }
-
+                                    // Menu of Shows (we have only 1 shows)                                   
                                     break;
                                 case 4:
-                                    if (viewing != null && show != null) {
-                                        System.out.println("If Thumbs up, Enter '1': ");
-                                        choice_show = scanner.nextInt();
-                                        viewing.rate(choice_show);
-                                        System.out.println(show.getTitle() + " is rated with " + viewing.getRate());
-                                    } else {
-                                        System.out.println("\nThere are no Viewings to rate, exit this menu to add new one!\n");
-                                    }
+                                    //Changed
+                                    
                                     break;
                             }
                         } while (authenticated_choice != 0);

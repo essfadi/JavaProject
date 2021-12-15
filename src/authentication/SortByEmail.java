@@ -9,7 +9,7 @@ import java.util.Comparator;
  *
  * @author oessf
  */
-public class sortByEmail implements Comparator<Account>{
+public class SortByEmail implements Comparator<Account>{
     public int compare(Account a, Account b) {
         return a.getEmail().compareTo(b.getEmail());
     }

@@ -49,6 +49,9 @@ public class Show implements Serializable{
         this.total_watch = total_watch;
     }
     
+    public void view() {
+        this.num_views += 1;
+    }
 
     public String getTitle() {
         return title;
