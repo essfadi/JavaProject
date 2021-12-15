@@ -231,10 +231,11 @@ public class Essfadi_Hakkour {
                                     break;
                                 case 2:
                                     if (showList != null) {
-
+                                        scanner.nextLine();
+                                        System.out.println(showList.toString());
                                         System.out.println("enter the title of your show:");
-                                        scanner.next();
                                         String title = scanner.nextLine();
+                                        System.out.println(title);
                                         Show s = showList.searchByTitle(title);
                                         if (s != null) {
                                             myProfile.add_favorite(s);
