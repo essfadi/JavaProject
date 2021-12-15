@@ -16,6 +16,8 @@ import main.Genres;
 import main.Quality;
 import platform.component.Show;
 import static guis.NetflixFrame.shows;
+import java.text.SimpleDateFormat;
+import java.util.ListIterator;
 
 /**
  *
@@ -30,6 +32,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         model = new DefaultListModel<>();
         initComponents();
         showList.setModel(model);
+        loadInitialDataToJList();
     }
 
     /**
@@ -644,9 +647,9 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         if (show == null) return;
         
         resetInput();
-        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         titleTxt.setText(show.getTitle());
-        dateTxt.setText(show.getRelease_date().getTime().toString());
+        dateTxt.setText(formatter.format(show.getRelease_date().getTime()));
         qualityCombo.setSelectedItem(show.getQuality());
         languageCombo.setSelectedItem(show.getLang());
         namesTxt.setText(String.join(", ",show.getNames()));
@@ -825,7 +828,12 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         showList.updateUI();
         JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "The editing has been made successfully!", "Editing Show", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_editBtnActionPerformed
-
+    private void loadInitialDataToJList() {
+        ListIterator<Show> iter = shows.getShows().listIterator();
+        while (iter.hasNext()) {
+            model.addElement(iter.next());
+        }
+    }
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
         resetInput();
