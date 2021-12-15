@@ -174,7 +174,7 @@ public class ShowCollection {
                     System.out.print("Please enter the new min age:");
                     int age = scanner.nextInt();
                     try {
-                        placeHolder.setLevels(Netflix.setMaturityLevel(age, placeHolder.getLevels()));
+                        Netflix.setMaturityLevel(age, placeHolder.getLevels());
                     } catch (AgeException err) {
                         System.err.println(err.getMessage());
                     }

@@ -10,6 +10,7 @@ import customization.ShowLanguage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 import main.AgeException;
 import main.Netflix;
@@ -59,7 +60,7 @@ public class User {
         Scanner scanner = new Scanner(System.in);
         String profile_name, profile_email, profile_lang;
         boolean notification, subtitle;
-        MaturityLevel levels;
+        ArrayList<MaturityLevel> levels = new ArrayList();
         Playback setting;
         ShowLanguage language;
         int profile_age, playback_choice, option1, option2, profile_choice;
@@ -70,7 +71,7 @@ public class User {
         System.out.print("Enter the minimum age that will use this profile: ");
         profile_age = scanner.nextInt();
         try {
-            levels = Netflix.setMaturityLevel(profile_age, levels);
+            Netflix.setMaturityLevel(profile_age, levels);
         } catch (AgeException ex) {
             System.err.println(ex.getMessage());
             return;
@@ -156,7 +157,7 @@ public class User {
                 language = ShowLanguage.ENGLISH;
                 break;
         }
-        Profile myProfile = new Profile(profile_name, levels, profile_email, notification, profile_lang, setting, subtitle, language);
+        Profile myProfile = new Profile(profile_name, levels.get(levels.size() - 1), profile_email, notification, profile_lang, setting, subtitle, language);
         this.profile.addProfile(myProfile);
     }
 

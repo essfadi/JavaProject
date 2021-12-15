@@ -329,7 +329,7 @@ public class Netflix {
         return (shows);
     }
 
-    public static ArrayList<MaturityLevel> setMaturityLevel(int age, ArrayList<MaturityLevel> levels) throws AgeException {
+    public static void setMaturityLevel(int age, ArrayList<MaturityLevel> levels) throws AgeException {
         if (age > 0) {
             if (age < 7) {
                 levels.add(MaturityLevel.ALL);
@@ -351,9 +351,29 @@ public class Netflix {
                 levels.add(MaturityLevel.ADULT);
                 levels.add(MaturityLevel.ADULTS);
             }
-            return levels;
         } else {
             throw new AgeException("\tThe Age You Entered Is Not Valid");
         }
+    }
+
+    public AccountCollection getAccList() {
+        return accList;
+    }
+
+    public void setAccList(AccountCollection accList) {
+        this.accList = accList;
+    }
+
+    public RequestCollection getRequests() {
+        return requests;
+    }
+
+    public void setRequests(RequestCollection requests) {
+        this.requests = requests;
+    }
+
+    @Override
+    public String toString() {
+        return "Netflix{" + "accList=" + accList + ", requests=" + requests + ", plans_by_country=" + plans_by_country + ", maturityByCountry=" + maturityByCountry + '}';
     }
 }

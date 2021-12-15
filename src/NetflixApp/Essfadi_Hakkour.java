@@ -71,7 +71,7 @@ public class Essfadi_Hakkour {
             switch (choice_menu) {
                 case 1:
                     netflix.register();
-                    if (netflix != null) {
+                    if (netflix.getAccList().getAccounts().isEmpty()) {
                         
 
                         System.out.println("\t\t======================================================");
