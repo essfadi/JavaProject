@@ -48,7 +48,7 @@ public class Netflix {
         this.plans_by_country = plans_by_country;
 
     }
-
+    
     public final void setMaturityByRegion(Country country) {
 
         switch (country) {
@@ -99,7 +99,7 @@ public class Netflix {
         }
     }
 
-    public Account register() {
+    public void register() {
         System.out.println("======================================================");
         Scanner scanner = new Scanner(System.in);
         //Should be developped later for checking the format!
@@ -112,7 +112,7 @@ public class Netflix {
         password = scanner.next();
         System.out.println("======================================================");
         Account acc = new Account(email, password);
-        return (accList.add(acc));
+        accList.add(acc);
     }
 
     public void search(int choice, String data) {
@@ -328,7 +328,7 @@ public class Netflix {
         }
         return (shows);
     }
-
+    
     public static MaturityLevel setMaturityLevel(int age) throws AgeException {
         if (age > 0) {
             if (age < 7) {
@@ -346,4 +346,26 @@ public class Netflix {
             throw new AgeException("\tThe Age You Entered Is Not Valid");
         }
     }
+
+    public AccountCollection getAccList() {
+        return accList;
+    }
+
+    public void setAccList(AccountCollection accList) {
+        this.accList = accList;
+    }
+
+    public RequestCollection getRequests() {
+        return requests;
+    }
+
+    public void setRequests(RequestCollection requests) {
+        this.requests = requests;
+    }
+
+    @Override
+    public String toString() {
+        return "Netflix{" + "accList=" + accList.toString() + ", requests=" + requests.toString() + ", plans_by_country=" + plans_by_country.toString() + ", maturityByCountry=" + maturityByCountry + '}';
+    }
+    
 }

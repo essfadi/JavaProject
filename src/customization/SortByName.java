@@ -6,14 +6,13 @@
 package customization;
 
 import java.util.Comparator;
-import platform.component.Show;
 
 /**
  *
  * @author oessf
  */
-public class sortByTitle implements Comparator<Show> {
-
+public class SortByName implements Comparator<Profile>{
+    
     /**
      *
      * @param a
@@ -21,7 +20,7 @@ public class sortByTitle implements Comparator<Show> {
      * @return
      */
     @Override
-    public int compare(Show a, Show b) {
-        return a.getTitle().compareTo(b.getTitle());
+    public int compare(Profile a, Profile b) {
+        return a.getName().compareTo(b.getName());
     }
 }

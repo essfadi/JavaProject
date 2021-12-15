@@ -28,7 +28,6 @@ import main.DateException;
 import main.OutOfRangeException;
 import platform.component.Country;
 import platform.component.ShowCollection;
-import platform.component.ViewingCollection;
 
 /**
  *
@@ -71,134 +70,10 @@ public class Essfadi_Hakkour {
 
             switch (choice_menu) {
                 case 1:
-                    fakeAccount = netflix.register();
-                    if (fakeAccount != null) {
-                        // Start for: Plan 
-                        System.out.println("1. Basic\n2. Standard\n3. Premuim\n");
-                        do {
-                            System.out.print("Enter Your Plan: ");
-                            choice_plan = scanner.nextInt();
-                        } while (!(choice_plan > 0 && choice_plan < 4));
-                        myPlan = new Plan(choice_plan);
-                        // The END
-                        // Start For: PaymentInfo
-                        scanner.nextLine();
-                        System.out.print("Enter Your Legal Full Name: ");
-                        full_name = scanner.nextLine();
-                        System.out.println("1. Visa\n2. MasterCard\n3. American Express\n");
-                        do {
-                            System.out.print("Enter The Type of Your Card: ");
-                            choice_card = scanner.nextInt();
-                        } while (!(choice_card > 0 && choice_card < 4));
-                        System.out.print("Enter Month of Expiration: ");
-                        month_exp = scanner.nextInt();
-                        System.out.print("Enter Year of Expiration: ");
-                        year_exp = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.print("Enter your Card Number: ");
-                        card_number = scanner.nextLine();
-                        method = new PaymentMethod(full_name, month_exp, year_exp, choice_card, card_number);
-                        // The End
-                        // Create Subscription
-                        mySubscription = new Subscription(myPlan);
-                        // The Start for Profile
-                        System.out.print("Enter a name for your profile: ");
-                        profile_name = scanner.nextLine();
-                        System.out.print("Enter an email for your profile: ");
-                        profile_email = scanner.next();
-                        System.out.print("Enter the minimum age that will use this profile: ");
-                        profile_age = scanner.nextInt();
-                        try {
-                            levels = Netflix.setMaturityLevel(profile_age);
-                        } catch (AgeException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        // The Start for: Playback Settings (1)
-                        System.out.println("\n1. AUTO \n2. LOW \n3. MEDIUM \n4. HIGH");
-                        System.out.print("Choose your Data Usage setting: ");
-                        do {
-                            System.out.print("Chooose a Play Back setting: ");
-                            playback_choice = scanner.nextInt();
-                        } while (!(playback_choice < 5 && playback_choice > 0));
+                    netflix.register();
+                    if (netflix != null) {
+                        
 
-                        switch (playback_choice) {
-                            case 1:
-                                setting = Playback.AUTO;
-                                break;
-                            case 2:
-                                setting = Playback.LOW;
-                                break;
-                            case 3:
-                                setting = Playback.MEDIUM;
-                                break;
-                            default:
-                                setting = Playback.HIGH;
-                                break;
-                        }
-                        System.out.print("Would you like to auto play next episodes in all devices?(if YES, Enter '1'): ");
-                        option1 = scanner.nextInt();
-                        setting.setAutoplayNextEpi(option1);
-                        System.out.print("Would you like to auto play previews while browsing on devices?(if YES, Enter '1'): ");
-                        option2 = scanner.nextInt();
-                        setting.setAutoplayPreviews(option2);
-                        System.out.println("Enter a language for your profile: ");
-                        profile_lang = scanner.next();
-                        System.out.print("Would you like to receive notifications?(if YES, Enter '1'): ");
-                        profile_choice = scanner.nextInt();
-                        notification = profile_choice == 1;
-                        System.out.print("Would you like to activate subtitle?(if YES, Enter '1'): ");
-                        profile_choice = scanner.nextInt();
-                        subtitle = profile_choice == 1;
-                        System.out.println("\n1.ENGLISH\n2.FRENCH\n3.GERMAN\n4.ITALIEN\n5.SPANISH\n6.POTUGUESE"
-                                + "\n7.ARABIC\n8.KOREAN\n9.TURKISH\n10.HEBREW\n11.CHINESE");
-                        profile_choice = 0;
-                        while (profile_choice < 1 || profile_choice > 11) {
-                            System.out.print("Enter your choice of languages: ");
-                            profile_choice = scanner.nextInt();
-                        }
-                        switch (profile_choice) {
-                            case 1:
-                                language = ShowLanguage.ENGLISH;
-                                break;
-                            case 2:
-                                language = ShowLanguage.FRENCH;
-                                break;
-                            case 3:
-                                language = ShowLanguage.GERMAN;
-                                break;
-                            case 4:
-                                language = ShowLanguage.ITALIEN;
-                                break;
-                            case 5:
-                                language = ShowLanguage.SPANISH;
-                                break;
-                            case 6:
-                                language = ShowLanguage.POTUGUESE;
-                                break;
-                            case 7:
-                                language = ShowLanguage.ARABIC;
-                                break;
-                            case 8:
-                                language = ShowLanguage.KOREAN;
-                                break;
-                            case 9:
-                                language = ShowLanguage.TURKISH;
-                                break;
-                            case 10:
-                                language = ShowLanguage.HEBREW;
-                                break;
-                            case 11:
-                                language = ShowLanguage.CHINESE;
-                                break;
-                            default:
-                                language = ShowLanguage.ENGLISH;
-                                break;
-                        }
-                        myProfile = new Profile(profile_name, levels, profile_email, notification, profile_lang, setting, subtitle, language);
-                        profiles.addProfile(myProfile);
-                        System.out.print("Enter your phone number: ");
-                        phone_number = scanner.next();
-                        myUser = new User(phone_number, myProfile, method);
                         System.out.println("\t\t======================================================");
                         System.out.println("\t\tYou Have Been Registered Successfully!!!");
                         System.out.println("\t\t======================================================");
