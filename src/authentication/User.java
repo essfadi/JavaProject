@@ -1,6 +1,5 @@
 package authentication;
 
-import platform.component.Request;
 import authentication.finance.PaymentMethod;
 import authentication.finance.Subscription;
 import customization.MaturityLevel;
@@ -8,10 +7,14 @@ import customization.Playback;
 import customization.Profile;
 import customization.ProfileCollection;
 import customization.ShowLanguage;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import main.AgeException;
 import main.Netflix;
 import platform.component.RequestCollection;
+import platform.component.ViewingCollection;
 
 public class User {
 
@@ -22,20 +25,34 @@ public class User {
     private RequestCollection requests;
 
     private PaymentMethod pay_method;
+    private ViewingCollection history;
 
     public User(String phone, PaymentMethod payment) {
         this.pay_method = payment;
         this.phone = phone;
         this.profile = new ProfileCollection();
         this.requests = new RequestCollection();
+        this.history = new ViewingCollection();
     }
 
-    public void view_prof_history() {
-
+    public void view_prof_history(Profile myProfile) {
+        //Print History of profile
+        this.history = myProfile.getViewing();
+        if (history == null) {
+            System.out.println("You have no history yet!");
+        } else {
+            System.out.println("Your Activity:");
+            this.history.toString();
+        }
     }
 
-    public void download_history() {
-        // Cannot implemmented without aggregations
+    public void download_history(String file) throws IOException, AgeException {
+        // save view_prof_History to the file
+        FileOutputStream fout = new FileOutputStream(file);
+        ObjectOutputStream out = new ObjectOutputStream(fout);
+        out.writeObject(this.history);
+        fout.close();
+        out.close();
     }
 
     public void addProfile() {
@@ -53,7 +70,7 @@ public class User {
         System.out.print("Enter the minimum age that will use this profile: ");
         profile_age = scanner.nextInt();
         try {
-            levels = Netflix.setMaturityLevel(profile_age);
+            levels = Netflix.setMaturityLevel(profile_age, levels);
         } catch (AgeException ex) {
             System.err.println(ex.getMessage());
             return;
@@ -167,9 +184,11 @@ public class User {
         card_number = scanner.nextLine();
         return (new PaymentMethod(full_name, month_exp, year_exp, choice_card, card_number));
     }
+
     public void addRequest() {
-        
+
     }
+
     public String getPhone() {
         return phone;
     }
