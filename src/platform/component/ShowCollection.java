@@ -21,6 +21,9 @@ import main.Genres;
 import main.Quality;
 import java.io.Serializable;
 import javax.swing.JOptionPane;
+import main.AgeException;
+import main.Language;
+import main.Netflix;
 
 /**
  *
@@ -70,7 +73,6 @@ public class ShowCollection {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
-            System.out.println(s.toString());
             if (s.getTitle().equalsIgnoreCase(title)) {
                 return s;
             }
@@ -101,7 +103,8 @@ public class ShowCollection {
     }
 
     public void modifyShow(Show show) {
-        /*Show placeHolder;
+        Show placeHolder;
+        ArrayList<Genres> genres = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int choice_change;
         if (shows.contains(show)) {
@@ -110,6 +113,7 @@ public class ShowCollection {
             System.out.print("Choose The Element You want to change: ");
             choice_change = scanner.nextInt();
             switch (choice_change) {
+
                 case 1:
                     System.out.print("Please enter the searched title:");
                     String title = scanner.nextLine();
@@ -123,18 +127,42 @@ public class ShowCollection {
                     placeHolder.setQuality(Quality.valueOf(quality));
                     break;
                 case 4:
-                    System.out.print("Please enter the searched Genre:");
+                    //modifying Genres;
+                    int choice = 0;
+                    System.out.print(show.getGenres().toString());
+
+                    do {
+                        System.out.print("would you like to add a show?");
+                        choice = scanner.nextInt();
+
+                    } while (choice != 1);
+                    if (choice == 1) {
+                        System.out.print("Please enter the new Genres:");
+                    }
                     String genre = scanner.nextLine();
-                    placeHolder.setGenres(Genres.valueOf(genre));
+                    genres.add(Genres.valueOf(genre));
+                    placeHolder.setGenres(genres);
                     break;
                 case 5:
-                    System.out.print("Please enter the new language :");
+                    //modifying language
+                    System.out.print("Please enter the new language for your show:");
                     String language = scanner.nextLine();
-                    placeHolder.setGenres(Genres.valueOf(language));
+                    placeHolder.setLang(ShowLanguage.valueOf(language));
                     break;
                 case 6:
-                    System.out.print("Please enter the new names :");
-                    String names = scanner.nextLine();
+                    String[] names = {};
+
+                    do {
+                        System.out.println("would you like to add show names? ");
+                        choice = scanner.nextInt();
+                    } while (choice != 1);
+                    if (choice == 1) {
+                        System.out.print("Please enter the new name :");
+                        String name = scanner.nextLine();
+                        for (int i = 0; i < placeHolder.getNames().length - 1; i++) {
+                            names[i] = name;
+                        }
+                    }
                     placeHolder.setNames(names);
                     break;
                 case 7:
@@ -145,14 +173,19 @@ public class ShowCollection {
                 case 8:
                     System.out.print("Please enter the new min age:");
                     int age = scanner.nextInt();
-                    placeHolder.setLevels(new MaturityLevel(age));
+                    try {
+                        placeHolder.setLevels(Netflix.setMaturityLevel(age, placeHolder.getLevels()));
+                    } catch (AgeException err) {
+                        System.err.println(err.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("The Choice You Entered Is Not Valid!");
             }
         } else {
             System.out.println("The Show you entered is not contained in your list of shows for this account!");
-        }*/
+        }
+
     }
 
     public ArrayList<Show> findShowWithGenre(Genres genre) {
@@ -166,15 +199,16 @@ public class ShowCollection {
         }
         return results;
     }
-    
-    public void save() throws IOException{
+
+    public void save() throws IOException {
         FileOutputStream fout = new FileOutputStream("data/netflix.ser");
         ObjectOutputStream out = new ObjectOutputStream(fout);
         out.writeObject(this.shows);
         fout.close();
         out.close();
     }
-    public void load() throws IOException, ClassNotFoundException{
+
+    public void load() throws IOException, ClassNotFoundException {
         FileInputStream fin = new FileInputStream("data/netflix.ser");
         ObjectInputStream in = new ObjectInputStream(fin);
         this.shows = (ArrayList<Show>) in.readObject();
