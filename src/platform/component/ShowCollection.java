@@ -31,6 +31,7 @@ public class ShowCollection {
     private ArrayList<Show> shows;
     private int numberOfShows = 0;
     private Show show;
+    private static final long serialversionUID = 129348938L;
     //private Genres genre;
 
     public ShowCollection() {
@@ -100,7 +101,7 @@ public class ShowCollection {
     }
 
     public void modifyShow(Show show) {
-        Show placeHolder;
+        /*Show placeHolder;
         Scanner scanner = new Scanner(System.in);
         int choice_change;
         if (shows.contains(show)) {
@@ -151,7 +152,7 @@ public class ShowCollection {
             }
         } else {
             System.out.println("The Show you entered is not contained in your list of shows for this account!");
-        }
+        }*/
     }
 
     public ArrayList<Show> findShowWithGenre(Genres genre) {

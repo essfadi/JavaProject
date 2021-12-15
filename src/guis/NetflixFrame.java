@@ -6,9 +6,9 @@
 package guis;
 
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import platform.component.ShowCollection;
 
@@ -17,7 +17,9 @@ import platform.component.ShowCollection;
  * @author oessf
  */
 public class NetflixFrame extends javax.swing.JFrame {
+
     static ShowCollection shows;
+
     /**
      * Creates new form NetflixFrame
      */
@@ -25,8 +27,16 @@ public class NetflixFrame extends javax.swing.JFrame {
         setTitle("Netflix Application");
         setLayout(new FlowLayout());
         shows = new ShowCollection();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../icons/netflix.png")));
+        try {
+            shows.load();
+            JOptionPane.showMessageDialog(NetflixFrame.this, "Data Loaded Successfully!", "Loading Shows", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(NetflixFrame.this, ex.getMessage(), "Loading Shows", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(NetflixFrame.this, ex.getMessage(), "Loading Shows", JOptionPane.ERROR_MESSAGE);
+        }
         initComponents();
-        
     }
 
     /**
@@ -110,8 +120,9 @@ public class NetflixFrame extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             shows.save();
+            JOptionPane.showMessageDialog(NetflixFrame.this, "Data Saved Successfully!", "Saving Shows", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
-            Logger.getLogger(NetflixFrame.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(NetflixFrame.this, ex.getMessage(), "Saving Shows", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_saveMenuActionPerformed
 
@@ -135,7 +146,7 @@ public class NetflixFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName() );
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(NetflixFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
