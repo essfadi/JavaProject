@@ -7,6 +7,7 @@ package platform.component;
 
 import customization.ShowLanguage;
 import customization.MaturityLevel;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,9 +23,9 @@ public class Series extends Show {
     private int num_seasons = 0;
     private List<Seasons> seasons;
 
-    public Series(String title, GregorianCalendar release_date, Quality quality, Genres genres,
-            ShowLanguage lang, String names, String synopsis, MaturityLevel levels, int num_seasons) {
-        super(title, release_date, quality, genres, lang, names, synopsis, levels);
+    public Series(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
+            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int num_views,double average_rating, int total_watch, int num_seasons) {
+        super(title, release_date, quality, genres, lang, names, synopsis, levels, num_views, average_rating, total_watch);
         this.num_seasons = num_seasons;
         this.seasons = new LinkedList<Seasons>();
     }

@@ -29,7 +29,6 @@ public class AccountCollection {
             accounts.add(numberOfAccounts++, acc);
             return acc;
         } else {
-            System.out.println("This email adress already have an account!");
             return null;
         }
     }
@@ -49,6 +48,7 @@ public class AccountCollection {
         while (accounts != null) {
             if (accounts.contains(acc)) {
                 accounts.remove(acc);
+                numberOfAccounts--;
             } else {
                 System.out.println("The account is not found, Deletion failed!");
             }

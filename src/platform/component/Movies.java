@@ -21,7 +21,7 @@ public class Movies extends Show {
     private int duration; // Should be in seconds
 
     public Movies(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
-            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int duration, int  num_views, double average_rating, int total_watch) {
+            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int  num_views, double average_rating, int total_watch, int duration) {
         super(title, release_date, quality, genres, lang, names, synopsis, levels, num_views, average_rating, total_watch);
         this.duration = duration;
     }
