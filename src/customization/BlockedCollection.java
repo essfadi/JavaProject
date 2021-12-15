@@ -57,7 +57,7 @@ public class BlockedCollection {
     }
     
     public void sort() {
-        Collections.sort(blocked, new sortByTitle());
+        Collections.sort(blocked, new SortByTitle());
     }
 
     public ShowCollection generateAllowedShows(ShowCollection showList, Profile profile) {

@@ -158,7 +158,7 @@ public class ProfileCollection {
     }
 
     public void sortProfiles() {
-        Collections.sort(profiles, new sortByName());
+        Collections.sort(profiles, new SortByName());
     }
 
     public ArrayList<Profile> getProfiles() {
