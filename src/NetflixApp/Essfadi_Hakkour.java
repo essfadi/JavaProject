@@ -28,6 +28,7 @@ import main.DateException;
 import main.OutOfRangeException;
 import platform.component.Country;
 import platform.component.ShowCollection;
+import static authentication.AccountCollection.accounts;
 
 /**
  *
@@ -70,23 +71,9 @@ public class Essfadi_Hakkour {
 
             switch (choice_menu) {
                 case 1:
-                    netflix.register();
-                    if (netflix.getAccList().getAccounts().isEmpty()) {
-                        
-
-                        System.out.println("\t\t======================================================");
-                        System.out.println("\t\tYou Have Been Registered Successfully!!!");
-                        System.out.println("\t\t======================================================");
-
-                    } else {
-                        System.out.println("This email adress already has an account!");
-                    }
-                    // THE END
-
-                    // Settings for profile
+                    fakeAccount = netflix.register();
+                    fakeAccount.getUser().addProfile();
                     break;
-                // Add Your case 2
-
                 case 2:
                     if (myProfile != null) {
                         do {

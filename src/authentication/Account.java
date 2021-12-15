@@ -7,15 +7,29 @@ public class Account {
     private final String email;
 
     private String password;
+    
+    private User user;
 
     //private final User user;
     public Account(String email, String password) {
         this.email = email;
         this.password = password;
+        user = Account.addUser();
     }
 
-    public void authenticate() {
+    public Account authenticate() {
         // Pending For Devs
+        Account acc = AccountCollection.search(email);
+        if (acc != null) {
+            if (acc.getPassword().equals(password)) {
+                return acc;
+            } else {
+                System.out.println("Your Password is wrong! please, try again.");
+                return null;
+            }
+        }
+        System.out.println("The Email is wrong! please, try again.");
+        return null;
     }
 
     public void changePass() {
@@ -40,7 +54,7 @@ public class Account {
         System.out.print("Enter your phone number: ");
         phone_number = scanner.next();
 
-        return (new User(phone_number, User.addPaymentMethod()));
+        return (new User(phone_number));
     }
 
     public String getEmail() {
@@ -60,6 +74,14 @@ public class Account {
         System.out.println("You Will Receive An Email To Reset Your Password in " + getEmail());
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     @Override
     public String toString() {
         return "Account{" + "email=" + email + ", password=" + password + '}';
