@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class AccountCollection {
 
-    private ArrayList<Account> accounts;
+    public static ArrayList<Account> accounts;
     private int numberOfAccounts = 0;
 
     public AccountCollection() {
@@ -25,15 +25,17 @@ public class AccountCollection {
     }
 
     public Account add(Account acc) {
-        if(search(acc.getEmail()) == null) {
+        if(this.search(acc.getEmail()) == null) {
             accounts.add(numberOfAccounts++, acc);
+            System.out.println("Account Added Successfully!");
             return acc;
         } else {
+            System.out.println("Account is already registered!");
             return null;
         }
     }
 
-    public Account search(String email) {
+    public static Account search(String email) {
         Iterator<Account> iterator = accounts.iterator();
         while (iterator.hasNext()) {
             Account account = iterator.next();
@@ -53,19 +55,6 @@ public class AccountCollection {
                 System.out.println("The account is not found, Deletion failed!");
             }
         }
-    }
- public Account checkAcc(String email, String password) {
-        Account acc = search(email);
-        if (acc != null) {
-            if (acc.getPassword().equals(password)) {
-                return acc;
-            } else {
-                System.out.println("Your Password is wrong! please, try again.");
-                return null;
-            }
-        }
-        System.out.println("The Email is wrong! please, try again.");
-        return null;
     }
 
     public void modify(String email) {

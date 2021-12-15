@@ -26,14 +26,19 @@ public class User {
     private RequestCollection requests;
 
     private PaymentMethod pay_method;
+    
     private ViewingCollection history;
+    
+    private Subscription subscription;
 
-    public User(String phone, PaymentMethod payment) {
-        this.pay_method = payment;
+    public User(String phone) {
         this.phone = phone;
         this.profile = new ProfileCollection();
         this.requests = new RequestCollection();
         this.history = new ViewingCollection();
+        this.pay_method = User.addPaymentMethod();
+        this.subscription = User.addSubscription();
+        
     }
 
     public void view_prof_history(Profile myProfile) {
@@ -104,7 +109,7 @@ public class User {
         System.out.print("Would you like to auto play previews while browsing on devices?(if YES, Enter '1'): ");
         option2 = scanner.nextInt();
         setting.setAutoplayPreviews(option2);
-        System.out.println("Enter a language for your profile: ");
+        System.out.print("Enter a language for your profile: ");
         profile_lang = scanner.next();
         System.out.print("Would you like to receive notifications?(if YES, Enter '1'): ");
         profile_choice = scanner.nextInt();
@@ -222,6 +227,22 @@ public class User {
         this.pay_method = pay_method;
     }
 
+    public ViewingCollection getHistory() {
+        return history;
+    }
+
+    public void setHistory(ViewingCollection history) {
+        this.history = history;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
+    
     @Override
     public String toString() {
         return "User{" + "phone=" + phone + ", profile=" + profile.toString() + ", requests=" + requests.toString() + ", pay_method=" + pay_method.toString() + '}';
