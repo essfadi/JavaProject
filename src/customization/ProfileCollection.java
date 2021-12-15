@@ -27,11 +27,11 @@ public class ProfileCollection {
     }
 
     public void addProfile(Profile profile) {
-        while (numberOfProfiles <= 5) {
+        if (numberOfProfiles < 5) {
             profiles.add(numberOfProfiles++, profile);
-        }
+        } else {
         System.out.println("You reached the profile limit!");
-
+        }
     }
 
     public void removeProfile(Profile profile) {

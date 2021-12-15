@@ -69,6 +69,7 @@ public class ShowCollection {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
+            System.out.println(s.toString());
             if (s.getTitle().equalsIgnoreCase(title)) {
                 return s;
             }
@@ -99,7 +100,7 @@ public class ShowCollection {
     }
 
     public void modifyShow(Show show) {
-        /*Show placeHolder;
+        Show placeHolder;
         Scanner scanner = new Scanner(System.in);
         int choice_change;
         if (shows.contains(show)) {
@@ -150,7 +151,7 @@ public class ShowCollection {
             }
         } else {
             System.out.println("The Show you entered is not contained in your list of shows for this account!");
-        }*/
+        }
     }
 
     public ArrayList<Show> findShowWithGenre(Genres genre) {

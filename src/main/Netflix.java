@@ -212,7 +212,7 @@ public class Netflix {
         while (choice < 1 || choice > 11) {
             System.out.print("Enter your choice of genres: ");
             choice = scanner.nextInt();
-            genres.add(Genres.valueOf(Genres.));
+            genres.add(Genres.values()[choice]);
         }
         switch (choice) {
             case 1:
