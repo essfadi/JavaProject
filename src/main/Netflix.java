@@ -156,12 +156,7 @@ public class Netflix {
                 System.out.println(shows.searchByTitle(data).toString());
                 break;
             case 2:
-                try {
-                    System.out.println(shows.searchByGenre(data).toString());
-                } catch (OutOfGenresException ex) {
-                    System.err.println(ex.getMessage());
-                    ex.recover();
-                }
+                System.out.println(shows.searchByGenre(data).toString());
                 break;
             case 3:
                 shows.searchByLang(shows.searchByLang(data).toString());
