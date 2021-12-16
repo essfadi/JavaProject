@@ -216,6 +216,7 @@ public class Essfadi_Hakkour {
                                 case 3:
                                     // Remove Profile  
                                     System.out.println("Would you like to delete this profile? Press 1 if yes:");
+
                                     choice = scanner.nextInt();
                                     if (choice == 1) {
                                         System.out.println("This Profile no longer exists!");
