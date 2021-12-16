@@ -9,8 +9,13 @@ package main;
  *
  * @author user
  */
-public class OutOfRangeException extends Exception{
-    public OutOfRangeException(String message){
+public class OutOfRangeException extends Exception {
+
+    public OutOfRangeException(String message) {
         super(message);
+    }
+
+    public void recover() {
+        System.err.println("Try integer values from the menu displayed above");
     }
 }
