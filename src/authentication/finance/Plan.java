@@ -1,9 +1,10 @@
 package authentication.finance;
+
 import main.Quality;
 
 public class Plan {
 
-        private Plans subPlan;
+    private Plans subPlan;
 
     private double cost;
 
@@ -40,24 +41,50 @@ public class Plan {
         }
     }
 
+    public Plans getSubPlan() {
+        return subPlan;
+    }
+
+    public void setSubPlan(Plans subPlan) {
+        this.subPlan = subPlan;
+    }
+
     public double getCost() {
-        return this.cost;
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public int getScreen_num() {
-        return this.screen_num;
+        return screen_num;
+    }
+
+    public void setScreen_num(int screen_num) {
+        this.screen_num = screen_num;
     }
 
     public int getDownload_devices() {
-        return this.download_devices;
+        return download_devices;
+    }
+
+    public void setDownload_devices(int download_devices) {
+        this.download_devices = download_devices;
     }
 
     public Quality getQuality() {
-        return this.quality;
+        return quality;
     }
 
-        @Override
+    public void setQuality(Quality quality) {
+        this.quality = quality;
+    }
+
+    
+    
+    @Override
     public String toString() {
-        return ("Your plan is: " + subPlan.name() +" costs "+cost +" The number of screens you can watch is : " + screen_num);
+        return ("Your plan is: " + subPlan.name() + " costs " + cost + " The number of screens you can watch is : " + screen_num);
     }
 }

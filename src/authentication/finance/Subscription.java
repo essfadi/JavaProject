@@ -24,9 +24,16 @@ public class Subscription {
         this.current_plan = current_plan;
     }
 
-    public void change_plan(Plan newPlan) {
+    public void change_plan() {
+        Scanner scanner = new Scanner(System.in);
+        int choice_plan;
+        do {
+            System.out.println("Please choose your new plan: \n1. Basic\n2. Standard\n3. Premuim\n");
+            choice_plan = scanner.nextInt();
+        } while (!(choice_plan > 0 && choice_plan < 4));
         this.subscribed = new GregorianCalendar();
-        this.current_plan = newPlan;
+        this.current_plan = new Plan(choice_plan);
+        System.out.println(this.getCurrent_plan().toString());
     }
 
     public void billing_by_month() {
@@ -56,7 +63,10 @@ public class Subscription {
         return (new Plan(choice_plan));
     }
 
-    public void cancel(String reason) {
+    public void cancel() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please, specify why you cancel your subscription: ");
+        String reason = scanner.nextLine();
         this.cancel_reason = reason;
         this.current_plan = null;
         this.canceled = new GregorianCalendar();
@@ -69,7 +79,7 @@ public class Subscription {
     public Plan getCurrent_plan() {
         return current_plan;
     }
-
+    
     public GregorianCalendar getCanceled() {
         return canceled;
     }
@@ -78,9 +88,25 @@ public class Subscription {
         return cancel_reason;
     }
 
+    public void setSubscribed(GregorianCalendar subscribed) {
+        this.subscribed = subscribed;
+    }
+
+    public void setCurrent_plan(Plan current_plan) {
+        this.current_plan = current_plan;
+    }
+
+    public void setCanceled(GregorianCalendar canceled) {
+        this.canceled = canceled;
+    }
+
+    public void setCancel_reason(String cancel_reason) {
+        this.cancel_reason = cancel_reason;
+    }
+    
     @Override
     public String toString() {
-        return "Subscription{" + "subscribed=" + subscribed.getTime() + ", current_plan=" + current_plan.toString() + ", canceled=" + canceled.getTime() + ", cancel_reason=" + cancel_reason + ", billing_by_month=" + billing_by_month + ", month=" + month + '}';
+        return "Subscription:" + "\nSubscribed in: " + subscribed.getTime() + "\nCurrent Plan: " + current_plan.toString() + "\nCanceled: " + canceled.getTime() + "\nCancel's reason: " + cancel_reason + "\nBilling By Month: " + billing_by_month + "\nMonth: " + month;
     }
 
 }

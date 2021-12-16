@@ -5,7 +5,7 @@ import platform.component.Show;
 import authentication.Account;
 import authentication.AccountCollection;
 import authentication.finance.Plans;
-import customization.ShowLanguage;
+import customization.Language;
 import customization.MaturityLevel;
 import customization.Profile;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 import platform.component.Country;
 import platform.component.Movies;
+import platform.component.OutOfGenresException;
 import platform.component.RequestCollection;
 import platform.component.Seasons;
 import platform.component.Series;
@@ -115,14 +116,23 @@ public class Netflix {
         return (accList.add(acc));
     }
 
-    public void search(int choice, String data) {
+    public void search() /*throws OutOfGenresException*/{
         // We ask the user then implement one of the 3 types of search()
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("We have Try types of Search: (1. by Title 2. by Genre 3. by Language");
+        int choice = scanner.nextInt();
+        System.out.println("Enter a keyword please based on your choice: ");
+        String data = scanner.next();
         switch (choice) {
             case 1:
                 System.out.println(shows.searchByTitle(data).toString());
                 break;
             case 2:
+            try {
                 System.out.println(shows.searchByGenre(data).toString());
+            } catch (OutOfGenresException ex) {
+                System.err.println(ex.getMessage());
+            }
                 break;
             case 3:
                 shows.searchByLang(shows.searchByLang(data).toString());
@@ -133,7 +143,7 @@ public class Netflix {
     public void browse(Profile myProfile) {
         // To display all shows available
         if (myProfile != null) {
-            Iterator<Show> iter = shows.iterator();
+            Iterator<Show> iter = shows.getShows().iterator();
             while (iter.hasNext()) {
                 Show show = iter.next();
                 if (show.getLevels().contains(myProfile.getLevel_restriction())) {
@@ -167,7 +177,7 @@ public class Netflix {
         Quality quality;
         Genres genre = Genres.TVSHOWS;
         ArrayList<Genres> genres = new ArrayList();
-        ShowLanguage language = ShowLanguage.ENGLISH;
+        Language language = Language.ENGLISH;
         String[] names = new String[5];
         String synopsis;
         int choice = 0;
@@ -258,37 +268,37 @@ public class Netflix {
         }
         switch (choice) {
             case 1:
-                language = ShowLanguage.ENGLISH;
+                language = Language.ENGLISH;
                 break;
             case 2:
-                language = ShowLanguage.FRENCH;
+                language = Language.FRENCH;
                 break;
             case 3:
-                language = ShowLanguage.GERMAN;
+                language = Language.GERMAN;
                 break;
             case 4:
-                language = ShowLanguage.ITALIEN;
+                language = Language.ITALIEN;
                 break;
             case 5:
-                language = ShowLanguage.SPANISH;
+                language = Language.SPANISH;
                 break;
             case 6:
-                language = ShowLanguage.POTUGUESE;
+                language = Language.POTUGUESE;
                 break;
             case 7:
-                language = ShowLanguage.ARABIC;
+                language = Language.ARABIC;
                 break;
             case 8:
-                language = ShowLanguage.KOREAN;
+                language = Language.KOREAN;
                 break;
             case 9:
-                language = ShowLanguage.TURKISH;
+                language = Language.TURKISH;
                 break;
             case 10:
-                language = ShowLanguage.HEBREW;
+                language = Language.HEBREW;
                 break;
             case 11:
-                language = ShowLanguage.CHINESE;
+                language = Language.CHINESE;
                 break;
         }
         scanner.nextLine();
@@ -371,9 +381,10 @@ public class Netflix {
     public void setRequests(RequestCollection requests) {
         this.requests = requests;
     }
-
+    
     @Override
     public String toString() {
-        return "Netflix{" + "accList=" + accList + ", requests=" + requests + ", plans_by_country=" + plans_by_country + ", maturityByCountry=" + maturityByCountry + '}';
+        return "Netflix:\n" + "Accounts Registered:\n" + accList.toString() + ", requests:\n" + requests.toString() + ", plans_by_country=" + plans_by_country + ", maturityByCountry:\n" + maturityByCountry.toString() + '}';
     }
 }
+// Checking if Request should stay there

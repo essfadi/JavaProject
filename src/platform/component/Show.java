@@ -2,7 +2,7 @@ package platform.component;
 
 import customization.MaturityLevel;
 import main.Genres;
-import customization.ShowLanguage;
+import customization.Language;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class Show implements Serializable{
 
     private ArrayList<Genres> genres; // Enum
 
-    private ShowLanguage lang; // Enum
+    private Language lang; // Enum
 
     private String[] names; // Array of names
 
@@ -35,7 +35,7 @@ public class Show implements Serializable{
 
     
     public Show(String title, GregorianCalendar release_date, Quality quality, ArrayList<Genres> genres,
-            ShowLanguage lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int num_views, double average_rating, int total_watch) {
+            Language lang, String[] names, String synopsis, ArrayList<MaturityLevel> levels, int num_views, double average_rating, int total_watch) {
         this.title = title;
         this.release_date = release_date;
         this.quality = quality;
@@ -77,11 +77,11 @@ public class Show implements Serializable{
         this.quality = quality;
     }
 
-    public ShowLanguage getLang() {
+    public Language getLang() {
         return lang;
     }
 
-    public void setLang(ShowLanguage lang) {
+    public void setLang(Language lang) {
         this.lang = lang;
     }
 

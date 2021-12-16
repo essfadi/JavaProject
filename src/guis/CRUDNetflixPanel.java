@@ -6,7 +6,7 @@
 package guis;
 
 import customization.MaturityLevel;
-import customization.ShowLanguage;
+import customization.Language;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -170,7 +170,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
 
         qualityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Quality.values()));
 
-        languageCombo.setModel(new javax.swing.DefaultComboBoxModel<>(ShowLanguage.values()));
+        languageCombo.setModel(new javax.swing.DefaultComboBoxModel<>(Language.values()));
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(229, 9, 20));
@@ -468,7 +468,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             return;
         }
         Quality quality = (Quality) qualityCombo.getSelectedItem();
-        ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
+        Language language = (Language) languageCombo.getSelectedItem();
         String[] names;
         if (namesTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter some names of actors!", "Add Show", JOptionPane.ERROR_MESSAGE);
@@ -580,7 +580,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
         titleTxt.setText("");
         dateTxt.setText("");
         qualityCombo.setSelectedItem(Quality.HD);
-        languageCombo.setSelectedItem(ShowLanguage.ENGLISH);
+        languageCombo.setSelectedItem(Language.ENGLISH);
         namesTxt.setText("");
         viewsTxt.setText("");
         synopsisTxt.setText("");
@@ -714,7 +714,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
             return;
         }
         Quality quality = (Quality) qualityCombo.getSelectedItem();
-        ShowLanguage language = (ShowLanguage) languageCombo.getSelectedItem();
+        Language language = (Language) languageCombo.getSelectedItem();
         String[] names;
         if (namesTxt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(CRUDNetflixPanel.this, "Please enter some names of actors!", "Add Show", JOptionPane.ERROR_MESSAGE);
@@ -869,7 +869,7 @@ public class CRUDNetflixPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JComboBox<ShowLanguage> languageCombo;
+    private javax.swing.JComboBox<Language> languageCombo;
     private javax.swing.JComboBox<MaturityLevel> maturityCombo;
     private javax.swing.JTextField namesTxt;
     private javax.swing.JComboBox<Quality> qualityCombo;

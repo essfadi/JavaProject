@@ -2,7 +2,7 @@ package platform.component;
 
 public class MaturityRating {
 
-    private String rating_reason; // Array or List or entered by the user
+    private String rating_reason; 
     
     MaturityRating(String rating_reason) {
         this.rating_reason = rating_reason;
@@ -18,7 +18,7 @@ public class MaturityRating {
 
     @Override
     public String toString() {
-        return "MaturityRating{" + "rating_reason=" + rating_reason + '}';
+        return "MaturityRating: \n" + "Rating Reason: " + rating_reason;
     }
     
 }

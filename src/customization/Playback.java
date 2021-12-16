@@ -43,7 +43,7 @@ public enum Playback {
                 break;
         }
     }
-
+    @Override
     public String toString() {
         return ("\nYour current Playback setting status is: \n Auto Play Next Episodes in all devices: " + autoplayNextEpi + "\n Auto play preview in all devices: " + autoplayPreviews);
     }
