@@ -9,8 +9,13 @@ package main;
  *
  * @author oessf
  */
-public class AgeException extends Exception{
+public class AgeException extends Exception {
+
     public AgeException(String str) {
         super(str);
+    }
+
+    public void recover() {
+        System.err.println("\t\tTry a value greater than 0");
     }
 }
