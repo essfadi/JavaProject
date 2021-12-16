@@ -18,6 +18,7 @@ import customization.Playback;
 import customization.Profile;
 import customization.ProfileCollection;
 import customization.ShowLanguage;
+import java.util.ArrayList;
 import platform.component.Request;
 import main.Netflix;
 import platform.component.Show;
@@ -28,7 +29,6 @@ import main.DateException;
 import main.OutOfRangeException;
 import platform.component.Country;
 import platform.component.ShowCollection;
-import static authentication.AccountCollection.accounts;
 
 /**
  *
@@ -51,7 +51,7 @@ public class Essfadi_Hakkour {
         ProfileCollection profiles = new ProfileCollection();
         ShowCollection showList = null;
         Subscription mySubscription;
-        MaturityLevel levels = null;
+        ArrayList<MaturityLevel> levels = new ArrayList<>();
         ShowLanguage language;
         Request showRequest;
         User myUser;
@@ -74,11 +74,13 @@ public class Essfadi_Hakkour {
                     fakeAccount = netflix.register();
                     fakeAccount.getUser().addProfile();
                     break;
+                // Add Your case 2
+
                 case 2:
                     if (myProfile != null) {
                         do {
                             System.out.println("======================================================");
-                            System.out.println("\t1. Change Maturity\n\t2. Add To Favorite\n\t3. View Show\n\t4. Rating\n\t0. Exit Profile");
+                            System.out.println("\t1. Change Maturity\n\t2. Show Menu\n\t3. Remove Profile\n\t0. Exit Profile");
                             System.out.println("======================================================");
                             do {
                                 System.out.print("Enter your choice: ");
@@ -95,11 +97,13 @@ public class Essfadi_Hakkour {
                                 case 2:
                                     BlockedCollection notAllowed = myProfile.getBlocked();
                                     ShowCollection allowed = notAllowed.generateAllowedShows(showList, myProfile);
-                                    System.out.println("Enter your choice: ");
+                                    System.out.println("--------------Show_Menu-------------\n\t1. AddFavorites\n\t2. Edit \n\t3. Remove"
+                                            + "\n\t4. View Show \n\t5. Rate Show \nEnter your choice: ");
                                     int choice_show_menu = scanner.nextInt();
                                     System.out.println(allowed);
                                     switch (choice_show_menu) {
                                         case 1:
+                                            //add favorites
                                             if (showList != null) {
                                                 scanner.nextLine();
                                                 System.out.println(showList.toString());
@@ -118,10 +122,20 @@ public class Essfadi_Hakkour {
                                             }
                                             break;
                                         case 2:
-                                            // edit
+                                            // Edit show in fav
+                                            System.out.println("Enter the title of the show to edit");
+                                            String title=scanner.nextLine();
+                                            System.out.println("Rate this show: \n\t1/ Thumbs Up\n\t Thumbs Down");
+                                            int choice_rate= scanner.nextInt();
+                                            myProfile.getFavorites().modify(title, choice_rate);
                                             break;
                                         case 3:
-                                            // Remove
+                                            // Remove show from favorites
+                                            String toRemove;
+                                                System.out.println("Please enter the title of the show to remove:");
+                                                toRemove = scanner.nextLine();
+                                                myProfile.getFavorites().remove(toRemove);
+                                                System.out.println("Show was Removed Sucessfully!");
                                             break;
                                         case 4:
                                             // Viewing
@@ -138,6 +152,7 @@ public class Essfadi_Hakkour {
                                             show_viewing = null;
                                             break;
                                         case 5:
+                                            //Rate
                                             if (!myProfile.getViewing().getViewings().isEmpty()) {
                                                 System.out.println(myProfile.getViewing().toString());
                                                 System.out.println("Choose the show that you want to watch by title: ");
@@ -162,11 +177,20 @@ public class Essfadi_Hakkour {
                                     }
                                     break;
                                 case 3:
-                                    // Menu of Shows (we have only 1 shows)                                   
+                                    // Remove Profile  
+                                    System.out.println("Would you like to delete this profile? Press 1 if yes:");
+                                    choice= scanner.nextInt();
+                                    if(choice==1){
+                                        System.out.println("This Profile no longer exists!");
+                                        profiles.removeProfile(myProfile);
+                                    }
+                                    //Done
                                     break;
-                                case 4:
-                                    //Changed
-                                    
+                                case 0:
+                                    //Exit
+                                    System.out.println("=======================");
+                                    System.out.println("       Main Menu");
+                                    System.out.println("=======================");
                                     break;
                             }
                         } while (authenticated_choice != 0);
