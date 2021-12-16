@@ -146,7 +146,7 @@ public class ProfileCollection {
                 case 10:
                     System.out.println("Please enter the new language of subtitles");
                     String subtitle = scanner.nextLine();
-                    placeHolder.setSubtitle_lang(ShowLanguage.valueOf(subtitle.toUpperCase()));
+                    placeHolder.setSubtitle_lang(Language.valueOf(subtitle.toUpperCase()));
 
                     break;
                 default:

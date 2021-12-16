@@ -5,9 +5,7 @@
  */
 package platform.component;
 
-import customization.ShowLanguage;
-import customization.MaturityLevel;
-import java.io.File;
+import customization.Language;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,10 +17,7 @@ import java.util.ListIterator;
 import java.util.Scanner;
 import main.Genres;
 import main.Quality;
-import java.io.Serializable;
-import javax.swing.JOptionPane;
 import main.AgeException;
-import main.Language;
 import main.Netflix;
 
 /**
@@ -33,7 +28,6 @@ public class ShowCollection {
 
     private ArrayList<Show> shows;
     private int numberOfShows = 0;
-    private Show show;
     private static final long serialversionUID = 129348938L;
     //private Genres genre;
 
@@ -80,22 +74,33 @@ public class ShowCollection {
         return null;
     }
 
-    public Show searchByGenre(String genre) {
-        Iterator<Show> iterator = shows.iterator();
-        while (iterator.hasNext()) {
-            Show s = iterator.next();
-            if (s.getGenres().equals(Genres.valueOf(genre.toUpperCase()))) {
-                return s;
+    public Show searchByGenre(String genre) throws OutOfGenresException {
+        boolean flag = false;
+        for (Genres genres : Genres.values()) {
+            if (genres.equals(Genres.valueOf(genre.toUpperCase()))) {
+                flag = true;
+                break;
             }
         }
-        return null;
+        if (flag) {
+            Iterator<Show> iterator = shows.iterator();
+            while (iterator.hasNext()) {
+                Show s = iterator.next();
+                if (s.getGenres().equals(Genres.valueOf(genre.toUpperCase()))) {
+                    return s;
+                }
+            }
+            return null;
+        } else {
+            throw new OutOfGenresException("The Genre You Entered Is Out of Bound.");
+        }
     }
 
     public Show searchByLang(String lang) {
         Iterator<Show> iterator = shows.iterator();
         while (iterator.hasNext()) {
             Show s = iterator.next();
-            if (s.getLang().equals(ShowLanguage.valueOf(lang.toUpperCase()))) {
+            if (s.getLang().equals(Language.valueOf(lang.toUpperCase()))) {
                 return s;
             }
         }
@@ -147,7 +152,7 @@ public class ShowCollection {
                     //modifying language
                     System.out.print("Please enter the new language for your show:");
                     String language = scanner.nextLine();
-                    placeHolder.setLang(ShowLanguage.valueOf(language));
+                    placeHolder.setLang(Language.valueOf(language));
                     break;
                 case 6:
                     String[] names = {};
@@ -231,7 +236,7 @@ public class ShowCollection {
     public void setNumberOfShows(int numberOfShows) {
         this.numberOfShows = numberOfShows;
     }
-
+    
     @Override
     public String toString() {
         String str = "";
@@ -241,9 +246,5 @@ public class ShowCollection {
             str += s.toString() + "\n";
         }
         return str;
-    }
-
-    public Iterator<Show> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

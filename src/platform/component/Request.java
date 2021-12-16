@@ -41,6 +41,23 @@ public class Request implements Comparable<Request>{
     public GregorianCalendar getRequestDate() {
         return request_made;
     }
+
+    public String getTitleSuggested() {
+        return titleSuggested;
+    }
+
+    public void setTitleSuggested(String titleSuggested) {
+        this.titleSuggested = titleSuggested;
+    }
+
+    public GregorianCalendar getRequest_made() {
+        return request_made;
+    }
+
+    public void setRequest_made(GregorianCalendar request_made) {
+        this.request_made = request_made;
+    }
+    
     @Override
     public int compareTo(Request req) {
         return this.getRequestDate().compareTo(req.getRequestDate());

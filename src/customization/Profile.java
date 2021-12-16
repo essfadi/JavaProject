@@ -26,13 +26,13 @@ public class Profile {
 
     private BlockedCollection blocked; // List or Array or Enum
 
-    private ShowLanguage subtitle_lang; // List or Array or Enum
+    private Language subtitle_lang; // List or Array or Enum
     
     private ViewingCollection viewing;
 
     public Profile(String name, MaturityLevel level_restriction, String email,
             boolean toNotify, String language, Playback playback,
-            boolean subtitles, ShowLanguage subtitle_lang) {
+            boolean subtitles, Language subtitle_lang) {
         this.name = name;
         this.level_restriction = level_restriction;
         this.email = email;
@@ -142,11 +142,11 @@ public class Profile {
         this.blocked = blocked;
     }
 
-    public ShowLanguage getSubtitle_lang() {
+    public Language getSubtitle_lang() {
         return subtitle_lang;
     }
 
-    public void setSubtitle_lang(ShowLanguage subtitle_lang) {
+    public void setSubtitle_lang(Language subtitle_lang) {
         this.subtitle_lang = subtitle_lang;
     }
 
@@ -160,7 +160,7 @@ public class Profile {
     
     @Override
     public String toString() {
-        return ("\nYour profile is name: " + name + level_restriction.toString()
+        return ("\nYour profile is name: " + name + level_restriction.name()
                 + "\nProfile's Language: " + language
                 + "\nPofile's email: " + email + "\nNotifications Activation: " + toNotify
                 + "\nSubtitle Activation: " + subtitles + ", in " + subtitle_lang.name()

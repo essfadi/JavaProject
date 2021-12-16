@@ -7,6 +7,7 @@ package platform.component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.ListIterator;
 /**
  *
  * @author oessf
@@ -53,6 +54,13 @@ public class ViewingCollection {
     }
     @Override
     public String toString() {
-        return "";
+        System.out.println("This is Your List of Views:");
+        String str = "";
+        ListIterator<Viewing> iter = viewings.listIterator();
+        while (iter.hasNext()) {
+            Viewing view = iter.next();
+            str += view.toString() + "\n";
+        }
+        return str;
     }
 }

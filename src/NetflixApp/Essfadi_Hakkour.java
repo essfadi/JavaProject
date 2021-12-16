@@ -17,7 +17,7 @@ import customization.MaturityLevel;
 import customization.Playback;
 import customization.Profile;
 import customization.ProfileCollection;
-import customization.ShowLanguage;
+import customization.Language;
 import java.util.ArrayList;
 import platform.component.Request;
 import main.Netflix;
@@ -52,7 +52,7 @@ public class Essfadi_Hakkour {
         ShowCollection showList = null;
         Subscription mySubscription;
         ArrayList<MaturityLevel> levels = new ArrayList<>();
-        ShowLanguage language;
+        Language language;
         Request showRequest;
         User myUser=null;
         Show show = null;
@@ -274,13 +274,7 @@ public class Essfadi_Hakkour {
                             mySubscription = new Subscription(myPlan);
                             switch (choice_subs) {
                                 case 1://change Plan
-                                    do {
-                                        System.out.println("Please choose your new plan: \n1. Basic\n2. Standard\n3. Premuim\n");
-                                        choice_plan = scanner.nextInt();
-                                    } while (!(choice_plan > 0 && choice_plan < 4));
-                                    myPlan = new Plan(choice_plan);
-                                    System.out.println(myPlan.toString());
-                                    mySubscription.change_plan(myPlan);
+                                    mySubscription.change_plan();
                                     break;
                                 case 2://See your billing by month
                                     mySubscription.billing_by_month();
@@ -289,7 +283,7 @@ public class Essfadi_Hakkour {
                                     scanner.nextLine();
                                     System.out.println("Please enter the reason for your cancelation: ");
                                     cancelReason = scanner.nextLine();
-                                    mySubscription.cancel(cancelReason);
+                                    mySubscription.cancel();
                                     System.out.println("Your subscription is canceled successfully!\nReason: " + mySubscription.getCancel_reason());
                                     break;
                                 case 4:

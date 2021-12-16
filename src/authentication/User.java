@@ -6,7 +6,7 @@ import customization.MaturityLevel;
 import customization.Playback;
 import customization.Profile;
 import customization.ProfileCollection;
-import customization.ShowLanguage;
+import customization.Language;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -67,7 +67,7 @@ public class User {
         boolean notification, subtitle;
         ArrayList<MaturityLevel> levels = new ArrayList();
         Playback setting;
-        ShowLanguage language;
+        Language language;
         int profile_age, playback_choice, option1, option2, profile_choice;
         System.out.print("Enter a name for your profile: ");
         profile_name = scanner.nextLine();
@@ -126,40 +126,40 @@ public class User {
         }
         switch (profile_choice) {
             case 1:
-                language = ShowLanguage.ENGLISH;
+                language = Language.ENGLISH;
                 break;
             case 2:
-                language = ShowLanguage.FRENCH;
+                language = Language.FRENCH;
                 break;
             case 3:
-                language = ShowLanguage.GERMAN;
+                language = Language.GERMAN;
                 break;
             case 4:
-                language = ShowLanguage.ITALIEN;
+                language = Language.ITALIEN;
                 break;
             case 5:
-                language = ShowLanguage.SPANISH;
+                language = Language.SPANISH;
                 break;
             case 6:
-                language = ShowLanguage.POTUGUESE;
+                language = Language.POTUGUESE;
                 break;
             case 7:
-                language = ShowLanguage.ARABIC;
+                language = Language.ARABIC;
                 break;
             case 8:
-                language = ShowLanguage.KOREAN;
+                language = Language.KOREAN;
                 break;
             case 9:
-                language = ShowLanguage.TURKISH;
+                language = Language.TURKISH;
                 break;
             case 10:
-                language = ShowLanguage.HEBREW;
+                language = Language.HEBREW;
                 break;
             case 11:
-                language = ShowLanguage.CHINESE;
+                language = Language.CHINESE;
                 break;
             default:
-                language = ShowLanguage.ENGLISH;
+                language = Language.ENGLISH;
                 break;
         }
         Profile myProfile = new Profile(profile_name, levels.get(levels.size() - 1), profile_email, notification, profile_lang, setting, subtitle, language);
@@ -245,7 +245,6 @@ public class User {
     
     @Override
     public String toString() {
-        return "User{" + "phone=" + phone + ", profile=" + profile.toString() + ", requests=" + requests.toString() + ", pay_method=" + pay_method.toString() + '}';
+        return "User: " + "\nPhone: " + phone + "\nProfile: " + profile.toString() + "\nRequests: " + requests.toString() + "\nPay Method: " + pay_method.toString();
     }
-
 }

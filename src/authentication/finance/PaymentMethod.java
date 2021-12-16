@@ -15,7 +15,7 @@ public class PaymentMethod {
 
     public PaymentMethod(String holder_name, int month, int year, int choice_type, String number) {
         this.holder_name = holder_name;
-        setExpiration(month, year);
+        this.setExpiration(month, year);
         switch(choice_type) {
             case 1:
                 this.type = Type.VISA;
@@ -71,7 +71,7 @@ public class PaymentMethod {
 
     @Override
     public String toString() {
-        return "PaymentMethod{" + "holder_name=" + holder_name + ", expiration=" + expiration.getTime() + ", type=" + type + ", number=" + number + '}';
+        return "PaymentMethod:\n" + "Holder Name:" + holder_name + "\nExpiration: " + expiration.getTime() + "\nType: " + type.name() + "\nCard Number:" + number;
     }
     
 }
