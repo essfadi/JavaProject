@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package main;
-import java.lang.Exception;
 
 /**
  *
  * @author oessf
  */
-public class DateException extends Exception{
+public class DateException extends Exception {
+
     public DateException(String str) {
         super(str);
+    }
+
+    public void recover() {
+        System.err.println("Try for: \n\tMonth: 1->12 \n\t Days: 1->30");
     }
 }
