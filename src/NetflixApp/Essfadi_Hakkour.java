@@ -26,6 +26,7 @@ import platform.component.Viewing;
 import java.util.Scanner;
 import main.AgeException;
 import main.DateException;
+import main.InvalidPasswordException;
 import main.OutOfRangeException;
 import platform.component.Country;
 import platform.component.ShowCollection;
@@ -54,13 +55,13 @@ public class Essfadi_Hakkour {
         ArrayList<MaturityLevel> levels = new ArrayList<>();
         Language language;
         Request showRequest;
-        User myUser=null;
+        User myUser = null;
         Show show = null;
         boolean notification, subtitle;
         int choice_menu, choice_card, choice_plan, choice_request, choice_subs, month_exp,
                 year_exp, playback_choice, option1, option2,
                 profile_choice, profile_age, authenticated_choice, choice_show, choice;
-        String full_name, card_number, profile_email, profile_name, profile_lang, phone_number, request, cancelReason, retry_char;
+        String full_name, card_number, profile_email, profile_name, profile_lang, phone_number, request, cancelReason, retry_char, answer;
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("\n\t1. Account Menu.\n\t2. Profile Menu.\n\t3. Request\n\t4. Add a show\n\t5. Subscrib\n\t6. Maturity Ratings By Country\n\t0. Exit.\n");
@@ -73,40 +74,70 @@ public class Essfadi_Hakkour {
                 case 1:
                     do {
                         System.out.println("=========Account Menu=========\n1. Register\n2. Authenticate\n3. Add profile"
-                                + "\n4.Delete Account\n5.Exit");
+                                + "\n4.Delete Account\n5.Password Settings\n6.Exit");
                         choice = scanner.nextInt();
                     } while (choice < 1 && choice > 5);
                     switch (choice) {
                         case 1:
                             //Register Account
-                            fakeAccount = netflix.register();
-                            fakeAccount.getUser().addProfile();
+                            do {
+                                try {
+                                    fakeAccount = netflix.register();                                   
+                                    fakeAccount.getUser().addProfile();
+                                } catch (InvalidPasswordException err) {
+                                    err.recover();
+                                    System.err.println(err.getMessage());
+                                    
+                                }
+                            } while(choice!=0);
+
                             break;
                         case 2:
                             //authenticate
                             System.out.println("Enter your email:");
-                            String email= scanner.nextLine();
+                            String email = scanner.nextLine();
                             System.out.println("Enter your password:");
-                            String password= scanner.nextLine();
-                            fakeAccount= new Account(email, password);
+                            String password = scanner.nextLine();
+                            fakeAccount = new Account(email, password);
                             fakeAccount.authenticate();
                             break;
                         case 3:
                             //add profile 
-                            if(accList!=null){
-                                if(profiles.getNumberOfProfiles()<5 && myUser!=null)
+                            if (accList != null) {
+                                if (profiles.getNumberOfProfiles() < 5 && myUser != null) {
                                     myUser.addProfile();
-                            }else
+                                }
+                            } else {
                                 System.out.println("There is no account! Register or authenticate first!");
+                            }
                             break;
                         case 4:
                             //Delete Account
-                            if(fakeAccount!=null)
+                            if (fakeAccount != null) {
                                 accList.remove(fakeAccount);
-                            else 
+                            } else {
                                 System.out.println("Authenticate to delete the account!");
+                            }
                             break;
-                        case 5:
+                        case 5://Password Settings
+                            if (fakeAccount != null) {
+                                System.out.println("=========Password settings=======\n1. Change your password!");
+                                System.out.println("2. Reset your password");
+                                System.out.println("0. Exit");
+                                do {
+                                    System.out.println("Enter your choice: ");
+                                    choice = scanner.nextInt();
+                                } while (choice < 0 || choice > 2);
+                                if (choice == 1) {
+                                    fakeAccount.changePass();
+                                } else if (choice == 2) {
+                                    fakeAccount.resetPass();
+                                }
+                            } else {
+                                System.out.println("You are not connected to your account!");
+                            }
+                            break;
+                        case 6:
                             System.out.println("Exit Account Menu!");
                             break;
                     }
@@ -129,14 +160,18 @@ public class Essfadi_Hakkour {
                                         myProfile.modify_maturity();
                                     } catch (OutOfRangeException err) {
                                         System.out.println(err.getMessage());
+                                        err.recover();
                                     }
                                     break;
                                 case 2:
+                                    int choice_show_menu;
                                     BlockedCollection notAllowed = myProfile.getBlocked();
                                     ShowCollection allowed = notAllowed.generateAllowedShows(showList, myProfile);
-                                    System.out.println("--------------Show_Menu-------------\n\t1. AddFavorites\n\t2. Edit \n\t3. Remove"
-                                            + "\n\t4. View Show \n\t5. Rate Show \nEnter your choice: ");
-                                    int choice_show_menu = scanner.nextInt();
+                                    do {
+                                        System.out.println("--------------Show_Menu-------------\n\t1. AddFavorites\n\t2. Edit \n\t3. Remove"
+                                                + "\n\t4. View Show \n\t5. Rate Show \n\t0.Exit\nEnter your choice: ");
+                                        choice_show_menu = scanner.nextInt();
+                                    } while (choice_show_menu < 1 || choice_show_menu > 6);
                                     System.out.println(allowed);
                                     switch (choice_show_menu) {
                                         case 1:
@@ -211,12 +246,13 @@ public class Essfadi_Hakkour {
                                                 System.out.println("\nThere are no Viewings to rate, exit this menu to add new one!\n");
                                             }
                                             break;
+                                        default:
+                                            System.out.println("Exit Show Menu!");
                                     }
                                     break;
                                 case 3:
                                     // Remove Profile  
                                     System.out.println("Would you like to delete this profile? Press 1 if yes:");
-
                                     choice = scanner.nextInt();
                                     if (choice == 1) {
                                         System.out.println("This Profile no longer exists!");
@@ -248,15 +284,15 @@ public class Essfadi_Hakkour {
                         try {
                             showList = new ShowCollection();
                             showList = Netflix.addShow();
-                            System.out.println("Test1");
                             System.out.println("======================================================");
                             System.out.println(showList.toString());
-                            System.out.println("Test2");
                             System.out.println("======================================================");
                         } catch (AgeException err1) {
                             System.err.println(err1.getMessage());
+                            err1.recover();
                         } catch (DateException err2) {
                             System.err.println(err2.getMessage());
+                            err2.recover();
                         } finally {
                             System.out.print("If you want to try again or add another show, enter 'YES': ");
                             retry_char = scanner.next();
@@ -280,9 +316,6 @@ public class Essfadi_Hakkour {
                                     mySubscription.billing_by_month();
                                     break;
                                 case 3://cancel plan
-                                    scanner.nextLine();
-                                    System.out.println("Please enter the reason for your cancelation: ");
-                                    cancelReason = scanner.nextLine();
                                     mySubscription.cancel();
                                     System.out.println("Your subscription is canceled successfully!\nReason: " + mySubscription.getCancel_reason());
                                     break;
@@ -309,22 +342,7 @@ public class Essfadi_Hakkour {
                     System.out.println(netflix.getMaturityByRegion());
                     break;
                 case 7:
-                    if (fakeAccount != null) {
-                        System.out.println("1. Change your password!");
-                        System.out.println("2. Reset your password");
-                        System.out.println("0. Exit");
-                        do {
-                            System.out.println("Enter your choice: ");
-                            choice = scanner.nextInt();
-                        } while (choice < 0 || choice > 2);
-                        if (choice == 1) {
-                            fakeAccount.changePass();
-                        } else if (choice == 2) {
-                            fakeAccount.resetPass();
-                        }
-                    } else {
-                        System.out.println("You are not connected to your account!");
-                    }
+                    //Maybe recover password
                     break;
             }
         } while (choice_menu != 0);
