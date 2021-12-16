@@ -2,6 +2,7 @@ package customization;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import main.Language;
 import main.OutOfRangeException;
 import platform.component.Show;
 import platform.component.ViewingCollection;
@@ -16,7 +17,7 @@ public class Profile {
 
     private boolean toNotify;
 
-    private String language;
+    private Language language;
 
     private Playback playback; // I think Enum or another Class
 
@@ -37,7 +38,7 @@ public class Profile {
         this.level_restriction = level_restriction;
         this.email = email;
         this.toNotify = toNotify;
-        this.language = language;
+        this.language = Language.valueOf(language);
         this.playback = playback;
         this.subtitles = subtitles;
         this.subtitle_lang = subtitle_lang;
@@ -102,12 +103,12 @@ public class Profile {
         this.toNotify = toNotify;
     }
 
-    public String getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
     public void setLanguage(String language) {
-        this.language = language;
+        this.language = Language.valueOf(language);
     }
 
     public Playback getPlayback() {
