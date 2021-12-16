@@ -174,7 +174,7 @@ public class User {
     public static PaymentMethod addPaymentMethod() {
         Scanner scanner = new Scanner(System.in);
         String full_name;
-        int card_number;
+        String card_number;
         int choice_card, month_exp, year_exp;
         System.out.print("Enter Your Legal Full Name: ");
         full_name = scanner.nextLine();
@@ -189,7 +189,7 @@ public class User {
         year_exp = scanner.nextInt();
         scanner.nextLine();
         System.out.print("Enter your Card Number: ");
-        card_number = scanner.nextInt();
+        card_number = scanner.next();
         return (new PaymentMethod(full_name, month_exp, year_exp, choice_card, card_number));
     }
 
