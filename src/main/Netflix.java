@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Scanner;
 import platform.component.Country;
 import platform.component.Movies;
-import platform.component.OutOfGenresException;
 import platform.component.RequestCollection;
 import platform.component.Seasons;
 import platform.component.Series;
@@ -100,7 +99,7 @@ public class Netflix {
         }
     }
 
-    public Account register() {
+    public Account register() throws InvalidPasswordException {
         System.out.println("======================================================");
         Scanner scanner = new Scanner(System.in);
         //Should be developped later for checking the format!
@@ -111,12 +110,41 @@ public class Netflix {
         scanner.nextLine();
         System.out.print("Enter a password: ");
         password = scanner.next();
+        boolean flag = passwordCheck(password);
         System.out.println("======================================================");
-        Account acc = new Account(email, password);
-        return (accList.add(acc));
+        if (flag) {
+            Account acc = new Account(email, password);
+            return (accList.add(acc));
+        } else {
+            throw new InvalidPasswordException("Password Format is not Valid");
+        }
     }
 
-    public void search() /*throws OutOfGenresException*/{
+    public boolean passwordCheck(String pass) {
+        boolean upper = false;
+        boolean lower = false;
+        boolean num = false;
+        if (pass.length() == 8) {
+            for (int i = 0; i < pass.length(); i++) {
+                char c = pass.charAt(i);
+                if (Character.isDigit(c)) {
+                    num = true;
+                } else if (Character.isUpperCase(c)) {
+                    upper = true;
+                } else if (Character.isLowerCase(c)) {
+                    lower = true;
+                }
+                if (num && upper && lower) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    public void search() throws OutOfGenresException {
         // We ask the user then implement one of the 3 types of search()
         Scanner scanner = new Scanner(System.in);
         System.out.println("We have Try types of Search: (1. by Title 2. by Genre 3. by Language");
@@ -128,11 +156,12 @@ public class Netflix {
                 System.out.println(shows.searchByTitle(data).toString());
                 break;
             case 2:
-            try {
-                System.out.println(shows.searchByGenre(data).toString());
-            } catch (OutOfGenresException ex) {
-                System.err.println(ex.getMessage());
-            }
+                try {
+                    System.out.println(shows.searchByGenre(data).toString());
+                } catch (OutOfGenresException ex) {
+                    System.err.println(ex.getMessage());
+                    ex.recover();
+                }
                 break;
             case 3:
                 shows.searchByLang(shows.searchByLang(data).toString());
@@ -143,7 +172,7 @@ public class Netflix {
     public void browse(Profile myProfile) {
         // To display all shows available
         if (myProfile != null) {
-            Iterator<Show> iter = shows.getShows().iterator();
+            Iterator<Show> iter = shows.getShows().iterator();;
             while (iter.hasNext()) {
                 Show show = iter.next();
                 if (show.getLevels().contains(myProfile.getLevel_restriction())) {
@@ -381,10 +410,10 @@ public class Netflix {
     public void setRequests(RequestCollection requests) {
         this.requests = requests;
     }
-    
+
+    //To string
     @Override
     public String toString() {
         return "Netflix:\n" + "Accounts Registered:\n" + accList.toString() + ", requests:\n" + requests.toString() + ", plans_by_country=" + plans_by_country + ", maturityByCountry:\n" + maturityByCountry.toString() + '}';
     }
 }
-// Checking if Request should stay there
