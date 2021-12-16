@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import main.AgeException;
 import main.Netflix;
+import platform.component.Request;
 import platform.component.RequestCollection;
 import platform.component.ViewingCollection;
 
@@ -26,9 +27,9 @@ public class User {
     private RequestCollection requests;
 
     private PaymentMethod pay_method;
-    
+
     private ViewingCollection history;
-    
+
     private Subscription subscription;
 
     public User(String phone) {
@@ -38,7 +39,7 @@ public class User {
         this.history = new ViewingCollection();
         this.pay_method = User.addPaymentMethod();
         this.subscription = User.addSubscription();
-        
+
     }
 
     public void view_prof_history(Profile myProfile) {
@@ -172,7 +173,8 @@ public class User {
 
     public static PaymentMethod addPaymentMethod() {
         Scanner scanner = new Scanner(System.in);
-        String full_name, card_number;
+        String full_name;
+        int card_number;
         int choice_card, month_exp, year_exp;
         System.out.print("Enter Your Legal Full Name: ");
         full_name = scanner.nextLine();
@@ -187,12 +189,15 @@ public class User {
         year_exp = scanner.nextInt();
         scanner.nextLine();
         System.out.print("Enter your Card Number: ");
-        card_number = scanner.nextLine();
+        card_number = scanner.nextInt();
         return (new PaymentMethod(full_name, month_exp, year_exp, choice_card, card_number));
     }
 
-    public void addRequest() {
-
+    public void addRequest(Account owner) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the title of your requested show: ");
+        String request = scanner.nextLine();
+        requests.add(new Request(owner, request));
     }
 
     public String getPhone() {
@@ -242,9 +247,10 @@ public class User {
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
-    
+
     @Override
     public String toString() {
         return "User: " + "\nPhone: " + phone + "\nProfile: " + profile.toString() + "\nRequests: " + requests.toString() + "\nPay Method: " + pay_method.toString();
     }
+
 }
