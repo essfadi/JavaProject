@@ -3,24 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package platform.component;
-
-import main.Genres;
+package main;
 
 /**
  *
- * @author oessf
+ * @author user
  */
-public class OutOfGenresException extends Exception {
-    public OutOfGenresException(String err) {
-        super(err);
-        this.suggestGenres();
+public class OutOfGenresException extends Exception{
+    
+    public OutOfGenresException(String message){
+        super(message);
     }
-    public void suggestGenres() {
-        System.out.println("Here is the available Genres:");
-        for (Genres genre: Genres.values()) {
-            System.out.println(genre.name());
-        }
-        System.out.println("Please, Choose one within this list!");
+    public void recover(){
+        System.err.println("Try: Action, Romance, COMEDIES, DRAMAS, HORROR.....");
     }
 }
