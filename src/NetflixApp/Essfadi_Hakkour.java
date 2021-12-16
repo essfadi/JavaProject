@@ -54,7 +54,7 @@ public class Essfadi_Hakkour {
         ArrayList<MaturityLevel> levels = new ArrayList<>();
         ShowLanguage language;
         Request showRequest;
-        User myUser;
+        User myUser=null;
         Show show = null;
         boolean notification, subtitle;
         int choice_menu, choice_card, choice_plan, choice_request, choice_subs, month_exp,
@@ -63,7 +63,7 @@ public class Essfadi_Hakkour {
         String full_name, card_number, profile_email, profile_name, profile_lang, phone_number, request, cancelReason, retry_char;
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("\n\t1. Register.\n\t2. Access Profile.\n\t3. Request\n\t4. Add a show\n\t5. Subscrib\n\t6. Maturity Ratings By Country\n\t0. Exit.\n");
+            System.out.println("\n\t1. Account Menu.\n\t2. Profile Menu.\n\t3. Request\n\t4. Add a show\n\t5. Subscrib\n\t6. Maturity Ratings By Country\n\t0. Exit.\n");
             do {
                 System.out.print("Enter your Choice: ");
                 choice_menu = scanner.nextInt();
@@ -71,8 +71,45 @@ public class Essfadi_Hakkour {
 
             switch (choice_menu) {
                 case 1:
-                    fakeAccount = netflix.register();
-                    fakeAccount.getUser().addProfile();
+                    do {
+                        System.out.println("=========Account Menu=========\n1. Register\n2. Authenticate\n3. Add profile"
+                                + "\n4.Delete Account\n5.Exit");
+                        choice = scanner.nextInt();
+                    } while (choice < 1 && choice > 5);
+                    switch (choice) {
+                        case 1:
+                            //Register Account
+                            fakeAccount = netflix.register();
+                            fakeAccount.getUser().addProfile();
+                            break;
+                        case 2:
+                            //authenticate
+                            System.out.println("Enter your email:");
+                            String email= scanner.nextLine();
+                            System.out.println("Enter your password:");
+                            String password= scanner.nextLine();
+                            fakeAccount= new Account(email, password);
+                            fakeAccount.authenticate();
+                            break;
+                        case 3:
+                            //add profile 
+                            if(accList!=null){
+                                if(profiles.getNumberOfProfiles()<5 && myUser!=null)
+                                    myUser.addProfile();
+                            }else
+                                System.out.println("There is no account! Register or authenticate first!");
+                            break;
+                        case 4:
+                            //Delete Account
+                            if(fakeAccount!=null)
+                                accList.remove(fakeAccount);
+                            else 
+                                System.out.println("Authenticate to delete the account!");
+                            break;
+                        case 5:
+                            System.out.println("Exit Account Menu!");
+                            break;
+                    }
                     break;
                 // Add Your case 2
 
@@ -124,18 +161,18 @@ public class Essfadi_Hakkour {
                                         case 2:
                                             // Edit show in fav
                                             System.out.println("Enter the title of the show to edit");
-                                            String title=scanner.nextLine();
+                                            String title = scanner.nextLine();
                                             System.out.println("Rate this show: \n\t1/ Thumbs Up\n\t Thumbs Down");
-                                            int choice_rate= scanner.nextInt();
+                                            int choice_rate = scanner.nextInt();
                                             myProfile.getFavorites().modify(title, choice_rate);
                                             break;
                                         case 3:
                                             // Remove show from favorites
                                             String toRemove;
-                                                System.out.println("Please enter the title of the show to remove:");
-                                                toRemove = scanner.nextLine();
-                                                myProfile.getFavorites().remove(toRemove);
-                                                System.out.println("Show was Removed Sucessfully!");
+                                            System.out.println("Please enter the title of the show to remove:");
+                                            toRemove = scanner.nextLine();
+                                            myProfile.getFavorites().remove(toRemove);
+                                            System.out.println("Show was Removed Sucessfully!");
                                             break;
                                         case 4:
                                             // Viewing
@@ -179,8 +216,9 @@ public class Essfadi_Hakkour {
                                 case 3:
                                     // Remove Profile  
                                     System.out.println("Would you like to delete this profile? Press 1 if yes:");
-                                    choice= scanner.nextInt();
-                                    if(choice==1){
+
+                                    choice = scanner.nextInt();
+                                    if (choice == 1) {
                                         System.out.println("This Profile no longer exists!");
                                         profiles.removeProfile(myProfile);
                                     }
